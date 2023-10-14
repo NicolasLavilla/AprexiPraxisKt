@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="gris_fuerte">#424242</color>
+    <color name="gris_intenso">#616161</color>
+    <color name="gris_tenue">#757575</color>
+    <color name="gris_claro">#9E9E9E</color>
+    <color name="gris_clarisimo">#E0E0E0</color>
+    <color name="gris_item_busqueda_oferta">#F4F4F4</color>
+    <color name="fondo_gris_azulado_super_claro">#F4F8FB</color>
+    <!--<color name="fondo_gris_azulado_super_claro">#FBF5F4</color>-->
+    <color name="tv_title_offer_item">#FF101010</color>
+    <color name="tv_name_company_offer_item">#FF605B5B</color>
+    <color name="fondo_titulo_oferta">#FFF4F4F4</color>
+    <color name="linea_divisoria_oferta">#FFBBBBBB</color>
+    <color name="requisitos_oferta">#FF8A8A8A</color>
+    <color name="naranja_rojizo_boton">#D05834</color>
+    <color name="verde_Oferta_Inscrito_Novedad">#009B50</color>
+    <color name="azul_candidatura">#2D7AC0</color>
+    <color name="rojo_candidatura">#D82664</color>
+
+
+    <!--COLORES PROYECTO VUE.JS-->
+    <color name="color_principal_azul">#0EA4E9</color>
+    <color name="color_principal_gris_fondo_blanquecino">#F9FAFB</color>
+    <color name="color_principal_gris_azulado_fondo">#F1F5F9</color>
+    <color name="color_principal_gris_fondo">#F3F4F6</color>
+    <color name="color_borde_input">#D1D5DB</color>
+    <color name="color_titulo_buscador">#A2AFC2</color>
+    <color name="color_letras_menu_lateral">#64748B</color>
+    <color name="color_letras_inscripcion">#00A550</color>
+    <color name="color_fondo_izq_cv">#414141</color>
+    <color name="color_letra_huevo_roto">#ECECEE</color>
+    <color name="color_letra_oscuro">#828282</color>
+    <color name="color_separacion_1">#E2E8F0</color>
+
+</resources>

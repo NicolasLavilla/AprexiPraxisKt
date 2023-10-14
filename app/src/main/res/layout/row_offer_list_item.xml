@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="170dp"
+    android:layout_marginEnd="0dp"
+    android:layout_marginStart="0dp"
+    android:layout_marginTop="2dp"
+    android:layout_marginBottom="2dp"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="3dp">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_offer_list_item"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="15dp"
+            android:layout_marginEnd="15dp"
+            android:background="@drawable/ic_image_offer_list_item"
+            android:src="@drawable/baseline_person_24"/>
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_offer_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tv_title_offer_item"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/tv_title_offer_item"
+                android:maxLines="4"
+                android:ellipsize="end"
+                tools:text="@string/tv_title_offer_item"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name_company_offer_item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/tv_name_enterprise_offer_item"
+                android:fontFamily="@font/roboto_bold"
+                android:textColor="@color/tv_name_company_offer_item"
+                tools:text="@string/tv_name_enterprise_offer_item"
+                android:maxLines="1"
+                android:ellipsize="end"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_location_item"
+                    android:layout_width="@dimen/icon_dimens_offer_item"
+                    android:layout_height="@dimen/icon_dimens_offer_item"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/baseline_location_on_24"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_location_offer_list_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/tv_information_offer_list_item"
+                    android:maxWidth="150dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/black"
+                    tools:text="@string/tv_location_offer_list_item"
+                    android:maxLines="1"
+                    android:ellipsize="end"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_vacant_offer_list_item"
+                    android:layout_width="@dimen/icon_dimens_offer_item"
+                    android:layout_height="@dimen/icon_dimens_offer_item"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/baseline_person_add_24"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_vacant_offer_list_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/tv_information_offer_list_item"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="@string/tv_vacant_offer_list_item"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:orientation="horizontal"
+                android:gravity="center">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_modality_offer_list_item"
+                    android:layout_width="@dimen/icon_dimens_offer_item"
+                    android:layout_height="@dimen/icon_dimens_offer_item"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/baseline_home_work_24"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_modality_offer_list_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/tv_information_offer_list_item"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="@string/tv_modality_offer_list_item"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_time_offer_list_item"
+                    android:layout_width="@dimen/icon_dimens_offer_item"
+                    android:layout_height="@dimen/icon_dimens_offer_item"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/baseline_access_time_24"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_time_offer_list_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/tv_information_offer_list_item"
+                    android:fontFamily="@font/roboto_regular"
+                    android:textColor="@color/black"
+                    android:maxLines="1"
+                    android:ellipsize="end"
+                    tools:text="@string/tv_time_offer_list_item"/>
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="200dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:layout_gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_salary_offer_list_item"
+                        android:layout_width="@dimen/icon_dimens_offer_item"
+                        android:layout_height="@dimen/icon_dimens_offer_item"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="@drawable/baseline_attach_money_24"/>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_salary_offer_list_item"
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:textColor="@color/gris_fuerte"
+                        android:textSize="@dimen/tv_information_offer_list_item"
+                        android:maxLines="1"
+                        android:ellipsize="end"
+                        tools:text="@string/tv_salary_offer_list_item"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_inscription_offer_list_item"
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginEnd="10dp"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="@font/roboto_bold"
+                    android:textColor="@color/verde_Oferta_Inscrito_Novedad"
+                    android:textSize="@dimen/tv_inscription_offer_list_item"
+                    android:text="@string/tv_inscription_offer_list_item"
+                    />
+            </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.cardview.widget.CardView>

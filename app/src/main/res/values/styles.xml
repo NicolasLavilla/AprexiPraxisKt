@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Buttons - Prueba -->
+    <style name="titulo_splash_activity">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:text">@string/titulo_splash_activity</item>
+        <item name="android:textSize">@dimen/titulo_splash_activity</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="et_search_fragment_offer_list">
+        <item name="android:textSize">@dimen/et_search_fragment_offer_list</item>
+        <item name="android:text">@string/text_search_fragment_offer_list</item>
+        <item name="android:textColor">@color/gris_tenue</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="et_search_fragment_offer_detail">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">3dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/tv_information_offer_detail_item</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+
+    <style name="tv_title_requirements_offer_detail_fragment">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginTop">15dp</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textColor">@color/tv_title_offer_item</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
+    <style name="tv_subtitle_requirements_offer_detail_fragment">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">37dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/requisitos_oferta</item>
+    </style>
+
+    <style name="tv_text_requirements_offer_detail_fragment">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">37dp</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="ll_requirements_offer_detail_fragment">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_marginBottom">4dp</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+
+</resources>

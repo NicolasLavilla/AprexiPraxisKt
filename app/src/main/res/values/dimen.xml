@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titulo_splash_activity">45sp</dimen>
+    <dimen name="tv_title_offer_item">19sp</dimen>
+    <dimen name="tv_name_enterprise_offer_item">14sp</dimen>
+    <dimen name="tv_information_offer_list_item">13sp</dimen>
+    <dimen name="tv_inscription_offer_list_item">12sp</dimen>
+    <dimen name="et_search_fragment_offer_list">16dp</dimen>
+    <dimen name="iet_space_iet_register_fragment">10dp</dimen>
+    <dimen name="icon_dimens_offer_item">21dp</dimen>
+    <dimen name="tv_information_offer_detail_item">13sp</dimen>
+</resources>

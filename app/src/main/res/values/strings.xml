@@ -1,0 +1,60 @@
+<resources>
+    <!--ITEM OFFER LIST-->
+    <string name="app_name">AprexiPraxis</string>
+    <string name="titulo_splash_activity">Aprexi</string>
+    <string name="tv_title_offer_item">Técnico de Laboratorio</string>
+    <string name="tv_name_enterprise_offer_item">ADECCO</string>
+    <string name="tv_location_offer_list_item">Zaragoza</string>
+    <string name="tv_vacant_offer_list_item">vacantes</string>
+    <string name="tv_modality_offer_list_item">Presencial</string>
+    <string name="tv_time_offer_list_item">Hace 4 dias</string>
+    <string name="tv_salary_offer_list_item">2.000€ - 3.000€ al mes</string>
+    <string name="tv_inscription_offer_list_item">INSCRITO</string>
+    <string name="error">Error</string>
+    <string name="action_ok">Aceptar</string>
+    <string name="action_retry">Reintentar</string>
+    <string name="text_search_fragment_offer_list">Todas las Ofertas de Zaragoza</string>
+    <string name="buscador">Buscador</string>
+    <string name="mis_ofertas">Mis Ofertas</string>
+    <string name="cv">CV</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="name_register_fragment">Nombre</string>
+    <string name="surname_register_fragment">Primer Apellido</string>
+    <string name="second_surname_register_fragment">Segundo Apellido</string>
+    <string name="mobile_register_fragment">Móvil</string>
+    <string name="email_register_fragment">Correo Electronico</string>
+    <string name="password_register_fragment">Contraseña</string>
+    <string name="dni_register_fragment">DNI</string>
+    <string name="birthdate_register_fragment">Fecha de Nacimiento</string>
+    <string name="municipality_register_fragment">Municipio</string>
+    <string name="btn_register_fragment">Registrar</string>
+    <string name="nie_register_fragment">NIE</string>
+    <string name="passport_register_fragment">Pasaporte</string>
+    <string name="male_register_fragment">Hombre</string>
+    <string name="female_register_fragment">Mujer</string>
+    <string name="email_login_fragment">Email</string>
+    <string name="password_login_fragment">Contraseña</string>
+    <string name="register_btn_login_fragment">Registrarse</string>
+    <string name="login_btn_login_fragment">Iniciar Sesión</string>
+    <string name="work_permit_register_fragment">Permiso de Trabajo</string>
+    <string name="autonomous_discharger_register_fragment">¿Eres autónomo?</string>
+    <string name="own_vehicle_register_fragment">¿Dispones de vehículo?</string>
+    <string name="studies_minium_offer_detail_fragment">Estudios Minimos</string>
+    <string name="experience_minium_offer_detail_fragment">Experiencia Minima</string>
+    <string name="required_languages_offer_detail_fragment">Idiomas Requeridos</string>
+    <string name="license_offer_detail_fragment">Carnets</string>
+    <string name="minimum_requirements_offer_detail_fragment">Requisitos Mínimos</string>
+    <string name="title_description_offer_detail_fragment">Descripción del Puesto</string>
+    <string name="btn_register_offer_detail_fragment">Inscribirse</string>
+    <string name="is_request_offer_detail_fragment">Ya estas Inscrito!</string>
+
+
+</resources>
