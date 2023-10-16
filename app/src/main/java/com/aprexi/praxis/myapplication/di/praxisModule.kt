@@ -12,8 +12,12 @@ import com.aprexi.praxis.myapplication.data.offer.remote.LoginRemoteImpl
 import com.aprexi.praxis.myapplication.data.offer.remote.TokenRemoteImpl
 import com.aprexi.praxis.myapplication.data.remote.ApiClient
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
+import com.aprexi.praxis.myapplication.data.requestOffer.RequestOfferDataImpl
+import com.aprexi.praxis.myapplication.data.requestOffer.local.RequestOfferLocalImpl
+import com.aprexi.praxis.myapplication.data.requestOffer.remote.RequestOfferRemoteImpl
 import com.aprexi.praxis.myapplication.domain.LoginRepository
 import com.aprexi.praxis.myapplication.domain.OfferRepository
+import com.aprexi.praxis.myapplication.domain.RequestOfferRepository
 import com.aprexi.praxis.myapplication.domain.TokenRepository
 import com.aprexi.praxis.myapplication.domain.usercase.CleanTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteFollowOfferUseCause
@@ -26,8 +30,10 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowCompanyOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -52,6 +58,12 @@ val praxisModule = module {
     factory { OfferRemoteImpl(get()) }
     factory<OfferRepository> { OfferDataImpl(get(),get()) }
 
+    factory { RequestOfferLocalImpl(get()) }
+    factory { RequestOfferRemoteImpl(get()) }
+    factory<RequestOfferRepository> { RequestOfferDataImpl(get(),get()) }
+
+
+    factory { GetRequestOfferListUseCause(get()) }
     factory { DeleteFollowOfferUseCause(get()) }
     factory { GetLoginTokenPreferencesUseCause(get()) }
     factory { GetCheckTokenPreferencesUseCause(get()) }
@@ -68,5 +80,6 @@ val praxisModule = module {
     viewModel{OfferViewModel(get(),get(),get(),get(),get(),get())}
     viewModel{TokenViewModel(get(),get(),get(),get(),get())}
     viewModel{LoginViewModel(get())}
+    viewModel{OfferRequestViewModel(get())}
 
 }

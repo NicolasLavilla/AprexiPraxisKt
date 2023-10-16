@@ -9,4 +9,5 @@
     <dimen name="iet_space_iet_register_fragment">10dp</dimen>
     <dimen name="icon_dimens_offer_item">21dp</dimen>
     <dimen name="tv_information_offer_detail_item">13sp</dimen>
+    <dimen name="tv_request_offer_state">14sp</dimen>
 </resources>

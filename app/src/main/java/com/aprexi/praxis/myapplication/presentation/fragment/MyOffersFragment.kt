@@ -5,29 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
+import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentMyOffersBinding
-import com.aprexi.praxis.myapplication.databinding.FragmentOfferListBinding
-import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
-import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import org.koin.androidx.viewmodel.ext.android.activityViewModel
+import com.google.android.material.tabs.TabLayoutMediator
 
 class MyOffersFragment: Fragment() {
 
     private val binding: FragmentMyOffersBinding by lazy {
         FragmentMyOffersBinding.inflate(layoutInflater)
     }
-
-    /*private val user: Int = 4
-
-    private lateinit var navController: NavController
-    private val offerListAdapter = OfferListAdapter()
-    private val offerViewModel: OfferViewModel by activityViewModel()*/
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,6 +33,7 @@ class MyOffersFragment: Fragment() {
         //val bottomNavigationView = view.findViewById<BottomNavigationView>(binding.bottomNavMyOffers.id)
         val bottomNavigationView = binding.bottomNavMyOffers
         val navController = findNavController()
+        initUI()
 
         val appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -54,10 +45,31 @@ class MyOffersFragment: Fragment() {
 
         bottomNavigationView.setupWithNavController(navController)
 
+    }
 
-        /*initViewModel()
-        initUI()
+    private fun initUI(){
+        val tabLayout = binding.tlMyOffersTabs
+        val viewPager = binding.vp2MyOfferViewpager
 
-        offerViewModel.fetchOfferList(idUser = user) //Hay que buscar el id del usuario con sharedPreference*/
+        viewPager.adapter = OfferViewPagerAdapter(this)
+
+        TabLayoutMediator(tabLayout, viewPager){ tab, position ->
+            tab.text = when (position){
+                0 -> getString(R.string.inscriptions_my_offers_fragment)
+                1 -> getString(R.string.follow_my_offers_fragment)
+                else -> getString(R.string.error)
+            }
+        }.attach()
+    }
+
+    private inner class OfferViewPagerAdapter(fragment: Fragment): FragmentStateAdapter(fragment){
+        override fun getItemCount() = 2
+        override fun createFragment(position: Int): Fragment{
+            return when(position){
+                0 -> OfferRequestListFragment()
+                1 -> OfferFollowListFragment()
+                else -> throw IllegalAccessException("Invalid position")
+            }
+        }
     }
 }

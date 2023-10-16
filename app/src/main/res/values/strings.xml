@@ -55,6 +55,14 @@
     <string name="title_description_offer_detail_fragment">Descripción del Puesto</string>
     <string name="btn_register_offer_detail_fragment">Inscribirse</string>
     <string name="is_request_offer_detail_fragment">Ya estas Inscrito!</string>
+    <string name="tv_num_inscriptions_item">Inscritos</string>
+    <string name="request_offer">Inscrito</string>
+    <string name="time_request_offer">Hace 12 horas</string>
+    <string name="text_request_offer">Te has Inscrito en esta Oferta</string>
+    <string name="title_my_offerts_fragment">Mis Ofertas</string>
+    <string name="inscriptions_my_offers_fragment">CANDIDATURAS</string>
+    <string name="follow_my_offers_fragment">GUARDADAS</string>
+    <string name="inscription_offer_detail_request_list_item">Inscrito</string>
 
 
 </resources>

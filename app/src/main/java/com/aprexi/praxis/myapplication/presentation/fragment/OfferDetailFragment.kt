@@ -101,7 +101,7 @@ class OfferDetailFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> showProgressBar(true)
             is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { redirectToLogin() }
+            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
             else -> { }
         }
     }

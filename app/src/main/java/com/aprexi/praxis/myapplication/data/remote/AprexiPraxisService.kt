@@ -4,6 +4,7 @@ import com.aprexi.praxis.myapplication.model.CheckToken
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
+import com.aprexi.praxis.myapplication.model.ListRequestOffer
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.RequestOfferUser
@@ -34,5 +35,8 @@ interface AprexiPraxisService {
 
     @DELETE("DeleteFollowOfferUser.php")
     suspend fun deleteFollowOffer(@Query("idUser") idUser: Int, @Query("idOffer") idOffer: Int, @Query("token") token: String): DeleteFollowOfferUser
+
+    @GET("ListRequestOffer.php")
+    suspend fun getRequestOfferList(@Query("idUser") idUser: Int, @Query("token") token: String): ListRequestOffer
 
 }

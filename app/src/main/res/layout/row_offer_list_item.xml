@@ -151,7 +151,6 @@
                     android:ellipsize="end"
                     tools:text="@string/tv_time_offer_list_item"/>
 
-
             </LinearLayout>
 
             <LinearLayout
