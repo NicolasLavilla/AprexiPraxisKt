@@ -1,7 +1,6 @@
 package com.aprexi.praxis.myapplication.data.requestOffer.local
 
 import com.aprexi.praxis.myapplication.data.local.MemoryCache
-import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
 
 class RequestOfferLocalImpl (

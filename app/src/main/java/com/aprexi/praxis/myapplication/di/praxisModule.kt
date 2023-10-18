@@ -1,5 +1,8 @@
 package com.aprexi.praxis.myapplication.di
 
+import com.aprexi.praxis.myapplication.data.followOffer.FollowOfferDataImpl
+import com.aprexi.praxis.myapplication.data.followOffer.local.FollowOfferLocalImpl
+import com.aprexi.praxis.myapplication.data.followOffer.remote.FollowOfferRemoteImpl
 import com.aprexi.praxis.myapplication.data.local.MemoryCache
 import com.aprexi.praxis.myapplication.data.offer.OfferDataImpl
 import com.aprexi.praxis.myapplication.data.login.LoginDataImpl
@@ -15,6 +18,7 @@ import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.data.requestOffer.RequestOfferDataImpl
 import com.aprexi.praxis.myapplication.data.requestOffer.local.RequestOfferLocalImpl
 import com.aprexi.praxis.myapplication.data.requestOffer.remote.RequestOfferRemoteImpl
+import com.aprexi.praxis.myapplication.domain.FollowOfferRepository
 import com.aprexi.praxis.myapplication.domain.LoginRepository
 import com.aprexi.praxis.myapplication.domain.OfferRepository
 import com.aprexi.praxis.myapplication.domain.RequestOfferRepository
@@ -30,9 +34,11 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowCompanyOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
@@ -62,7 +68,12 @@ val praxisModule = module {
     factory { RequestOfferRemoteImpl(get()) }
     factory<RequestOfferRepository> { RequestOfferDataImpl(get(),get()) }
 
+    factory { FollowOfferLocalImpl(get()) }
+    factory { FollowOfferRemoteImpl(get()) }
+    factory<FollowOfferRepository> { FollowOfferDataImpl(get(),get()) }
 
+
+    factory { GetFollowOffersUseCause(get()) }
     factory { GetRequestOfferListUseCause(get()) }
     factory { DeleteFollowOfferUseCause(get()) }
     factory { GetLoginTokenPreferencesUseCause(get()) }
@@ -81,5 +92,5 @@ val praxisModule = module {
     viewModel{TokenViewModel(get(),get(),get(),get(),get())}
     viewModel{LoginViewModel(get())}
     viewModel{OfferRequestViewModel(get())}
-
+    viewModel{ OfferFollowViewModel(get()) }
 }

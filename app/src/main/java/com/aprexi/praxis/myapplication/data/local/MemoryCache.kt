@@ -8,11 +8,13 @@ import com.aprexi.praxis.myapplication.model.Offer
 class MemoryCache {
 
     var offerList: ListOffersResponse? = null
+    var followOfferList: ListOffersResponse? = null
     var RequestOfferList: ListRequestOffer? = null
 
     fun clearAll() {
         offerList = null
         RequestOfferList = null
+        followOfferList= null
     }
 
 }

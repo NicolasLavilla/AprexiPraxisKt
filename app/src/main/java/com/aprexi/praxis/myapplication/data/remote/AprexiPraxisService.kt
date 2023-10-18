@@ -39,4 +39,7 @@ interface AprexiPraxisService {
     @GET("ListRequestOffer.php")
     suspend fun getRequestOfferList(@Query("idUser") idUser: Int, @Query("token") token: String): ListRequestOffer
 
+    @GET("ListFollowtOffer.php")
+    suspend fun getFollowOfferList(@Query("idUser") idUser: Int, @Query("token") token: String): ListOffersResponse
+
 }

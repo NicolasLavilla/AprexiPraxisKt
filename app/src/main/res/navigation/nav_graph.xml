@@ -73,6 +73,7 @@
         <action
             android:id="@+id/action_navMyOffersFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+
     </fragment>
 
     <fragment
@@ -100,6 +101,7 @@
         <argument
             android:name="idOffer"
             app:argType="integer" />
+
         <action
             android:id="@+id/action_offerDetailFragment_to_companyFragment"
             app:destination="@id/companyFragment" />
@@ -131,6 +133,7 @@
         <action
             android:id="@+id/action_offerFollowFragment_to_offerDetailFragment"
             app:destination="@id/offerDetailFragment" />
+
     </fragment>
 
     <fragment

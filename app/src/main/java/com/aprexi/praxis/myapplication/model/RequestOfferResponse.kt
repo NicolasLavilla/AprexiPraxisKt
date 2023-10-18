@@ -17,5 +17,6 @@ data class RequestOffer (
     val dateRequest: String,
     val stateRequest: Long,
     val nameState: String,
-    val numRegistered: Long
+    val numRegistered: Long,
+    val logoCompany: String
 )

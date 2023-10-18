@@ -33,17 +33,15 @@ class MyOffersFragment: Fragment() {
         //val bottomNavigationView = view.findViewById<BottomNavigationView>(binding.bottomNavMyOffers.id)
         val bottomNavigationView = binding.bottomNavMyOffers
         val navController = findNavController()
-        initUI()
-
-        val appBarConfiguration = AppBarConfiguration(
+        AppBarConfiguration(
             setOf(
                 R.id.navOfferListFragment,
                 R.id.navMyOffersFragment,
                 R.id.navCurriculumFragment
             )
         )
-
         bottomNavigationView.setupWithNavController(navController)
+        initUI()
 
     }
 

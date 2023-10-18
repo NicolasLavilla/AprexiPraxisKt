@@ -8,6 +8,7 @@ import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.RowOfferRequestListItemBinding
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.RequestOffer
+import com.bumptech.glide.Glide
 import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Locale
@@ -37,11 +38,11 @@ class RequestOfferListAdapter: RecyclerView.Adapter<RequestOfferListAdapter.Requ
         holder.time.text = calculateElapsedTime(item.datePublication.toString())
         holder.circleState.setBackgroundResource(colorState(item.stateRequest.toInt()))
 
-      /*  if (!item.logoCompany.isNullOrEmpty()) {
+        if (!item.logoCompany.isNullOrEmpty()) {
             Glide.with(holder.logoImageView)
                 .load(item.logoCompany)
                 .into(holder.logoImageView)
-        }*/
+        }
 
     }
     private fun colorState(state: Int): Int{
