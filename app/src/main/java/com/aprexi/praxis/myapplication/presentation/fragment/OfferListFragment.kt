@@ -31,7 +31,6 @@ class OfferListFragment : Fragment() {
         FragmentOfferListBinding.inflate(layoutInflater)
     }
 
-
     private val offerListAdapter = OfferListAdapter()
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val offerViewModel: OfferViewModel by activityViewModel()
@@ -50,16 +49,6 @@ class OfferListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bottomNavigationView = binding.bottomNavSearchOfferList
-        val navController = findNavController()
-        AppBarConfiguration(
-            setOf(
-                R.id.navOfferListFragment,
-                R.id.navMyOffersFragment,
-                R.id.navCurriculumFragment
-            )
-        )
-        bottomNavigationView.setupWithNavController(navController)
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()

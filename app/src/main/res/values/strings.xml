@@ -63,6 +63,10 @@
     <string name="inscriptions_my_offers_fragment">CANDIDATURAS</string>
     <string name="follow_my_offers_fragment">GUARDADAS</string>
     <string name="inscription_offer_detail_request_list_item">Inscrito</string>
+    <string name="title_activity_botton">BottonActivity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 
 </resources>

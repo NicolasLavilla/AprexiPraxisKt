@@ -1,5 +1,6 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -13,6 +14,7 @@ import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentSplashBinding
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.ResourceState
+import com.aprexi.praxis.myapplication.presentation.BottomActivity
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -101,9 +103,11 @@ class SplashFragment : Fragment() {
     private fun redirectToMainActivityWithDelay() {
         lifecycleScope.launch {
             delay(1500)
-            findNavController().navigate(
+            /*findNavController().navigate(
                 SplashFragmentDirections.actionSplashFragmentToOfferListFragment()
-            )
+            )*/
+            val intent = Intent(requireContext(), BottomActivity::class.java)
+            startActivity(intent)
         }
     }
 
@@ -114,4 +118,5 @@ class SplashFragment : Fragment() {
             .setPositiveButton(R.string.action_ok, null)
             .show()
     }
+
 }

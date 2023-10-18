@@ -1,5 +1,6 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentLoginBinding
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.ResourceState
+import com.aprexi.praxis.myapplication.presentation.BottomActivity
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
@@ -125,7 +127,9 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToOfferListFragment() {
-        findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToOfferListFragment())
+        //findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToOfferListFragment())
+        val intent = Intent(requireContext(), BottomActivity::class.java)
+        startActivity(intent)
     }
 
     private fun navigateToRegisterFragment() {

@@ -41,18 +41,7 @@ class CurriculumFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         //val bottomNavigationView = view.findViewById<BottomNavigationView>(binding.bottomNavCurriculum.id)
-        val bottomNavigationView = binding.bottomNavCurriculum
-        val navController = findNavController()
 
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navOfferListFragment,
-                R.id.navMyOffersFragment,
-                R.id.navCurriculumFragment
-            )
-        )
-
-        bottomNavigationView.setupWithNavController(navController)
 
 
         /*initViewModel()

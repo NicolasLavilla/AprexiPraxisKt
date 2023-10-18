@@ -12,9 +12,9 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <action
+        <!--<action
             android:id="@+id/action_splashFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />
+            app:destination="@id/navOfferListFragment" />-->
     </fragment>
 
     <fragment
@@ -24,20 +24,21 @@
         <action
             android:id="@+id/action_loginFragment_to_RegisterFragment"
             app:destination="@id/registerFragment" />
-        <action
+        <!--<action
             android:id="@+id/action_loginFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />
+            app:destination="@id/navOfferListFragment" />-->
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.RegisterFragment"
         tools:layout="@layout/fragment_register">
-        <action
+        <!--<action
             android:id="@+id/action_RegisterFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />
+            app:destination="@id/navOfferListFragment" />-->
     </fragment>
 
+    <!--
     <fragment
         android:id="@+id/navOfferListFragment"
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferListFragment"
@@ -145,4 +146,5 @@
             android:id="@+id/action_offerRequestListFragment_to_detailRequestOfferFragment"
             app:destination="@id/detailRequestOfferFragment" />
     </fragment>
+    -->
 </navigation>

@@ -57,22 +57,12 @@
         android:background="@color/white"
         android:clipToPadding="false"
         android:padding="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav_search_offer_list"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ly_search_fragment_offer_list"
         tools:itemCount="3"
         tools:listitem="@layout/row_offer_list_item" />
-
-    <com.google.android.material.bottomnavigation.BottomNavigationView
-        android:id="@+id/bottom_nav_search_offer_list"
-        android:layout_width="0dp"
-        android:layout_height="70dp"
-        android:background="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/bottom_nav"/>
 
     <ProgressBar
         android:id="@+id/pb_offer_list"
