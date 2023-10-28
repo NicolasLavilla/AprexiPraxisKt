@@ -54,7 +54,7 @@
         android:id="@+id/cv_detail_offer_request"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="3dp"
+        android:layout_margin="5dp"
         app:cardCornerRadius="10dp"
         app:cardElevation="3dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -156,6 +156,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cv_detail_offer_request" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_detail_request_offer_list_fragment"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         tools:itemCount="3"
@@ -167,5 +168,14 @@
 
     </androidx.recyclerview.widget.RecyclerView>
 
+    <ProgressBar
+        android:id="@+id/pb_detail_request_offer_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,11 +10,14 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.viewpager2.widget.ViewPager2
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentOffersFollowBinding
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ResourceState
+import com.aprexi.praxis.myapplication.presentation.OfferDetailActivity
 import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.adpter.FollowOfferListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
 import com.aprexi.praxis.myapplication.presentation.viewmodel.FollowOfferListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
@@ -31,7 +34,7 @@ class OfferFollowListFragment: Fragment() {
         FragmentOffersFollowBinding.inflate(layoutInflater)
     }
 
-    private val offerListAdapter = OfferListAdapter()
+    private val followOfferListAdapter = FollowOfferListAdapter()
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val offerFollowViewModel: OfferFollowViewModel by activityViewModel()
     private var loginToken: String = ""
@@ -73,7 +76,7 @@ class OfferFollowListFragment: Fragment() {
 
     private fun handleSuccess(result: ListOffersResponse) {
         showProgressBar(false)
-        offerListAdapter.submitList(result.offer)
+        followOfferListAdapter.submitList(result.offer)
     }
 
     private fun handleSuccessResponse() {
@@ -82,17 +85,23 @@ class OfferFollowListFragment: Fragment() {
     }
 
     private fun initUI() {
-        binding.rvOfferListFollowOffersFragment.adapter = offerListAdapter
+        binding.rvOfferListFollowOffersFragment.adapter = followOfferListAdapter
         binding.rvOfferListFollowOffersFragment.layoutManager = LinearLayoutManager(requireContext())
 
-        offerListAdapter.onClickListener = { offer ->
+        followOfferListAdapter.onClickListener = { offer ->
 
-            findNavController().navigate(
+            /*findNavController().navigate(
                 OfferFollowListFragmentDirections.actionOfferFollowFragmentToOfferDetailFragment(
+                //MyOffersFragmentDirections.actionNavMyOffersFragmentToOfferDetailFragment(
                     idUser = idUser,
                     idOffer = offer.idOffer.toInt(),
                 )
-            )
+            )*/
+
+            val intent = Intent(context, OfferDetailActivity::class.java)
+            intent.putExtra("idUser", idUser)
+            intent.putExtra("idOffer", offer.idOffer.toInt())
+            startActivity(intent)
         }
     }
 

@@ -14,6 +14,7 @@ import com.aprexi.praxis.myapplication.databinding.FragmentOfferRequestBinding
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
 import com.aprexi.praxis.myapplication.model.ResourceState
+import com.aprexi.praxis.myapplication.presentation.DetailRequestOfferActivity
 import com.aprexi.praxis.myapplication.presentation.SplashActivity
 import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.RequestOfferListAdapter
@@ -127,9 +128,11 @@ class OfferRequestListFragment: Fragment() {
 
         offerListAdapter.onClickListener = { offer ->
 
-            findNavController().navigate(
-                OfferRequestListFragmentDirections.actionOfferRequestListFragmentToDetailRequestOfferFragment()
-            )
+            val intent = Intent(requireContext(), DetailRequestOfferActivity::class.java)
+            intent.putExtra("idUser", idUser)
+            intent.putExtra("idOffer", offer.idOffer.toInt())
+            startActivity(intent)
+
         }
     }
 

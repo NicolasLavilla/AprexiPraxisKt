@@ -3,10 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/offer_detail_fragment">
 
     <fragment
-        android:id="@+id/splashFragment"
+        android:id="@+id/offer_detail_fragment"
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.SplashFragment"
         tools:layout="@layout/fragment_splash">
         <action

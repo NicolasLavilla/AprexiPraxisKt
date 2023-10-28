@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
@@ -15,6 +16,8 @@ import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentOfferListBinding
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ResourceState
+import com.aprexi.praxis.myapplication.presentation.BottomActivity
+import com.aprexi.praxis.myapplication.presentation.OfferDetailActivity
 import com.aprexi.praxis.myapplication.presentation.SplashActivity
 import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferListState
@@ -123,12 +126,10 @@ class OfferListFragment : Fragment() {
 
         offerListAdapter.onClickListener = { offer ->
 
-            findNavController().navigate(
-                OfferListFragmentDirections.actionOfferListFragmentToOfferDetailFragment(
-                    idUser = idUser,
-                    idOffer = offer.idOffer.toInt(),
-                )
-            )
+            val intent = Intent(context, OfferDetailActivity::class.java)
+            intent.putExtra("idUser", idUser)
+            intent.putExtra("idOffer", offer.idOffer.toInt())
+            startActivity(intent)
         }
     }
 

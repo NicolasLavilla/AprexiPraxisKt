@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <View
-                android:id="@+id/icono_vacantes_item_listado"
+                android:id="@+id/v_state_circle"
                 android:layout_marginStart="7.5dp"
                 android:layout_marginTop="6.5dp"
                 android:layout_marginEnd="3dp"

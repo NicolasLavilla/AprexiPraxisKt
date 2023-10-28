@@ -4,6 +4,7 @@ import com.aprexi.praxis.myapplication.data.requestOffer.local.RequestOfferLocal
 import com.aprexi.praxis.myapplication.data.requestOffer.remote.RequestOfferRemoteImpl
 import com.aprexi.praxis.myapplication.domain.OfferRepository
 import com.aprexi.praxis.myapplication.domain.RequestOfferRepository
+import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
 
@@ -26,5 +27,14 @@ class RequestOfferDataImpl(
 
     override fun saveRequestOffers(requestOffers: ListRequestOffer) {
         requestOfferLocalImpl.saveRequestOffer(requestOffers)
+    }
+
+    override suspend fun getDetailRequestOfferList(
+        idUser: Int,
+        idOffer: Int,
+        forceRemote: Boolean,
+        token: String
+    ): ListDetailRequestOffer {
+        return requestOfferRemoteImpl.getDetailRequestOfferList(idUser,idOffer,token)
     }
 }

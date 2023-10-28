@@ -6,10 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aprexi.praxis.myapplication.R
@@ -42,9 +42,6 @@ class OfferDetailFragment : Fragment() {
         FragmentOfferDetailBinding.inflate(layoutInflater)
     }
 
-    private val args: OfferDetailFragmentArgs by navArgs()
-    private val tokenViewModel: TokenViewModel by activityViewModel()
-    private val offersViewModel: OfferViewModel by activityViewModel()
     private var loginToken: String = ""
     private var succesToken: Boolean = false
     private var followOffer: Boolean = false
@@ -57,8 +54,13 @@ class OfferDetailFragment : Fragment() {
         return binding.root
     }
 
+    private val args: OfferDetailFragmentArgs by navArgs()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val offersViewModel: OfferViewModel by activityViewModel()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
@@ -238,8 +240,9 @@ class OfferDetailFragment : Fragment() {
         })
 
         toolbarDetailFragment.setOnClickListener{
+
             findNavController().navigate(
-                OfferDetailFragmentDirections.actionOfferDetailFragmentToCompanyFragment()
+                OfferDetailFragmentDirections.actionOfferDetailFragmentToOfferCompanyFragment(4,4)
             )
         }
 

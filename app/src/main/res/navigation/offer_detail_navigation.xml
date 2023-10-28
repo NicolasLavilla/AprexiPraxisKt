@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/offer_detail_navigation"
+    app:startDestination="@id/offer_detail_fragment">
+
+    <fragment
+        android:id="@+id/offer_detail_fragment"
+        android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferDetailFragment"
+        tools:layout="@layout/fragment_offer_detail">
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+
+        <argument
+            android:name="idOffer"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_offer_detail_fragment_to_offerCompanyFragment"
+            app:destination="@id/offer_company_fragment" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/offer_company_fragment"
+        android:name="com.aprexi.praxis.myapplication.presentation.fragment.CompanyFragment"
+        tools:layout="@layout/fragment_company">
+
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+
+        <argument
+            android:name="idCompany"
+            app:argType="integer" />
+
+
+    </fragment>
+
+</navigation>
+
+

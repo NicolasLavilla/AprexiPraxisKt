@@ -3,6 +3,7 @@ package com.aprexi.praxis.myapplication.data.remote
 import com.aprexi.praxis.myapplication.model.CheckToken
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
+import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
 import com.aprexi.praxis.myapplication.model.Login
@@ -41,5 +42,8 @@ interface AprexiPraxisService {
 
     @GET("ListFollowtOffer.php")
     suspend fun getFollowOfferList(@Query("idUser") idUser: Int, @Query("token") token: String): ListOffersResponse
+
+    @GET("ListDetailRequestOffer.php")
+    suspend fun getDetailRequestOfferList(@Query("idUser") idUser: Int,@Query("idOffer") idOffer: Int, @Query("token") token: String): ListDetailRequestOffer
 
 }

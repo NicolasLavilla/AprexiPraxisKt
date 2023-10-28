@@ -20,3 +20,17 @@ data class RequestOffer (
     val numRegistered: Long,
     val logoCompany: String
 )
+
+data class ListDetailRequestOffer (
+    val detailRequestOffer: List<DetailRequestOffer>,
+    val success: Boolean,
+    val idError: Any? = null,
+    val messageError: Any? = null
+)
+
+data class DetailRequestOffer (
+    val dateRequest: String,
+    val stateRequest: Long,
+    val nameState: String,
+    val descriptionActionRequest: String
+)

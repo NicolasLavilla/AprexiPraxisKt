@@ -17,7 +17,7 @@ class CompanyFragment: Fragment() {
         FragmentCompanyBinding.inflate(layoutInflater)
     }
 
-    private val args: OfferDetailFragmentArgs by navArgs()
+    private val args: CompanyFragmentArgs by navArgs()
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val offersViewModel: OfferViewModel by activityViewModel()
     private var loginToken: String = ""

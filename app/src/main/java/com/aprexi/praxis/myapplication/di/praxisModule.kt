@@ -34,9 +34,12 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowCompanyOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetDetailRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
+import com.aprexi.praxis.myapplication.model.RequestOffer
+import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailRequestOfferViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
@@ -73,6 +76,7 @@ val praxisModule = module {
     factory<FollowOfferRepository> { FollowOfferDataImpl(get(),get()) }
 
 
+    factory { GetDetailRequestOfferListUseCause(get()) }
     factory { GetFollowOffersUseCause(get()) }
     factory { GetRequestOfferListUseCause(get()) }
     factory { DeleteFollowOfferUseCause(get()) }
@@ -92,5 +96,6 @@ val praxisModule = module {
     viewModel{TokenViewModel(get(),get(),get(),get(),get())}
     viewModel{LoginViewModel(get())}
     viewModel{OfferRequestViewModel(get())}
-    viewModel{ OfferFollowViewModel(get()) }
+    viewModel{OfferFollowViewModel(get()) }
+    viewModel{DetailRequestOfferViewModel(get())}
 }
