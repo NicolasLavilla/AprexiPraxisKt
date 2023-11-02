@@ -1,6 +1,7 @@
 package com.aprexi.praxis.myapplication.data.remote
 
 import com.aprexi.praxis.myapplication.model.CheckToken
+import com.aprexi.praxis.myapplication.model.Company
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
 import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
@@ -45,5 +46,12 @@ interface AprexiPraxisService {
 
     @GET("ListDetailRequestOffer.php")
     suspend fun getDetailRequestOfferList(@Query("idUser") idUser: Int,@Query("idOffer") idOffer: Int, @Query("token") token: String): ListDetailRequestOffer
+
+    @GET("Company.php")
+    suspend fun getCompany(@Query("idUser") idUser: Int, @Query("idCompany") idCompany: Int, @Query("token") token: String): Company
+
+    @GET("ListOfferOnlyCompany.php")
+    suspend fun getOffersListCompany(@Query("idUser") idUser: Int, @Query("idCompany") idCompany: Int, @Query("token") token: String): ListOffersResponse
+
 
 }

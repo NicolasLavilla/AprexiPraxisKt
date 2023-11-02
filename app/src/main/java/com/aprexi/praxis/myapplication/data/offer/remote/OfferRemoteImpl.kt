@@ -11,7 +11,7 @@ class OfferRemoteImpl(
     private val aprexiPraxisService: AprexiPraxisService
 ) {
 
-    suspend fun getOffers(idUser: Int, token: String): ListOffersResponse {
+    suspend fun getOfferList(idUser: Int, token: String): ListOffersResponse {
         return aprexiPraxisService.getOffersList(idUser = idUser,token = token)
     }
 
@@ -31,4 +31,7 @@ class OfferRemoteImpl(
         return aprexiPraxisService.deleteFollowOffer(idUser = idUser, idOffer = idOffer, token = token)
     }
 
+    suspend fun getOfferListCompany(idUser: Int, idCompany: Int,token: String): ListOffersResponse {
+        return aprexiPraxisService.getOffersListCompany(idUser = idUser,idCompany = idCompany,token = token)
+    }
 }

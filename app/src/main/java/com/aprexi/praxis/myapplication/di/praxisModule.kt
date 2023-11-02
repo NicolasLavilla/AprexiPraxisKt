@@ -1,5 +1,8 @@
 package com.aprexi.praxis.myapplication.di
 
+import com.aprexi.praxis.myapplication.data.company.CompanyDataImpl
+import com.aprexi.praxis.myapplication.data.company.local.CompanyLocalImpl
+import com.aprexi.praxis.myapplication.data.company.remote.CompanyRemoteImpl
 import com.aprexi.praxis.myapplication.data.followOffer.FollowOfferDataImpl
 import com.aprexi.praxis.myapplication.data.followOffer.local.FollowOfferLocalImpl
 import com.aprexi.praxis.myapplication.data.followOffer.remote.FollowOfferRemoteImpl
@@ -18,6 +21,7 @@ import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.data.requestOffer.RequestOfferDataImpl
 import com.aprexi.praxis.myapplication.data.requestOffer.local.RequestOfferLocalImpl
 import com.aprexi.praxis.myapplication.data.requestOffer.remote.RequestOfferRemoteImpl
+import com.aprexi.praxis.myapplication.domain.CompanyRepository
 import com.aprexi.praxis.myapplication.domain.FollowOfferRepository
 import com.aprexi.praxis.myapplication.domain.LoginRepository
 import com.aprexi.praxis.myapplication.domain.OfferRepository
@@ -30,15 +34,17 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLoginTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLoginUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetOfferUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetOffersUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowCompanyOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetDetailRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
-import com.aprexi.praxis.myapplication.model.RequestOffer
+import com.aprexi.praxis.myapplication.presentation.viewmodel.CompanyViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailRequestOfferViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
@@ -75,7 +81,13 @@ val praxisModule = module {
     factory { FollowOfferRemoteImpl(get()) }
     factory<FollowOfferRepository> { FollowOfferDataImpl(get(),get()) }
 
+    factory { CompanyLocalImpl() }
+    factory { CompanyRemoteImpl(get()) }
+    factory<CompanyRepository> { CompanyDataImpl(get(),get()) }
 
+
+    factory { GetOfferListCompanyUseCause(get())}
+    factory { GetCompanyUseCause(get()) }
     factory { GetDetailRequestOfferListUseCause(get()) }
     factory { GetFollowOffersUseCause(get()) }
     factory { GetRequestOfferListUseCause(get()) }
@@ -89,13 +101,14 @@ val praxisModule = module {
     factory { RequestOfferUseCause(get()) }
     factory { FollowOfferUseCause(get()) }
     factory { FollowCompanyOfferUseCause(get()) }
-    factory { GetOffersUseCause(get()) }
+    factory { GetOfferListUseCause(get()) }
     factory { GetOfferUseCause(get()) }
 
-    viewModel{OfferViewModel(get(),get(),get(),get(),get(),get())}
+    viewModel{OfferViewModel(get(),get(),get(),get(),get(),get(),get())}
     viewModel{TokenViewModel(get(),get(),get(),get(),get())}
     viewModel{LoginViewModel(get())}
     viewModel{OfferRequestViewModel(get())}
     viewModel{OfferFollowViewModel(get()) }
     viewModel{DetailRequestOfferViewModel(get())}
+    viewModel{CompanyViewModel(get())}
 }

@@ -14,14 +14,13 @@ class OfferDataImpl (
     private val offerRemoteImpl: OfferRemoteImpl
 ) : OfferRepository {
 
-
-    override suspend fun getOffers( idUser: Int, forceRemote: Boolean, token: String): ListOffersResponse {
+    override suspend fun getOfferList(idUser: Int, forceRemote: Boolean, token: String): ListOffersResponse {
         val cachedOffersList = offerLocalImpl.getOffers()
 
         if (cachedOffersList != null && forceRemote) {
             return cachedOffersList
         } else {
-            val remoteOfferList = offerRemoteImpl.getOffers(idUser = idUser, token = token)
+            val remoteOfferList = offerRemoteImpl.getOfferList(idUser = idUser, token = token)
             saveOffers(remoteOfferList)
             return remoteOfferList
         }
@@ -52,5 +51,7 @@ class OfferDataImpl (
         //NO ESTÁ IMPLEMENTADO LA SOOLICUTUD
     }
 
-
+    override suspend fun getOfferListCompany(idUser: Int, idCompany: Int, token: String): ListOffersResponse {
+       return offerRemoteImpl.getOfferListCompany(idUser = idUser, idCompany = idCompany, token = token)
+    }
 }

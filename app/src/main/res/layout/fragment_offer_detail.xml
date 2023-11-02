@@ -20,7 +20,7 @@
             android:fitsSystemWindows="true"
             app:layout_scrollFlags="scroll|snap|exitUntilCollapsed">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_desk_offer_detail"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -41,12 +41,12 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_logo_tb_offer_detail"
                         android:layout_width="60dp"
                         android:layout_height="60dp" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_offer_name_Company_detail_fragment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -90,13 +90,13 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <ImageView
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_logo_collapsing_tb_offer_detail"
                     android:layout_width="60dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="20dp"/>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_title_offer_detail_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -128,13 +128,13 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ic_municipality_offer_detail_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/baseline_location_on_24" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_municipality_offer_detail_fragment"
                         style="@style/et_search_fragment_offer_detail"
                         android:text="Zaragoza"/>
@@ -147,13 +147,13 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ic_salary_offer_detail_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/baseline_attach_money_24" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_salary_offer_detail_fragment"
                         style="@style/et_search_fragment_offer_detail"
                         android:text="2.000€ - 3.000€ al mes"/>
@@ -166,14 +166,14 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ic_time_offer_detail_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
                         android:background="@drawable/baseline_access_time_24" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_time_offer_detail_fragment"
                         style="@style/et_search_fragment_offer_detail"
                         android:text="Hace 4 dias" />
@@ -198,14 +198,14 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ic_vacant_offer_detail_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/baseline_person_add_24"
                         android:gravity="center" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_vacant_offer_detail_fragment"
                         style="@style/et_search_fragment_offer_detail"
                         android:text="2 vacantes" />
@@ -218,13 +218,13 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ic_inscriptions_offer_detail_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/baseline_person_24" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_inscriptions_offer_detail_fragment"
                         style="@style/et_search_fragment_offer_detail"
                         android:text="2 Inscritos"/>
@@ -237,13 +237,13 @@
                     android:gravity="center"
                     android:orientation="horizontal">
 
-                    <ImageView
+                    <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/ic_modality_offer_detail_fragment"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@drawable/baseline_home_work_24" />
 
-                    <TextView
+                    <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_modality_offer_detail_fragment"
                         style="@style/et_search_fragment_offer_detail"
                         android:text="Presencial"/>
@@ -257,7 +257,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_two">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/layout_oferta_requisito"
                     style="@style/tv_title_requirements_offer_detail_fragment"
                     android:text="Requisitos"         />
@@ -272,12 +272,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_subtitle_studies_minium_offer_detail_fragment"
                             android:text="@string/studies_minium_offer_detail_fragment"
                             style="@style/tv_subtitle_requirements_offer_detail_fragment"/>
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_studies_minium_offer_detail_fragment"
                             style="@style/tv_text_requirements_offer_detail_fragment"
                             tools:text="Grado Superior FP2"/>
@@ -288,12 +288,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_subtitle_experience_minium_offer_detail_fragment"
                             style="@style/tv_subtitle_requirements_offer_detail_fragment"
                             android:text="@string/experience_minium_offer_detail_fragment"/>
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_experience_minium_offer_detail_fragment"
                             style="@style/tv_text_requirements_offer_detail_fragment"
                             tools:text="minimo 2 años"/>
@@ -310,12 +310,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_subtitle_required_languages_offer_detail_fragment"
                             style="@style/tv_subtitle_requirements_offer_detail_fragment"
                             android:text="@string/required_languages_offer_detail_fragment"/>
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_text1_required_languages_offer_detail_fragment"
                             style="@style/tv_text_requirements_offer_detail_fragment"
                             tools:text="idioma 1" />
@@ -327,12 +327,12 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_subtitle_license_offer_detail_fragment"
                             style="@style/tv_subtitle_requirements_offer_detail_fragment"
                             android:text="@string/license_offer_detail_fragment"/>
 
-                        <TextView
+                        <androidx.appcompat.widget.AppCompatTextView
                             android:id="@+id/tv_text1_license_offer_detail_fragment"
                             style="@style/tv_text_requirements_offer_detail_fragment"
                             tools:text="B1 , A1"/>
@@ -340,12 +340,12 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_subtitle_minimum_requirements_offer_detail_fragment"
                     style="@style/tv_subtitle_requirements_offer_detail_fragment"
                     android:text="@string/minimum_requirements_offer_detail_fragment"/>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_text_requirements_minium_offer_detail_fragment"
                     style="@style/tv_text_requirements_offer_detail_fragment"
                     tools:text="Texto...."/>
@@ -359,12 +359,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/ll_requisitos_offer_detail_fragment">
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_title_description_offer_detail_fragment"
                     style="@style/tv_title_requirements_offer_detail_fragment"
                     android:text="@string/title_description_offer_detail_fragment"/>
 
-                <TextView
+                <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_text_description_offer_detail_fragment"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

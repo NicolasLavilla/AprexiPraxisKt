@@ -61,12 +61,22 @@
     <string name="text_request_offer">Te has Inscrito en esta Oferta</string>
     <string name="title_my_offerts_fragment">Mis Ofertas</string>
     <string name="inscriptions_my_offers_fragment">CANDIDATURAS</string>
+    <string name="description_company">DESCRIPCIÓN</string>
+    <string name="offers_company">OFERTAS</string>
     <string name="follow_my_offers_fragment">GUARDADAS</string>
     <string name="inscription_offer_detail_request_list_item">Inscrito</string>
     <string name="title_activity_botton">BottonActivity</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
+    <string name="detail_request_offer_title">Detalle de la solicitud</string>
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sector_company">Sector Empresa</string>
+    <string name="text_description">Descripción</string>
+    <string name="location">Ubicación</string>
+    <string name="number_workers">Número de Empleados</string>
+    <string name="websites">Página Web</string>
 
 
 </resources>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".presentation.fragment.DescriptionCompanyFragment"
+    android:padding="25dp">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_sector_company_description_company"
+        style="@style/tv_title_requirements_offer_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/sector_company" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_sector_company_description_company_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_sector_company_description_company"
+        android:text="Texto de la Descripción" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_description_company_description_company"
+        style="@style/tv_title_requirements_offer_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_sector_company_description_company_fragment"
+        android:text="@string/text_description" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_description_description_company_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_description_company_description_company"
+        tools:text="Texto de la Descripción" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_location_company_description_company"
+        style="@style/tv_title_requirements_offer_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_description_description_company_fragment"
+        android:text="@string/location" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_location_company_description_company_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_location_company_description_company"
+        tools:text="Texto de la Descripción" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_number_workers_description_company"
+        style="@style/tv_title_requirements_offer_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_location_company_description_company_fragment"
+        android:text="@string/number_workers" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_number_workers_description_company_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_number_workers_description_company"
+        tools:text="Texto de la Descripción" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_title_web_description_company"
+        style="@style/tv_title_requirements_offer_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_number_workers_description_company_fragment"
+        android:text="@string/websites" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_web_description_company_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_web_description_company"
+        tools:text="Texto de la Descripción" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

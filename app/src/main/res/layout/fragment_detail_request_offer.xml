@@ -23,6 +23,7 @@
             android:layout_marginStart="10dp">
 
             <View
+                android:id="@+id/v_back_bottom"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:background="@drawable/baseline_keyboard_backspace_24"
@@ -35,13 +36,8 @@
             android:gravity="center_horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:text="Detalle de la solicitud"
-                android:textColor="@color/black"
-                android:textSize="22sp" />
+                style="@style/bar_top_information"
+                android:text="@string/detail_request_offer_title"/>
 
             <View
                 android:layout_width="25dp"

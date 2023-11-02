@@ -6,10 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteFollowOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetOfferUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetOffersUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowCompanyOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListCompanyUseCause
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
@@ -29,11 +30,12 @@ typealias DeleteFollowOfferState = ResourceState<DeleteFollowOfferUser>
 
 class OfferViewModel(
     private val getOfferUseCause: GetOfferUseCause,
-    private val getOffersUseCause: GetOffersUseCause,
+    private val getOfferListUseCause: GetOfferListUseCause,
     private val requestOfferUseCause: RequestOfferUseCause,
     private val followCompanyUseCause: FollowCompanyOfferUseCause,
     private val followOfferUseCause: FollowOfferUseCause,
-    private val deleteFollowOfferUseCase: DeleteFollowOfferUseCause
+    private val deleteFollowOfferUseCase: DeleteFollowOfferUseCause,
+    private val getOfferListCompanyUseCause: GetOfferListCompanyUseCause
 ): ViewModel() {
 
     private val _offerListLiveData = MutableLiveData<OfferListState>()
@@ -47,6 +49,8 @@ class OfferViewModel(
     private val _followOfferLiveData = MutableLiveData<FollowOfferState>()
 
     private val _deleteFollowOfferLiveData = MutableLiveData<DeleteFollowOfferState>()
+
+    private val _offerListCompanyLiveData = MutableLiveData<OfferListState>()
 
     fun getOfferListLiveData(): LiveData<OfferListState> {
         return _offerListLiveData
@@ -72,12 +76,16 @@ class OfferViewModel(
         return _followOfferLiveData
     }
 
+    fun getOfferListCompanyLiveData(): LiveData<OfferListState> {
+        return _offerListCompanyLiveData
+    }
+
     fun fetchOfferList(idUser: Int, token: String) {
         _offerListLiveData.value = ResourceState.Loading()
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = getOffersUseCause.execute(idUser = idUser, token = token)
+                val response = getOfferListUseCause.execute(idUser = idUser, token = token)
 
                 withContext(Dispatchers.Main) {
                     if (response.success){
@@ -197,6 +205,28 @@ class OfferViewModel(
             } catch (e: Exception) {
                 withContext(Dispatchers.Main) {
                     _deleteFollowOfferLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
+                }
+            }
+        }
+    }
+
+    fun fetchOfferListCompany(idUser: Int, idCompany: Int , token: String) {
+        _offerListCompanyLiveData.value = ResourceState.Loading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val response = getOfferListCompanyUseCause.execute(idUser = idUser,idCompany = idCompany ,token = token)
+
+                withContext(Dispatchers.Main) {
+                    if (response.success){
+                        _offerListCompanyLiveData.value = ResourceState.Success(response)
+                    }else{
+                        _offerListCompanyLiveData.value = ResourceState.SuccessFaild(response)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _offerListCompanyLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
                 }
             }
         }

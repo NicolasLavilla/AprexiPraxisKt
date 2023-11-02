@@ -242,7 +242,7 @@ class OfferDetailFragment : Fragment() {
         toolbarDetailFragment.setOnClickListener{
 
             findNavController().navigate(
-                OfferDetailFragmentDirections.actionOfferDetailFragmentToOfferCompanyFragment(4,4)
+                OfferDetailFragmentDirections.actionOfferDetailFragmentToOfferCompanyFragment(idUser = args.idUser, idCompany = offer.idCompany.toInt())
             )
         }
 

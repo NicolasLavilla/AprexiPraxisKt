@@ -162,6 +162,10 @@ class DetailRequestOfferFragment: Fragment() {
             intent.putExtra("idOffer", args.idOffer)
             startActivity(intent)
         }
+
+        binding.vBackBottom.setOnClickListener{
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
     private fun showProgressBar(show: Boolean) {
