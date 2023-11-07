@@ -74,15 +74,9 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_location_offer_list_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/tv_information_offer_list_item"
+                    style="@style/row_styles_list_names"
                     android:maxWidth="150dp"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/black"
-                    tools:text="@string/tv_location_offer_list_item"
-                    android:maxLines="1"
-                    android:ellipsize="end"/>
+                    tools:text="@string/tv_location_offer_list_item"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_vacant_offer_list_item"
@@ -94,13 +88,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_vacant_offer_list_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/tv_information_offer_list_item"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/black"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    style="@style/row_styles_list_names"
                     tools:text="@string/tv_vacant_offer_list_item"/>
 
             </LinearLayout>
@@ -123,13 +111,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_modality_offer_list_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/tv_information_offer_list_item"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/black"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    style="@style/row_styles_list_names"
                     tools:text="@string/tv_modality_offer_list_item"/>
 
                 <androidx.appcompat.widget.AppCompatImageView
@@ -142,13 +124,7 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_time_offer_list_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:textSize="@dimen/tv_information_offer_list_item"
-                    android:fontFamily="@font/roboto_regular"
-                    android:textColor="@color/black"
-                    android:maxLines="1"
-                    android:ellipsize="end"
+                    style="@style/row_styles_list_names"
                     tools:text="@string/tv_time_offer_list_item"/>
 
             </LinearLayout>

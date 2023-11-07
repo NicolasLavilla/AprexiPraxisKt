@@ -8,7 +8,7 @@
     tools:context=".presentation.fragment.OfferListFragment"
     android:id="@+id/fragment_offer_list">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ly_search_fragment_offer_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -18,7 +18,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:layout_marginStart="15dp"
@@ -30,7 +30,7 @@
             android:orientation="horizontal"
             android:elevation="10dp">
 
-            <ImageView
+            <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="24dp"
                 android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
@@ -39,7 +39,7 @@
                 app:tint="@color/azul_candidatura"
                 android:src="@drawable/baseline_search_24"/>
 
-            <EditText
+            <androidx.appcompat.widget.AppCompatEditText
                 android:id="@+id/et_search_fragment_offer_list"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -47,8 +47,8 @@
                 android:backgroundTint="@color/white"
                 style="@style/et_search_fragment_offer_list"/>
 
-        </LinearLayout>
-    </LinearLayout>
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_offer_list"

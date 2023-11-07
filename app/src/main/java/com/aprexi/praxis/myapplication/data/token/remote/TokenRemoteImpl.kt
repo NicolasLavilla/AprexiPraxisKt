@@ -1,4 +1,4 @@
-package com.aprexi.praxis.myapplication.data.offer.remote
+package com.aprexi.praxis.myapplication.data.token.remote
 
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.model.CheckToken

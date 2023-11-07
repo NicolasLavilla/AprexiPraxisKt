@@ -38,11 +38,8 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_title_offer_detail_fragment"
-
                 android:layout_marginStart="10dp"
-
                 android:text="Hiberus"
-
                 style="@style/bar_top_information"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>

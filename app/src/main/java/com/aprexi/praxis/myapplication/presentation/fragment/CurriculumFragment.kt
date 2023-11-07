@@ -1,20 +1,37 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupWithNavController
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentCurriculumBinding
-import com.aprexi.praxis.myapplication.databinding.FragmentOfferListBinding
-import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
-import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferViewModel
-import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
+import com.aprexi.praxis.myapplication.model.ListLanguagesUser
+import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
+import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.ResourceState
+import com.aprexi.praxis.myapplication.model.User
+import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.adpter.ExperienceJobListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.LanguagesListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.ProfessionalProyectsListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.StudiesListAdapter
+import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.ExperienceJobState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.LanguagesUserState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.ProfessionalProyectsUserState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.StudiesUserState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.UserState
+import com.bumptech.glide.Glide
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class CurriculumFragment: Fragment() {
@@ -23,11 +40,21 @@ class CurriculumFragment: Fragment() {
         FragmentCurriculumBinding.inflate(layoutInflater)
     }
 
-    private val user: Int = 4
+    private val studiesListAdapter = StudiesListAdapter()
+    private val languagesListAdapter = LanguagesListAdapter()
+    private val professioanlProyectsListAdapter = ProfessionalProyectsListAdapter()
+    private val experienceJobListAdapter = ExperienceJobListAdapter()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val curriculumViewModel: CurriculumViewModel by activityViewModel()
+    private var loginToken: String = ""
+    private var succesToken: Boolean = false
+    private var idUser: Int = 0
 
-    /*private lateinit var navController: NavController
-    private val offerListAdapter = OfferListAdapter()
-    private val offerViewModel: OfferViewModel by activityViewModel()*/
+    private lateinit var studies: ListStudiesUser
+    private lateinit var experienceJob: ListExperienceJobUser
+    private lateinit var languages: ListLanguagesUser
+    private lateinit var professionalProyects: ListProfessionalProyectsUser
+    private lateinit var userData: User
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +67,224 @@ class CurriculumFragment: Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        //val bottomNavigationView = view.findViewById<BottomNavigationView>(binding.bottomNavCurriculum.id)
+        getTokenLoginPreference()
+        initViewModel()
+        handleAuthentication()
 
-
-
-        /*initViewModel()
-        initUI()
-
-        offerViewModel.fetchOfferList(idUser = user) //Hay que buscar el id del usuario con sharedPreference*/
     }
+
+    private fun getTokenLoginPreference(){
+        lifecycleScope.launch {
+            val uni = tokenViewModel.fetchLoginTokenPreferences()
+            loginToken = uni.token
+            succesToken = uni.success
+            idUser = uni.idUser
+        }
+    }
+
+    private fun handleAuthentication() {
+        try {
+            if (succesToken) {
+                tokenViewModel.fetchCheckToken(loginToken)
+                curriculumViewModel.fetchUserData(
+                    idUser = idUser,
+                    token = loginToken
+                )
+
+                curriculumViewModel.fetchLanguageUser(
+                    idUser = idUser,
+                    token = loginToken
+                )
+
+                curriculumViewModel.fetchExperienceJobUser(
+                    idUser = idUser,
+                    token = loginToken
+                )
+
+                curriculumViewModel.fetchStudiesUser(
+                    idUser = idUser,
+                    token = loginToken
+                )
+
+                curriculumViewModel.fetchProfessionalProyectsUser(
+                    idUser = idUser,
+                    token = loginToken
+                )
+
+            } else {
+                cleanTokenAndRedirectToLogin()
+            }
+        } catch (e: Exception) {
+            showErrorDialog(e.toString())
+        }
+    }
+
+    private fun initViewModel() {
+        curriculumViewModel.getUserDataLiveData().observe(viewLifecycleOwner, this::handleUserState)
+        curriculumViewModel.getExperienceJobUserLiveData().observe(viewLifecycleOwner, this::handleExperienceJobUserState)
+        curriculumViewModel.getLanguagesUserLiveData().observe(viewLifecycleOwner, this::handleLanguagesUserState)
+        curriculumViewModel.getStudiesUserLiveData().observe(viewLifecycleOwner, this::handleStudiesUserState)
+        curriculumViewModel.getProfessionalProyectsUserLiveData().observe(viewLifecycleOwner, this::handleProfessionalProyectsUserState)
+        tokenViewModel.getTokenLiveData().observe(viewLifecycleOwner, this::handleTokenState)
+    }
+
+    private fun handleUserState(state: UserState) {
+        when (state) {
+            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Success -> handleSuccessOfferDetail(state.result)
+            is ResourceState.SuccessFaild -> handleSuccessFailed()
+            is ResourceState.Error -> showErrorDialog(state.error)
+            else -> { }
+        }
+    }
+
+    private fun handleExperienceJobUserState(state: ExperienceJobState) {
+        when (state) {
+            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Success -> handleSuccessOfferDetail(state.result)
+            is ResourceState.SuccessFaild -> handleSuccessFailed()
+            is ResourceState.Error -> showErrorDialog(state.error)
+            else -> { }
+        }
+    }
+
+    private fun handleLanguagesUserState(state: LanguagesUserState) {
+        when (state) {
+            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Success -> handleSuccessOfferDetail(state.result)
+            is ResourceState.SuccessFaild -> handleSuccessFailed()
+            is ResourceState.Error -> showErrorDialog(state.error)
+            else -> { }
+        }
+    }
+
+    private fun handleProfessionalProyectsUserState(state: ProfessionalProyectsUserState) {
+        when (state) {
+            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Success -> handleSuccessOfferDetail(state.result)
+            is ResourceState.SuccessFaild -> handleSuccessFailed()
+            is ResourceState.Error -> showErrorDialog(state.error)
+            else -> { }
+        }
+    }
+
+    private fun handleStudiesUserState(state: StudiesUserState) {
+        when (state) {
+            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Success -> handleSuccessOfferDetail(state.result)
+            is ResourceState.SuccessFaild -> handleSuccessFailed()
+            is ResourceState.Error -> showErrorDialog(state.error)
+            else -> { }
+        }
+    }
+
+    private fun handleTokenState(state: TokenDetailState) {
+        when (state) {
+            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Success -> showProgressBar(false)
+            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            else -> { }
+        }
+    }
+
+    private fun handleSuccessOfferDetail(user: User) {
+        showProgressBar(false)
+        userData = user
+        initUI()
+    }
+
+    private fun handleSuccessOfferDetail(experienceUser: ListExperienceJobUser) {
+        showProgressBar(false)
+        experienceJob = experienceUser
+        experienceJobListAdapter.submitList(experienceUser.experienceJobUser)
+    }
+
+    private fun handleSuccessOfferDetail(professionalProUser: ListProfessionalProyectsUser) {
+        showProgressBar(false)
+        professionalProyects = professionalProUser
+        professioanlProyectsListAdapter.submitList(professionalProUser.professionalProyectsUser)
+    }
+
+    private fun handleSuccessOfferDetail(languagesUser: ListLanguagesUser) {
+        showProgressBar(false)
+        languages = languagesUser
+        languagesListAdapter.submitList(languagesUser.languagesUser)
+    }
+
+    private fun handleSuccessOfferDetail(studiesUser: ListStudiesUser) {
+        showProgressBar(false)
+        studies = studiesUser
+        studiesListAdapter.submitList(studiesUser.studiesUser)
+    }
+
+    private fun initUI() {
+
+        binding.rvListStudiesUserCurriculumFragment.adapter = studiesListAdapter
+        binding.rvListStudiesUserCurriculumFragment.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.rvListExperienceUserCurriculumFragment.adapter = experienceJobListAdapter
+        binding.rvListExperienceUserCurriculumFragment.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.rvListLanguagesUserCurriculumFragment.adapter = languagesListAdapter
+        binding.rvListLanguagesUserCurriculumFragment.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.rvListProyectsUserCurriculumFragment.adapter = professioanlProyectsListAdapter
+        binding.rvListProyectsUserCurriculumFragment.layoutManager = LinearLayoutManager(requireContext())
+
+
+        if (!userData.image.isNullOrBlank()) {
+            Glide.with(requireContext())
+                .load(userData.image)
+                .into(binding.ivProfileUserCurriculumFragment)
+        }
+
+        val fullName = buildString {
+            append(userData.name)
+            if (userData.surname1.isNotEmpty()) {
+                append(" ")
+                append(userData.surname1)
+            }
+            if (userData.surname2.isNotEmpty()) {
+                append(" ")
+                append(userData.surname2)
+            }
+        }
+
+        binding.tvNameUserCurriculumFragment.text = fullName
+        binding.tvMobileUserCurriculumFragment.text = userData.mobile.toString()
+        binding.tvEmailUserCurriculumFragment.text = userData.email
+        binding.tvLocationMunicipalityUserCurriculumFragment.text = userData.nameMunicipality
+        binding.tvLocationUserCurriculumFragment.text = userData.nameCcaa
+        binding.tvDescriptionUserCurriculumFragment.text = userData.description
+        binding.tvCountryUserCurriculumFragment.text = userData.nameCountry
+        binding.tvDateBirthdayUserCurriculumFragment.text = userData.birthDate
+    }
+
+    private fun handleSuccessFailed() {
+        showProgressBar(false)
+        cleanTokenAndRedirectToLogin()
+    }
+
+    private fun cleanTokenAndRedirectToLogin() {
+        tokenViewModel.cleanTokenPreferences()
+        redirectToLogin()
+    }
+
+    private fun redirectToLogin() {
+        val intent = Intent(requireContext(), SplashActivity::class.java)
+        startActivity(intent)
+    }
+
+    private fun showProgressBar(show: Boolean) {
+        binding.pbCurriculumFragment.visibility = if (show) View.VISIBLE else View.GONE
+    }
+
+    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
+        MaterialAlertDialogBuilder(requireContext())
+            .setTitle(R.string.error)
+            .setMessage(error)
+            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
+            .show()
+    }
+
 }

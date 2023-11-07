@@ -7,11 +7,11 @@ class RequestOfferLocalImpl (
     private val memoryCache: MemoryCache
 ) {
     fun getRequestOffers(): ListRequestOffer? {
-        return memoryCache.RequestOfferList
+        return memoryCache.requestOfferList
     }
 
     fun saveRequestOffer(requestOffers: ListRequestOffer) {
-        memoryCache.RequestOfferList = requestOffers
+        memoryCache.requestOfferList = requestOffers
     }
 }
 

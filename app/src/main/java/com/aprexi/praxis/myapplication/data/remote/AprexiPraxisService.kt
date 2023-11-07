@@ -5,11 +5,16 @@ import com.aprexi.praxis.myapplication.model.Company
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
 import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
+import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
+import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
+import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
+import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.RequestOfferUser
+import com.aprexi.praxis.myapplication.model.User
 import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
@@ -53,5 +58,19 @@ interface AprexiPraxisService {
     @GET("ListOfferOnlyCompany.php")
     suspend fun getOffersListCompany(@Query("idUser") idUser: Int, @Query("idCompany") idCompany: Int, @Query("token") token: String): ListOffersResponse
 
+    @GET("User.php")
+    suspend fun getUserData(@Query("idUser") idUser: Int, @Query("token") token: String): User
+
+    @GET("ListStudiesUser.php")
+    suspend fun getStudiesList(@Query("idUser") idUser: Int, @Query("token") token: String): ListStudiesUser
+
+    @GET("ListLanguagesUser.php")
+    suspend fun getLanguagesList(@Query("idUser") idUser: Int, @Query("token") token: String): ListLanguagesUser
+
+    @GET("ListExperienceJobUser.php")
+    suspend fun getExperienceJobList(@Query("idUser") idUser: Int, @Query("token") token: String): ListExperienceJobUser
+
+    @GET("ListProfessionalProyectsUser.php")
+    suspend fun getProfessionalProyects(@Query("idUser") idUser: Int, @Query("token") token: String): ListProfessionalProyectsUser
 
 }

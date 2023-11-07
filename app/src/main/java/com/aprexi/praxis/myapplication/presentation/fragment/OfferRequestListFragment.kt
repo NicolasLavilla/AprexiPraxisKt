@@ -7,16 +7,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentOfferRequestBinding
-import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.presentation.DetailRequestOfferActivity
 import com.aprexi.praxis.myapplication.presentation.SplashActivity
-import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.RequestOfferListAdapter
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.RequestOfferListState
@@ -25,9 +22,6 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class OfferRequestListFragment: Fragment() {
 
@@ -136,24 +130,6 @@ class OfferRequestListFragment: Fragment() {
         }
     }
 
-    private fun calculateElapsedTime(datePublication: String): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val dateCreated = dateFormat.parse(datePublication)
-
-        val timeDifferenceMillis = currentDate.time - dateCreated.time
-        val seconds = timeDifferenceMillis / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val days = hours / 24
-
-        return when {
-            days > 0 -> "Hace $days días"
-            hours > 0 -> "Hace $hours horas"
-            minutes > 0 -> "Hace $minutes minutos"
-            else -> "Hace $seconds segundos"
-        }
-    }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()

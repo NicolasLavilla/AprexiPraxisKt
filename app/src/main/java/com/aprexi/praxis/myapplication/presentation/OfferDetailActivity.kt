@@ -5,39 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.aprexi.praxis.myapplication.R
-import com.aprexi.praxis.myapplication.presentation.fragment.OfferDetailFragment
-
-/*
-
-class OfferDetailActivity : AppCompatActivity() {
-
-   override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Verifica si se pasan los parámetros a través del Intent
-        val idUser = intent.getIntExtra("idUser", 0)
-        val idOffer = intent.getIntExtra("idOffer", 0)
-
-        // Configura los argumentos para el fragmento
-        val args = Bundle()
-        args.putInt("idUser", idUser)
-        args.putInt("idOffer", idOffer)
-
-        // Luego, configura el fragmento OfferDetailFragment y pasa los argumentos a través de Bundle
-        val fragment = OfferDetailFragment()
-        fragment.arguments = args
-
-        setContentView(R.layout.activity_offer_detail)
-
-        val fragmentManager = supportFragmentManager
-        val fragmentTransaction = fragmentManager.beginTransaction()
-
-        fragmentTransaction.replace(R.id.fcv_offer_detail, fragment)
-        fragmentTransaction.commit()
-
-    }
-}*/
-
 
 class OfferDetailActivity : AppCompatActivity() {
 
@@ -59,7 +26,6 @@ class OfferDetailActivity : AppCompatActivity() {
         args.putInt("idOffer", idOffer)
 
         navController.setGraph(R.navigation.offer_detail_navigation, args)
-
     }
 
     override fun onStop() {
@@ -69,5 +35,4 @@ class OfferDetailActivity : AppCompatActivity() {
             finish()
         }
     }
-
 }

@@ -1,7 +1,7 @@
 package com.aprexi.praxis.myapplication.data.token
 
 import com.aprexi.praxis.myapplication.data.offer.local.TokenLocalImpl
-import com.aprexi.praxis.myapplication.data.offer.remote.TokenRemoteImpl
+import com.aprexi.praxis.myapplication.data.token.remote.TokenRemoteImpl
 import com.aprexi.praxis.myapplication.domain.TokenRepository
 import com.aprexi.praxis.myapplication.model.CheckToken
 import com.aprexi.praxis.myapplication.model.Login
@@ -21,7 +21,6 @@ class TokenDataImpl (
         }else{
             return resultToken
         }
-
     }
 
     override fun getCheckTokenPreferences(): CheckToken {
