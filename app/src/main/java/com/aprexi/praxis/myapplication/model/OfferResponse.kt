@@ -40,20 +40,20 @@ data class Offer (
 
 data class RequestOfferUser (
     val success: Boolean = false,
-    val idError: Any? = null,
-    val messageError: Any? = null
+    val idError: String? = null,
+    val messageError: String? = null
 )
 
 data class FollowOfferUser (
     val success: Boolean = false,
-    val idError: Any? = null,
-    val messageError: Any? = null
+    val idError: String? = null,
+    val messageError: String? = null
 )
 
 data class DeleteFollowOfferUser (
     val success: Boolean = false,
-    val idError: Any? = null,
-    val messageError: Any? = null
+    val idError: String? = null,
+    val messageError: String? = null
 )
 
 

@@ -8,12 +8,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_bar_detail_request"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/white"
-        android:elevation="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        style="@style/toolbar_activities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,7 +16,6 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title_curriculum_fragment"
             style="@style/bar_top_information"
-            android:layout_marginStart="10dp"
             android:text="@string/curriculum" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
@@ -46,6 +40,7 @@
 
 
             <androidx.cardview.widget.CardView
+                android:id="@+id/cv_curriculum_user_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"

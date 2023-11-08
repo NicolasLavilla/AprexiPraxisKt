@@ -7,12 +7,7 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_bar_detail_request"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:background="@color/white"
-        android:elevation="10dp"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
+        style="@style/toolbar_activities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

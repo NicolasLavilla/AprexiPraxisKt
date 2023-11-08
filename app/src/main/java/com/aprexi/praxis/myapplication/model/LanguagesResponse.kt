@@ -11,5 +11,14 @@ data class LanguagesUser (
     val idLanguages: Long,
     val nameLanguages: String,
     val idExperience: Long,
-    val nameExperience: String
+    val nameExperience: String,
+    val success: Boolean,
+    val idError: String?,
+    val messageError: String?
+)
+
+data class DeleteLanguagesUser (
+    val success: Boolean = false,
+    val idError: String? = null,
+    val messageError: String? = null
 )

@@ -3,7 +3,10 @@ package com.aprexi.praxis.myapplication.data.remote
 import com.aprexi.praxis.myapplication.model.CheckToken
 import com.aprexi.praxis.myapplication.model.Company
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
+import com.aprexi.praxis.myapplication.model.DeleteLanguagesUser
+import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
+import com.aprexi.praxis.myapplication.model.LanguagesUser
 import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
@@ -14,6 +17,7 @@ import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.RequestOfferUser
+import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.User
 import retrofit2.http.DELETE
 import retrofit2.http.GET
@@ -72,5 +76,17 @@ interface AprexiPraxisService {
 
     @GET("ListProfessionalProyectsUser.php")
     suspend fun getProfessionalProyects(@Query("idUser") idUser: Int, @Query("token") token: String): ListProfessionalProyectsUser
+
+    @DELETE("DeleteStudiesUser.php")
+    suspend fun deleteStudiesUser(@Query("idUser") idUser: Int, @Query("idStudiesUser") idStudiesUser: Int, @Query("token") token: String): DeleteStudiesUser
+
+    @GET("StudiesUser.php")
+    suspend fun getStudiesUser(@Query("idUser") idUser: Int, @Query("idStudiesUser") idStudiesUser: Int, @Query("token") token: String): StudiesUser
+
+    @GET("LanguagesUser.php")
+    suspend fun getLanguagesUser(@Query("idUser") idUser: Int, @Query("idLanguages") idLanguages: Int, @Query("token") token: String): LanguagesUser
+
+    @DELETE("DeleteLanguagesUser.php")
+    suspend fun deleteLanguagesUser(@Query("idUser") idUser: Int, @Query("idLanguagesUser") idLanguagesUser: Int, @Query("token") token: String): DeleteLanguagesUser
 
 }

@@ -8,6 +8,7 @@ data class ListExperienceJobUser (
 )
 
 data class ExperienceJobUser (
+    val idExperienceJobUser: Long,
     val nameJobs: String,
     val level: Long,
     val nameLevelJob: String,

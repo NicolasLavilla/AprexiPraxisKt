@@ -1,11 +1,17 @@
 package com.aprexi.praxis.myapplication.domain
 
+import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.StudiesUser
 
 interface StudiesRepository {
 
     suspend fun getStudiesList(idUser: Int,forceRemote: Boolean ,token: String): ListStudiesUser
 
-     fun saveStudies(studies: ListStudiesUser)
+    suspend fun getStudiesUser(idUser: Int, idStudiesUser: Int, token: String): StudiesUser
+
+    fun saveStudies(studies: ListStudiesUser)
+
+    suspend fun deleteStudiesUser(idUser: Int, idStudiesUser: Int, token: String): DeleteStudiesUser
 
 }

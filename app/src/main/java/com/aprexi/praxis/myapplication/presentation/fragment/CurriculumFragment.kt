@@ -16,16 +16,21 @@ import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.User
+import com.aprexi.praxis.myapplication.presentation.ExperienceJobsUserDetailActivity
+import com.aprexi.praxis.myapplication.presentation.LanguagesDetailActivity
+import com.aprexi.praxis.myapplication.presentation.ProfessionalProyectsDetailActivity
 import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.StudiesDetailActivity
+import com.aprexi.praxis.myapplication.presentation.UserDataDetailActivity
 import com.aprexi.praxis.myapplication.presentation.adpter.ExperienceJobListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.LanguagesListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.ProfessionalProyectsListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.StudiesListAdapter
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
-import com.aprexi.praxis.myapplication.presentation.viewmodel.ExperienceJobState
-import com.aprexi.praxis.myapplication.presentation.viewmodel.LanguagesUserState
-import com.aprexi.praxis.myapplication.presentation.viewmodel.ProfessionalProyectsUserState
-import com.aprexi.praxis.myapplication.presentation.viewmodel.StudiesUserState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.ExperienceJobListState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.LanguagesUserListState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.ProfessionalProyectsUserListState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.StudiesUserListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UserState
@@ -138,7 +143,7 @@ class CurriculumFragment: Fragment() {
         }
     }
 
-    private fun handleExperienceJobUserState(state: ExperienceJobState) {
+    private fun handleExperienceJobUserState(state: ExperienceJobListState) {
         when (state) {
             is ResourceState.Loading -> showProgressBar(true)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
@@ -148,7 +153,7 @@ class CurriculumFragment: Fragment() {
         }
     }
 
-    private fun handleLanguagesUserState(state: LanguagesUserState) {
+    private fun handleLanguagesUserState(state: LanguagesUserListState) {
         when (state) {
             is ResourceState.Loading -> showProgressBar(true)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
@@ -158,7 +163,7 @@ class CurriculumFragment: Fragment() {
         }
     }
 
-    private fun handleProfessionalProyectsUserState(state: ProfessionalProyectsUserState) {
+    private fun handleProfessionalProyectsUserState(state: ProfessionalProyectsUserListState) {
         when (state) {
             is ResourceState.Loading -> showProgressBar(true)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
@@ -168,7 +173,7 @@ class CurriculumFragment: Fragment() {
         }
     }
 
-    private fun handleStudiesUserState(state: StudiesUserState) {
+    private fun handleStudiesUserState(state: StudiesUserListState) {
         when (state) {
             is ResourceState.Loading -> showProgressBar(true)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
@@ -258,6 +263,44 @@ class CurriculumFragment: Fragment() {
         binding.tvDescriptionUserCurriculumFragment.text = userData.description
         binding.tvCountryUserCurriculumFragment.text = userData.nameCountry
         binding.tvDateBirthdayUserCurriculumFragment.text = userData.birthDate
+
+
+        studiesListAdapter.onClickListener = { studies ->
+
+            val intent = Intent(context, StudiesDetailActivity::class.java)
+            intent.putExtra("idStudies", studies.idStudiesUser.toInt())
+            startActivity(intent)
+        }
+
+        binding.cvCurriculumUserFragment.setOnClickListener {
+
+            val intent = Intent(context, UserDataDetailActivity::class.java)
+            intent.putExtra("idUser", idUser)
+            startActivity(intent)
+        }
+
+        experienceJobListAdapter.onClickListener = { experience ->
+
+            val intent = Intent(context, ExperienceJobsUserDetailActivity::class.java)
+            intent.putExtra("idExperienceJob", experience.idExperienceJobUser.toInt())
+            startActivity(intent)
+        }
+
+        languagesListAdapter.onClickListener = { language ->
+
+            val intent = Intent(context, LanguagesDetailActivity::class.java)
+            intent.putExtra("idLanguages", language.idLanguages.toInt())
+            startActivity(intent)
+        }
+
+        professioanlProyectsListAdapter.onClickListener = { professionalProyects ->
+
+            val intent = Intent(context, ProfessionalProyectsDetailActivity::class.java)
+            intent.putExtra("idProfessionalProyects", professionalProyects.idProfessionalProyects.toInt())
+            startActivity(intent)
+        }
+
+
     }
 
     private fun handleSuccessFailed() {

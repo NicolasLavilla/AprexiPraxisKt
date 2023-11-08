@@ -70,7 +70,7 @@
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="detail_request_offer_title">Detalle de la solicitud</string>
-<!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sector_company">Sector Empresa</string>
     <string name="text_description">Descripción</string>
@@ -78,6 +78,11 @@
     <string name="number_workers">Número de Empleados</string>
     <string name="websites">Página Web</string>
     <string name="curriculum">Curriculum</string>
+    <string name="title_estudies_fragment">Estudios</string>
+    <string name="title_languages_fragment">Idiomas</string>
+    <string name="title_user_data_fragment">Datos de Usuario</string>
+    <string name="title_experience_job_detail_fragment">Experiencia Laboral</string>
+    <string name="title_professional_proyects_fragment">Proyectos Profesionales</string>
 
 
 </resources>

@@ -49,6 +49,7 @@ import com.aprexi.praxis.myapplication.domain.TokenRepository
 import com.aprexi.praxis.myapplication.domain.UserRepository
 import com.aprexi.praxis.myapplication.domain.usercase.CleanTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteFollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.DeleteStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLoginTokenPreferencesUseCause
@@ -63,15 +64,19 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetDetailRequestOfferList
 import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesListUseCase
+import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetStudiesListUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetUserDataUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CompanyViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailLanguagesViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailRequestOfferViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailStudiesViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
@@ -131,6 +136,10 @@ val praxisModule = module {
     factory { ExperienceJobRetomeImpl(get()) }
     factory<ExperienceJobRepository> { ExperienceJobDataImpl(get(),get()) }
 
+
+    factory { GetLanguagesUserUseCause(get()) }
+    factory { DeleteStudiesUserUseCause(get())}
+    factory { GetStudiesUserUseCause(get())}
     factory { GetProfessionalProyectsListUseCase(get())}
     factory { GetExperienceJobUserListUseCause(get())}
     factory { GetLanguagesListUseCase(get())}
@@ -162,4 +171,7 @@ val praxisModule = module {
     viewModel{OfferFollowViewModel(get()) }
     viewModel{DetailRequestOfferViewModel(get())}
     viewModel{CompanyViewModel(get())}
+    viewModel{DetailStudiesViewModel(get(),get()) }
+    viewModel{ DetailLanguagesViewModel(get(),get()) }
+
 }

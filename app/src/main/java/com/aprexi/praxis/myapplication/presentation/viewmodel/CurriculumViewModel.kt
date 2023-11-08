@@ -19,11 +19,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-typealias ExperienceJobState = ResourceState<ListExperienceJobUser>
-typealias LanguagesUserState = ResourceState<ListLanguagesUser>
+typealias ExperienceJobListState = ResourceState<ListExperienceJobUser>
+typealias LanguagesUserListState = ResourceState<ListLanguagesUser>
 typealias UserState = ResourceState<User>
-typealias StudiesUserState = ResourceState<ListStudiesUser>
-typealias ProfessionalProyectsUserState = ResourceState<ListProfessionalProyectsUser>
+typealias StudiesUserListState = ResourceState<ListStudiesUser>
+typealias ProfessionalProyectsUserListState = ResourceState<ListProfessionalProyectsUser>
 class CurriculumViewModel(
     private val getExperienceJobUserListUseCause: GetExperienceJobUserListUseCause,
     private val getLanguagesListUseCase: GetLanguagesListUseCase,
@@ -32,25 +32,25 @@ class CurriculumViewModel(
     private val getProfessionalProyectsListUseCause: GetProfessionalProyectsListUseCase
 ): ViewModel() {
 
-    private val _experienceJobUserLiveData = MutableLiveData<ExperienceJobState>()
-    private val _languagesUserLiveData = MutableLiveData<LanguagesUserState>()
+    private val _experienceJobUserLiveData = MutableLiveData<ExperienceJobListState>()
+    private val _languagesUserLiveData = MutableLiveData<LanguagesUserListState>()
     private val _userDataLiveData = MutableLiveData<UserState>()
-    private val _studiesUserDataLiveData = MutableLiveData<StudiesUserState>()
-    private val _professionalProyectsUserDataLiveData = MutableLiveData<ProfessionalProyectsUserState>()
+    private val _studiesUserDataLiveData = MutableLiveData<StudiesUserListState>()
+    private val _professionalProyectsUserDataLiveData = MutableLiveData<ProfessionalProyectsUserListState>()
 
-    fun getExperienceJobUserLiveData(): LiveData<ExperienceJobState> {
+    fun getExperienceJobUserLiveData(): LiveData<ExperienceJobListState> {
         return _experienceJobUserLiveData
     }
-    fun getLanguagesUserLiveData(): LiveData<LanguagesUserState> {
+    fun getLanguagesUserLiveData(): LiveData<LanguagesUserListState> {
         return _languagesUserLiveData
     }
     fun getUserDataLiveData(): LiveData<UserState> {
         return _userDataLiveData
     }
-    fun getStudiesUserLiveData(): LiveData<StudiesUserState> {
+    fun getStudiesUserLiveData(): LiveData<StudiesUserListState> {
         return _studiesUserDataLiveData
     }
-    fun getProfessionalProyectsUserLiveData(): LiveData<ProfessionalProyectsUserState> {
+    fun getProfessionalProyectsUserLiveData(): LiveData<ProfessionalProyectsUserListState> {
         return _professionalProyectsUserDataLiveData
     }
 

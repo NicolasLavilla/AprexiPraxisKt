@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/offer_detail_navigation"
+    app:startDestination="@id/professional_proyects_detail_fragment">
+
+    <fragment
+        android:id="@+id/professional_proyects_detail_fragment"
+        android:name="com.aprexi.praxis.myapplication.presentation.fragment.ProfessionalProyectDetailFragment"
+        tools:layout="@layout/fragment_professional_proyects_detail">
+
+        <argument
+            android:name="idProfessionalProyects"
+            app:argType="integer" />
+
+    </fragment>
+</navigation>
+
+

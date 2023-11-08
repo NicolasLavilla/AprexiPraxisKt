@@ -15,6 +15,21 @@
         android:theme="@style/Theme.AprexiPraxis"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.ProfessionalProyectsDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.UserDataDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.LanguagesDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.ExperienceJobsUserDetailActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.StudiesDetailActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.DetailRequestOfferActivity"
             android:exported="false" />
         <activity
