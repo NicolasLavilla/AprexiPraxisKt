@@ -15,11 +15,25 @@ data class StudiesUser (
     val nameTypeStudies: String,
     val professionalFamilies: Long,
     val nameFamily: String,
+    val idSchool: Long,
+    val nameSchool: String,
     val startYear: String,
     val endYear: String,
     val success: Boolean,
     val idError: String?,
     val messageError: String?
+)
+
+data class InsertStudiesUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class UpdateStudiesUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
 )
 
 data class DeleteStudiesUser (

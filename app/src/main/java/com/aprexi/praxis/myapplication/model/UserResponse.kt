@@ -35,6 +35,11 @@ data class User (
     val messageError: String? = null
 )
 
+data class UpdateUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
 
 data class RegisterUser (
     val success: Boolean,

@@ -18,5 +18,26 @@ data class ExperienceJobUser (
     val idCompany: Long,
     val nameCompany: String,
     val initDate: String,
-    val endDate: String
+    val endDate: String,
+    val success: Boolean,
+    val idError: String?,
+    val messageError: String?
+)
+
+data class InsertExperienceJobUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class UpdateExperienceJobUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class DeleteExperienceJobUser (
+    val success: Boolean = false,
+    val idError: String? = null,
+    val messageError: String? = null
 )

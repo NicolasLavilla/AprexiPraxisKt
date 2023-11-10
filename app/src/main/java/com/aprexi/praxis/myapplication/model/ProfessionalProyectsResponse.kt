@@ -3,8 +3,8 @@ package com.aprexi.praxis.myapplication.model
 data class ListProfessionalProyectsUser (
     val professionalProyectsUser: List<ProfessionalProyectsUser>,
     val success: Boolean,
-    val idError: Any? = null,
-    val messageError: Any? = null
+    val idError: String? = null,
+    val messageError: String? = null
 )
 
 data class ProfessionalProyectsUser (
@@ -12,9 +12,30 @@ data class ProfessionalProyectsUser (
     val nameProyect: String,
     val descriptionProyect: String,
     val websites: String,
-    val imageProyect: Any? = null,
-    val job: Any? = null,
-    val briefcase: Any? = null,
+    val imageProyect: String? = null,
+    val job: String? = null,
+    val briefcase: String? = null,
     val initDate: String,
-    val endDate: Any? = null
+    val endDate: String? = null,
+    val success: Boolean,
+    val idError: String?,
+    val messageError: String?
+)
+
+data class InsertProfessionalProyectsUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class UpdateProfessionalProyectsUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class DeleteProfessionalProyectsUser (
+    val success: Boolean = false,
+    val idError: String? = null,
+    val messageError: String? = null
 )

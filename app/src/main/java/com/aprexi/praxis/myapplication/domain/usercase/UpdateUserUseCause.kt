@@ -1,19 +1,16 @@
-package com.aprexi.praxis.myapplication.data.user.remote
+package com.aprexi.praxis.myapplication.domain.usercase
 
-import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
-import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
+import com.aprexi.praxis.myapplication.domain.StudiesRepository
+import com.aprexi.praxis.myapplication.domain.UserRepository
+import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
+import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateUser
-import com.aprexi.praxis.myapplication.model.User
 
-class UserRemoteImpl(
-    private val aprexiPraxisService: AprexiPraxisService
+class UpdateUserUseCause(
+    private val userRepository: UserRepository
 ) {
 
-    suspend fun userData( idUser: Int, token: String): User {
-        return aprexiPraxisService.getUserData(idUser = idUser, token = token)
-    }
-
-    suspend fun updateUser(
+    suspend fun execute(
         name: String,
         surname1: String,
         surname2: String,
@@ -33,7 +30,7 @@ class UserRemoteImpl(
         idUser: Int,
         token: String
     ): UpdateUser {
-        return aprexiPraxisService.updateUser(
+        return userRepository.updateUser(
             idUser = idUser,
             name = name,
             surname1 = surname1,

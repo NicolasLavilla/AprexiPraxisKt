@@ -48,7 +48,9 @@ import com.aprexi.praxis.myapplication.domain.StudiesRepository
 import com.aprexi.praxis.myapplication.domain.TokenRepository
 import com.aprexi.praxis.myapplication.domain.UserRepository
 import com.aprexi.praxis.myapplication.domain.usercase.CleanTokenPreferencesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.DeleteExperienceJobUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteFollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.DeleteProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenUseCause
@@ -62,21 +64,35 @@ import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetDetailRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserListUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsListUseCase
+import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetStudiesListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetUserDataUseCase
+import com.aprexi.praxis.myapplication.domain.usercase.InsertExperienceJobUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.InsertLanguagesUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.InsertProfessionalProyectUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.InsertStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.UpdateExperienceJobUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.UpdateLanguagesUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.UpdateProfessionalProyectUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.UpdateStudiesUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.UpdateUserUseCause
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CompanyViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailExperienceJobViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailLanguagesViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailProfessionalProyectsViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailRequestOfferViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailStudiesViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailUserViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
@@ -137,6 +153,19 @@ val praxisModule = module {
     factory<ExperienceJobRepository> { ExperienceJobDataImpl(get(),get()) }
 
 
+    factory { InsertProfessionalProyectUserUseCause(get())}
+    factory { InsertExperienceJobUserUseCause(get())}
+    factory { InsertLanguagesUserUseCause(get())}
+    factory { InsertStudiesUserUseCause(get()) }
+    factory { UpdateExperienceJobUserUseCause(get())}
+    factory { UpdateLanguagesUserUseCause(get())}
+    factory { UpdateProfessionalProyectUserUseCause(get())}
+    factory { UpdateStudiesUserUseCause(get())}
+    factory { UpdateUserUseCause(get())}
+    factory { DeleteExperienceJobUserUseCause(get()) }
+    factory { DeleteProfessionalProyectUserUseCause(get()) }
+    factory { GetExperienceJobUserUseCause(get()) }
+    factory { GetProfessionalProyectsUserUseCause(get()) }
     factory { GetLanguagesUserUseCause(get()) }
     factory { DeleteStudiesUserUseCause(get())}
     factory { GetStudiesUserUseCause(get())}
@@ -171,7 +200,10 @@ val praxisModule = module {
     viewModel{OfferFollowViewModel(get()) }
     viewModel{DetailRequestOfferViewModel(get())}
     viewModel{CompanyViewModel(get())}
-    viewModel{DetailStudiesViewModel(get(),get()) }
-    viewModel{ DetailLanguagesViewModel(get(),get()) }
+    viewModel{DetailStudiesViewModel(get(),get(), get()) }
+    viewModel{DetailLanguagesViewModel(get(),get(),get()) }
+    viewModel{DetailProfessionalProyectsViewModel(get(),get(),get()) }
+    viewModel{DetailExperienceJobViewModel(get(),get(),get()) }
+    viewModel{DetailUserViewModel(get(),get()) }
 
 }

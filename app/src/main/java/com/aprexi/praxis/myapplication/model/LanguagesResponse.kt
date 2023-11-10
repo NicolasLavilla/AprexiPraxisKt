@@ -17,6 +17,18 @@ data class LanguagesUser (
     val messageError: String?
 )
 
+data class InsertLanguagesUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class UpdateLanguagesUser (
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
 data class DeleteLanguagesUser (
     val success: Boolean = false,
     val idError: String? = null,
