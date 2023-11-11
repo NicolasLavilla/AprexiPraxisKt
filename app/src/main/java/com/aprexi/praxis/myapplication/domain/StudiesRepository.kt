@@ -3,6 +3,8 @@ package com.aprexi.praxis.myapplication.domain
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.ListTypeStudies
+import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
@@ -12,7 +14,13 @@ interface StudiesRepository {
 
     suspend fun getStudiesUser(idUser: Int, idStudiesUser: Int, token: String): StudiesUser
 
+    suspend fun getListTypeStudies(token: String): ListTypeStudies
+
+    suspend fun getNameStudies(idTypeStudies: Int, idProfessionalFamilies: Int, token: String): NameStudies
+
     fun saveStudies(studies: ListStudiesUser)
+
+    fun saveListTypeStudies(typeStudies: ListTypeStudies)
 
     suspend fun deleteStudiesUser(idUser: Int, idStudiesUser: Int, token: String): DeleteStudiesUser
 

@@ -4,6 +4,7 @@ import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.model.DeleteExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ExperienceJobUser
 import com.aprexi.praxis.myapplication.model.InsertExperienceJobUser
+import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.UpdateExperienceJobUser
 
@@ -13,6 +14,12 @@ class ExperienceJobRetomeImpl(
 
     suspend fun getExperienceJobUserList(idUser: Int, token: String): ListExperienceJobUser {
         return aprexiPraxisService.getExperienceJobList(idUser = idUser, token = token)
+    }
+
+    suspend fun getListExperience(token: String): ListExperience {
+        return aprexiPraxisService.getListExperience(
+            token = token
+        )
     }
 
     suspend fun getExperienceJobUser(

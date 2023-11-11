@@ -4,6 +4,8 @@ import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.ListTypeStudies
+import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
@@ -18,6 +20,20 @@ class StudiesRemoteImpl(
     suspend fun getStudiesUser(idUser: Int, idStudiesUser: Int, token: String): StudiesUser {
         return aprexiPraxisService.getStudiesUser(
             idUser = idUser, idStudiesUser = idStudiesUser, token = token
+        )
+    }
+
+    suspend fun getListTypeStudies(token: String): ListTypeStudies {
+        return aprexiPraxisService.getListTypeStudies(
+            token = token
+        )
+    }
+
+    suspend fun getNameStudies(idTypeStudies: Int, idProfessionalFamilies: Int ,token: String): NameStudies {
+        return aprexiPraxisService.getNameStudies(
+            idTypeStudies = idTypeStudies,
+            idProfessionalFamilies = idProfessionalFamilies,
+            token = token
         )
     }
 

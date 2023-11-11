@@ -6,6 +6,7 @@ import com.aprexi.praxis.myapplication.domain.ExperienceJobRepository
 import com.aprexi.praxis.myapplication.model.DeleteExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ExperienceJobUser
 import com.aprexi.praxis.myapplication.model.InsertExperienceJobUser
+import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.UpdateExperienceJobUser
 
@@ -45,6 +46,26 @@ class ExperienceJobDataImpl(
 
     override fun saveExperienceJobsList(experienceJob: ListExperienceJobUser) {
         experienceJobLocalImpl.saveExpirienceJob(experienceJob)
+    }
+
+    override suspend fun getListExperience(
+        token: String
+    ): ListExperience {
+
+        val cachedExperienceList = experienceJobLocalImpl.getListExperience()
+
+        if (cachedExperienceList != null) {
+            return cachedExperienceList
+        } else {
+            val resultExperience: ListExperience =
+                experienceJobRetomeImpl.getListExperience(token = token)
+            saveListExperience(resultExperience)
+            return resultExperience
+        }
+    }
+
+    override fun saveListExperience(experience: ListExperience) {
+        experienceJobLocalImpl.saveListExperience(experience)
     }
 
     override suspend fun deleteExperienceJobUser(

@@ -1,6 +1,7 @@
 package com.aprexi.praxis.myapplication.data.experience.local
 
 import com.aprexi.praxis.myapplication.data.local.MemoryCache
+import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 
 class ExperienceJobLocalImpl(
@@ -13,5 +14,12 @@ class ExperienceJobLocalImpl(
 
     fun saveExpirienceJob(experieceJobUser : ListExperienceJobUser){
         memoryCache.experienceJobUserList = experieceJobUser
+    }
+
+    fun getListExperience(): ListExperience?{
+        return memoryCache.experience
+    }
+    fun saveListExperience(experience: ListExperience){
+        memoryCache.experience = experience
     }
 }

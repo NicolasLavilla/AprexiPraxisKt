@@ -1,11 +1,20 @@
 package com.aprexi.praxis.myapplication.data.local
 
+import com.aprexi.praxis.myapplication.model.ListBasicCompany
+import com.aprexi.praxis.myapplication.model.ListBasicLanguages
+import com.aprexi.praxis.myapplication.model.ListCategory
+import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
+import com.aprexi.praxis.myapplication.model.ListLevelJob
+import com.aprexi.praxis.myapplication.model.ListLicense
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
+import com.aprexi.praxis.myapplication.model.ListProfessionalFamilies
 import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
+import com.aprexi.praxis.myapplication.model.ListSchool
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.ListTypeStudies
 
 class MemoryCache {
 
@@ -16,6 +25,15 @@ class MemoryCache {
     var languagesUserList: ListLanguagesUser? = null
     var experienceJobUserList: ListExperienceJobUser? = null
     var professionalProyectsList: ListProfessionalProyectsUser? = null
+    var typeStudies: ListTypeStudies? = null
+    var professionalFamilies: ListProfessionalFamilies? = null
+    var school: ListSchool? = null
+    var listCompany: ListBasicCompany? = null
+    var level: ListLevelJob? = null
+    var category: ListCategory? = null
+    var experience: ListExperience? = null
+    var languagesBasic: ListBasicLanguages? = null
+    var license: ListLicense? = null
 
     fun clearAll() {
         offerList = null
@@ -25,6 +43,15 @@ class MemoryCache {
         languagesUserList = null
         experienceJobUserList = null
         professionalProyectsList = null
+        typeStudies = null
+        professionalFamilies = null
+        school = null
+        listCompany = null
+        level = null
+        category = null
+        experience = null
+        languagesBasic = null
+        license = null
     }
 
 }

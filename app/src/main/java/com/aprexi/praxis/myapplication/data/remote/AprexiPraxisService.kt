@@ -14,14 +14,24 @@ import com.aprexi.praxis.myapplication.model.InsertLanguagesUser
 import com.aprexi.praxis.myapplication.model.InsertProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
+import com.aprexi.praxis.myapplication.model.ListBasicCompany
+import com.aprexi.praxis.myapplication.model.ListBasicLanguages
+import com.aprexi.praxis.myapplication.model.ListCategory
 import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
+import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
+import com.aprexi.praxis.myapplication.model.ListLevelJob
+import com.aprexi.praxis.myapplication.model.ListLicense
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
+import com.aprexi.praxis.myapplication.model.ListProfessionalFamilies
 import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ListRequestOffer
+import com.aprexi.praxis.myapplication.model.ListSchool
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.ListTypeStudies
 import com.aprexi.praxis.myapplication.model.Login
+import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.ProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.RequestOfferUser
@@ -311,6 +321,58 @@ interface AprexiPraxisService {
         @Query("idExperienceJobUser") idExperienceJobUser: Int,
         @Query("token") token: String
     ): InsertExperienceJobUser
+
+    @GET("ListTypeStudies.php")
+    suspend fun getListTypeStudies(
+        @Query("token") token: String
+    ): ListTypeStudies
+
+    @GET("ListProfessionalFamilies.php")
+    suspend fun getListProfessionalFamilies(
+        @Query("token") token: String
+    ): ListProfessionalFamilies
+
+    @GET("ListSchools.php")
+    suspend fun getListSchools(
+        @Query("token") token: String
+    ): ListSchool
+
+    @GET("NameStudies.php")
+    suspend fun getNameStudies(
+        @Query("idTypeStudies") idTypeStudies: Int,
+        @Query("idProfessionalFamilies") idProfessionalFamilies: Int,
+        @Query("token") token: String
+    ): NameStudies
+
+    @GET("ListCompany.php")
+    suspend fun getListCompany(
+        @Query("token") token: String
+    ): ListBasicCompany
+
+    @GET("ListLevel.php")
+    suspend fun getListLevel(
+        @Query("token") token: String
+    ): ListLevelJob
+
+    @GET("ListCategory.php")
+    suspend fun getListCategory(
+        @Query("token") token: String
+    ): ListCategory
+
+    @GET("ListExperience.php")
+    suspend fun getListExperience(
+        @Query("token") token: String
+    ): ListExperience
+
+    @GET("ListLanguages.php")
+    suspend fun getListLanguages(
+        @Query("token") token: String
+    ): ListBasicLanguages
+
+    @GET("ListLicense.php")
+    suspend fun getListLicenses(
+        @Query("token") token: String
+    ): ListLicense
 
 
 }

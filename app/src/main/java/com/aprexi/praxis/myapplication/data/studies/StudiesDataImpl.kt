@@ -6,6 +6,8 @@ import com.aprexi.praxis.myapplication.domain.StudiesRepository
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
+import com.aprexi.praxis.myapplication.model.ListTypeStudies
+import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
@@ -43,6 +45,39 @@ class StudiesDataImpl(
             token = token
         )
     }
+
+    override suspend fun getListTypeStudies(
+        token: String
+    ): ListTypeStudies {
+
+        val cachedStudiesList = studiesLocalImpl.getListTypeStudies()
+
+        if (cachedStudiesList != null) {
+            return cachedStudiesList
+        } else {
+            val resultTypeStudies: ListTypeStudies =
+                studiesRemoteImpl.getListTypeStudies(token = token)
+            saveListTypeStudies(resultTypeStudies)
+            return resultTypeStudies
+        }
+    }
+
+    override fun saveListTypeStudies(typeStudies: ListTypeStudies) {
+        studiesLocalImpl.saveListTypeStudies(typeStudies)
+    }
+
+    override suspend fun getNameStudies(
+        idTypeStudies: Int,
+        idProfessionalFamilies: Int,
+        token: String
+    ): NameStudies {
+        return studiesRemoteImpl.getNameStudies(
+            idTypeStudies = idTypeStudies,
+            idProfessionalFamilies = idProfessionalFamilies,
+            token = token
+        )
+    }
+
 
     override fun saveStudies(studies: ListStudiesUser) {
         studiesLocalImpl.saveStudiesUser(studies)

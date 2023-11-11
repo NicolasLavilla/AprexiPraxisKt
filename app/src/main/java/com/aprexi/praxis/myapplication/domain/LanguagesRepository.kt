@@ -3,6 +3,7 @@ package com.aprexi.praxis.myapplication.domain
 import com.aprexi.praxis.myapplication.model.DeleteLanguagesUser
 import com.aprexi.praxis.myapplication.model.InsertLanguagesUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
+import com.aprexi.praxis.myapplication.model.ListBasicLanguages
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
 
@@ -17,6 +18,10 @@ interface LanguagesRepository {
     suspend fun getLanguagesUser(idUser: Int, idLanguages: Int, token: String): LanguagesUser
 
     fun saveLanguagesList(languages: ListLanguagesUser)
+
+    suspend fun getListLanguagesBasic(token: String): ListBasicLanguages
+
+    fun saveListLanguagesBasic(languages: ListBasicLanguages)
 
     suspend fun deleteLanguagesUser(
         idUser: Int,

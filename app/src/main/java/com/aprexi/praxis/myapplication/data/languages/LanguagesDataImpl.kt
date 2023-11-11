@@ -6,9 +6,9 @@ import com.aprexi.praxis.myapplication.domain.LanguagesRepository
 import com.aprexi.praxis.myapplication.model.DeleteLanguagesUser
 import com.aprexi.praxis.myapplication.model.InsertLanguagesUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
+import com.aprexi.praxis.myapplication.model.ListBasicLanguages
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
-import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
 
 class LanguagesDataImpl(
     private val languagesLocalImpl: LanguagesLocalImpl,
@@ -45,6 +45,26 @@ class LanguagesDataImpl(
 
     override fun saveLanguagesList(languages: ListLanguagesUser) {
         languagesLocalImpl.saveLanguagesList(languages)
+    }
+
+    override suspend fun getListLanguagesBasic(
+        token: String
+    ): ListBasicLanguages {
+
+        val cachedLanguages = languagesLocalImpl.getListLanguagesBasic()
+
+        if (cachedLanguages != null) {
+            return cachedLanguages
+        } else {
+            val resultLanguagesBasic: ListBasicLanguages =
+                languagesRemoteImpl.getListLanguage(token = token)
+            saveListLanguagesBasic(resultLanguagesBasic)
+            return resultLanguagesBasic
+        }
+    }
+
+    override fun saveListLanguagesBasic(languages: ListBasicLanguages) {
+        languagesLocalImpl.saveListLanguagesBasic(languages)
     }
 
     override suspend fun deleteLanguagesUser(

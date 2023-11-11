@@ -41,3 +41,25 @@ data class DeleteStudiesUser (
     val idError: String? = null,
     val messageError: String? = null
 )
+
+data class ListTypeStudies (
+    val typeStudies: List<TypeStudy>,
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class TypeStudy (
+    val idTypeStudies: Long,
+    val nameTypeStudies: String
+)
+
+data class NameStudies (
+    val idNameStudies: Long,
+    val nameStudies: String,
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+

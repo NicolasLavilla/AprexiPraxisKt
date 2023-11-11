@@ -34,3 +34,15 @@ data class DeleteLanguagesUser (
     val idError: String? = null,
     val messageError: String? = null
 )
+
+data class ListBasicLanguages (
+    val languages: List<BasicLanguages>,
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class BasicLanguages (
+    val idLanguages: Long,
+    val nameLanguages: String
+)

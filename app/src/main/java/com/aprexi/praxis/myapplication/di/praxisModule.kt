@@ -1,5 +1,8 @@
 package com.aprexi.praxis.myapplication.di
 
+import com.aprexi.praxis.myapplication.data.category.CategoryDataImpl
+import com.aprexi.praxis.myapplication.data.category.local.CategoryLocalImpl
+import com.aprexi.praxis.myapplication.data.category.remote.CategoryRemoteImpl
 import com.aprexi.praxis.myapplication.data.company.CompanyDataImpl
 import com.aprexi.praxis.myapplication.data.company.local.CompanyLocalImpl
 import com.aprexi.praxis.myapplication.data.company.remote.CompanyRemoteImpl
@@ -12,6 +15,12 @@ import com.aprexi.praxis.myapplication.data.followOffer.remote.FollowOfferRemote
 import com.aprexi.praxis.myapplication.data.languages.LanguagesDataImpl
 import com.aprexi.praxis.myapplication.data.languages.local.LanguagesLocalImpl
 import com.aprexi.praxis.myapplication.data.languages.remote.LanguagesRemoteImpl
+import com.aprexi.praxis.myapplication.data.level.LevelDataImpl
+import com.aprexi.praxis.myapplication.data.level.local.LevelLocalImpl
+import com.aprexi.praxis.myapplication.data.level.remote.LevelRemoteImpl
+import com.aprexi.praxis.myapplication.data.license.LicenseDataImpl
+import com.aprexi.praxis.myapplication.data.license.local.LicenseLocalImpl
+import com.aprexi.praxis.myapplication.data.license.remote.LicenseRemoteImpl
 import com.aprexi.praxis.myapplication.data.local.MemoryCache
 import com.aprexi.praxis.myapplication.data.offer.OfferDataImpl
 import com.aprexi.praxis.myapplication.data.login.LoginDataImpl
@@ -21,6 +30,9 @@ import com.aprexi.praxis.myapplication.data.login.local.LoginLocalImpl
 import com.aprexi.praxis.myapplication.data.offer.local.TokenLocalImpl
 import com.aprexi.praxis.myapplication.data.offer.remote.OfferRemoteImpl
 import com.aprexi.praxis.myapplication.data.offer.remote.LoginRemoteImpl
+import com.aprexi.praxis.myapplication.data.professionalFamilies.ProfessionalFamiliesDataImpl
+import com.aprexi.praxis.myapplication.data.professionalFamilies.local.ProfessionalFamiliesLocalImpl
+import com.aprexi.praxis.myapplication.data.professionalFamilies.remote.ProfessionalFamiliesRemoteImpl
 import com.aprexi.praxis.myapplication.data.token.remote.TokenRemoteImpl
 import com.aprexi.praxis.myapplication.data.remote.ApiClient
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
@@ -30,20 +42,28 @@ import com.aprexi.praxis.myapplication.data.requestOffer.remote.RequestOfferRemo
 import com.aprexi.praxis.myapplication.data.professionalProyects.ProfessionalProyectsImpl
 import com.aprexi.praxis.myapplication.data.professionalProyects.local.ProfessionalProyectsLocalImpl
 import com.aprexi.praxis.myapplication.data.professionalProyects.remote.ProfessionalProyectsRemoteImpl
+import com.aprexi.praxis.myapplication.data.school.SchoolDataImpl
+import com.aprexi.praxis.myapplication.data.school.local.SchoolLocalImpl
+import com.aprexi.praxis.myapplication.data.school.remote.SchoolRemoteImpl
 import com.aprexi.praxis.myapplication.data.studies.StudiesDataImpl
 import com.aprexi.praxis.myapplication.data.studies.local.StudiesLocalImpl
 import com.aprexi.praxis.myapplication.data.studies.remote.StudiesRemoteImpl
 import com.aprexi.praxis.myapplication.data.user.UserDataImpl
 import com.aprexi.praxis.myapplication.data.user.local.UserLocalImpl
 import com.aprexi.praxis.myapplication.data.user.remote.UserRemoteImpl
+import com.aprexi.praxis.myapplication.domain.CategoryRepository
 import com.aprexi.praxis.myapplication.domain.CompanyRepository
 import com.aprexi.praxis.myapplication.domain.ExperienceJobRepository
 import com.aprexi.praxis.myapplication.domain.FollowOfferRepository
 import com.aprexi.praxis.myapplication.domain.LanguagesRepository
+import com.aprexi.praxis.myapplication.domain.LevelRepository
+import com.aprexi.praxis.myapplication.domain.LicenseRepository
 import com.aprexi.praxis.myapplication.domain.LoginRepository
 import com.aprexi.praxis.myapplication.domain.OfferRepository
+import com.aprexi.praxis.myapplication.domain.ProfessionalFamiliesRepository
 import com.aprexi.praxis.myapplication.domain.ProfessionalProyectsRepository
 import com.aprexi.praxis.myapplication.domain.RequestOfferRepository
+import com.aprexi.praxis.myapplication.domain.SchoolRepository
 import com.aprexi.praxis.myapplication.domain.StudiesRepository
 import com.aprexi.praxis.myapplication.domain.TokenRepository
 import com.aprexi.praxis.myapplication.domain.UserRepository
@@ -68,6 +88,16 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserUseCa
 import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListCategoryUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListCompanyUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListExperienceUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListLanguagesBasicUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListLevelUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListLicenseUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListProfessionalFamiliesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListSchoolUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListTypeStudiesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetNameStudiesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsUserUseCause
@@ -128,7 +158,7 @@ val praxisModule = module {
     factory { FollowOfferRemoteImpl(get()) }
     factory<FollowOfferRepository> { FollowOfferDataImpl(get(),get()) }
 
-    factory { CompanyLocalImpl() }
+    factory { CompanyLocalImpl(get()) }
     factory { CompanyRemoteImpl(get()) }
     factory<CompanyRepository> { CompanyDataImpl(get(),get()) }
 
@@ -152,7 +182,37 @@ val praxisModule = module {
     factory { ExperienceJobRetomeImpl(get()) }
     factory<ExperienceJobRepository> { ExperienceJobDataImpl(get(),get()) }
 
+    factory { CategoryLocalImpl(get()) }
+    factory { CategoryRemoteImpl(get()) }
+    factory<CategoryRepository> { CategoryDataImpl(get(),get()) }
 
+    factory { LevelLocalImpl(get()) }
+    factory { LevelRemoteImpl(get()) }
+    factory<LevelRepository> { LevelDataImpl(get(),get()) }
+
+    factory { LicenseLocalImpl(get()) }
+    factory { LicenseRemoteImpl(get()) }
+    factory<LicenseRepository> { LicenseDataImpl(get(),get()) }
+
+    factory { ProfessionalFamiliesLocalImpl(get()) }
+    factory { ProfessionalFamiliesRemoteImpl(get()) }
+    factory<ProfessionalFamiliesRepository> { ProfessionalFamiliesDataImpl(get(),get()) }
+
+    factory { SchoolLocalImpl(get()) }
+    factory { SchoolRemoteImpl(get()) }
+    factory<SchoolRepository> { SchoolDataImpl(get(),get()) }
+
+
+    factory { GetListCategoryUseCause(get())}
+    factory { GetListCompanyUseCause(get())}
+    factory { GetListExperienceUseCause(get())}
+    factory { GetListLanguagesBasicUseCause(get())}
+    factory { GetListLevelUseCause(get())}
+    factory { GetListLicenseUseCause(get())}
+    factory { GetListProfessionalFamiliesUseCause(get())}
+    factory { GetListSchoolUseCause(get())}
+    factory { GetListTypeStudiesUseCause(get())}
+    factory { GetNameStudiesUseCause(get())}
     factory { InsertProfessionalProyectUserUseCause(get())}
     factory { InsertExperienceJobUserUseCause(get())}
     factory { InsertLanguagesUserUseCause(get())}

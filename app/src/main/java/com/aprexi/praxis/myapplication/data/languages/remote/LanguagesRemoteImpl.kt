@@ -4,9 +4,9 @@ import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.model.DeleteLanguagesUser
 import com.aprexi.praxis.myapplication.model.InsertLanguagesUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
+import com.aprexi.praxis.myapplication.model.ListBasicLanguages
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
-import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
 
 class LanguagesRemoteImpl(
     private val aprexiPraxisService: AprexiPraxisService
@@ -20,6 +20,12 @@ class LanguagesRemoteImpl(
         return aprexiPraxisService.getLanguagesUser(
             idUser = idUser,
             idLanguages = idLanguages,
+            token = token
+        )
+    }
+
+    suspend fun getListLanguage(token: String): ListBasicLanguages {
+        return aprexiPraxisService.getListLanguages(
             token = token
         )
     }

@@ -22,3 +22,15 @@ data class Company (
     val idError: Any? = null,
     val messageError: Any? = null
 )
+
+data class ListBasicCompany (
+    val company: List<BasicCompany>,
+    val success: Boolean,
+    val idError: String? = null,
+    val messageError: String? = null
+)
+
+data class BasicCompany (
+    val idCompany: Long,
+    val nameCompany: String
+)
