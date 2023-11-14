@@ -57,7 +57,7 @@ class LanguagesDataImpl(
             return cachedLanguages
         } else {
             val resultLanguagesBasic: ListBasicLanguages =
-                languagesRemoteImpl.getListLanguage(token = token)
+                languagesRemoteImpl.getListBasicLanguages(token = token)
             saveListLanguagesBasic(resultLanguagesBasic)
             return resultLanguagesBasic
         }

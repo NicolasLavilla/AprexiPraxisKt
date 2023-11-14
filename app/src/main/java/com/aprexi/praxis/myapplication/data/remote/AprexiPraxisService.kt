@@ -23,6 +23,7 @@ import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.ListLevelJob
 import com.aprexi.praxis.myapplication.model.ListLicense
+import com.aprexi.praxis.myapplication.model.ListNameStudies
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListProfessionalFamilies
 import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
@@ -31,7 +32,6 @@ import com.aprexi.praxis.myapplication.model.ListSchool
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ListTypeStudies
 import com.aprexi.praxis.myapplication.model.Login
-import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.ProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.RequestOfferUser
@@ -282,7 +282,7 @@ interface AprexiPraxisService {
         @Query("startYear") startYear: String,
         @Query("endYear") endYear: String,
         @Query("idSchool") idSchool: Int,
-        @Query("idStudiesUser") idStudiesUser: Int,
+        @Query("idStudiesUser") idStudiesUser: Int?,
         @Query("token") token: String
     ): InsertStudiesUser
 
@@ -337,12 +337,12 @@ interface AprexiPraxisService {
         @Query("token") token: String
     ): ListSchool
 
-    @GET("NameStudies.php")
-    suspend fun getNameStudies(
+    @GET("ListNameStudies.php")
+    suspend fun getListNameStudies(
         @Query("idTypeStudies") idTypeStudies: Int,
         @Query("idProfessionalFamilies") idProfessionalFamilies: Int,
         @Query("token") token: String
-    ): NameStudies
+    ): ListNameStudies
 
     @GET("ListCompany.php")
     suspend fun getListCompany(
@@ -365,7 +365,7 @@ interface AprexiPraxisService {
     ): ListExperience
 
     @GET("ListLanguages.php")
-    suspend fun getListLanguages(
+    suspend fun getListBasicLanguages(
         @Query("token") token: String
     ): ListBasicLanguages
 

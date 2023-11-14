@@ -17,10 +17,14 @@ class LanguagesDetailActivity : AppCompatActivity() {
         // Pasar argumentos al destino inicial
         // Verifica si se pasan los parámetros a través del Intent
         val idLanguages = intent.getIntExtra("idLanguages", 0)
+        val idExperience = intent.getIntExtra("idExperience", 0)
+        val idFragment = intent.getIntExtra("idFragment", 0)
 
         // Configura los argumentos para el fragmento
         val args = Bundle()
         args.putInt("idLanguages", idLanguages)
+        args.putInt("idExperience", idExperience)
+        args.putInt("idFragment", idFragment)
 
         navController.setGraph(R.navigation.languages_detail_navigation, args)
     }

@@ -13,6 +13,28 @@
         <argument
             android:name="idStudies"
             app:argType="integer" />
+        <argument
+            android:name="idNameStudies"
+            app:argType="integer" />
+        <argument
+            android:name="typeStudies"
+            app:argType="integer" />
+        <argument
+            android:name="professionalFamilies"
+            app:argType="integer" />
+        <argument
+        android:name="idSchool"
+        app:argType="integer" />
+        <argument
+            android:name="startYear"
+            app:argType="string" />
+        <argument
+        android:name="endYear"
+        app:argType="string" />
+
+        <argument
+            android:name="idFragment"
+            app:argType="integer" />
 
     </fragment>
 </navigation>

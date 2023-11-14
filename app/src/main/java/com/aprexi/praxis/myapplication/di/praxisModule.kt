@@ -70,6 +70,7 @@ import com.aprexi.praxis.myapplication.domain.UserRepository
 import com.aprexi.praxis.myapplication.domain.usercase.CleanTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteExperienceJobUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteFollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.DeleteLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenPreferencesUseCause
@@ -224,6 +225,7 @@ val praxisModule = module {
     factory { UpdateUserUseCause(get())}
     factory { DeleteExperienceJobUserUseCause(get()) }
     factory { DeleteProfessionalProyectUserUseCause(get()) }
+    factory { DeleteLanguagesUserUseCause(get()) }
     factory { GetExperienceJobUserUseCause(get()) }
     factory { GetProfessionalProyectsUserUseCause(get()) }
     factory { GetLanguagesUserUseCause(get()) }
@@ -260,8 +262,8 @@ val praxisModule = module {
     viewModel{OfferFollowViewModel(get()) }
     viewModel{DetailRequestOfferViewModel(get())}
     viewModel{CompanyViewModel(get())}
-    viewModel{DetailStudiesViewModel(get(),get(), get()) }
-    viewModel{DetailLanguagesViewModel(get(),get(),get()) }
+    viewModel{DetailStudiesViewModel(get(),get(),get(),get(),get(),get(),get(),get()) }
+    viewModel{DetailLanguagesViewModel(get(),get(),get(),get(),get(),get()) }
     viewModel{DetailProfessionalProyectsViewModel(get(),get(),get()) }
     viewModel{DetailExperienceJobViewModel(get(),get(),get()) }
     viewModel{DetailUserViewModel(get(),get()) }

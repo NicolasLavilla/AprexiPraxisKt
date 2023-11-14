@@ -5,9 +5,9 @@ import com.aprexi.praxis.myapplication.data.studies.remote.StudiesRemoteImpl
 import com.aprexi.praxis.myapplication.domain.StudiesRepository
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
+import com.aprexi.praxis.myapplication.model.ListNameStudies
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ListTypeStudies
-import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
@@ -66,18 +66,17 @@ class StudiesDataImpl(
         studiesLocalImpl.saveListTypeStudies(typeStudies)
     }
 
-    override suspend fun getNameStudies(
+    override suspend fun getListNameStudies(
         idTypeStudies: Int,
         idProfessionalFamilies: Int,
         token: String
-    ): NameStudies {
-        return studiesRemoteImpl.getNameStudies(
+    ): ListNameStudies {
+        return studiesRemoteImpl.getListNameStudies(
             idTypeStudies = idTypeStudies,
             idProfessionalFamilies = idProfessionalFamilies,
             token = token
         )
     }
-
 
     override fun saveStudies(studies: ListStudiesUser) {
         studiesLocalImpl.saveStudiesUser(studies)
@@ -121,7 +120,7 @@ class StudiesDataImpl(
         startYear: String,
         endYear: String,
         idSchool: Int,
-        idStudiesUser: Int,
+        idStudiesUser: Int?,
         token: String
     ): InsertStudiesUser {
         return studiesRemoteImpl.insertStudiesUser(

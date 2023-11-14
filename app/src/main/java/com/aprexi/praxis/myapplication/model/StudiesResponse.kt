@@ -54,12 +54,17 @@ data class TypeStudy (
     val nameTypeStudies: String
 )
 
-data class NameStudies (
-    val idNameStudies: Long,
-    val nameStudies: String,
+data class ListNameStudies (
+    val nameStudies: List<NameStudy>,
     val success: Boolean,
-    val idError: String? = null,
-    val messageError: String? = null
+    val idError: Any? = null,
+    val messageError: Any? = null
 )
+
+data class NameStudy (
+    val idNameStudies: Long,
+    val nameStudies: String
+)
+
 
 

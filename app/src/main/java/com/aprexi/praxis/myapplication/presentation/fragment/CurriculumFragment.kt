@@ -268,7 +268,28 @@ class CurriculumFragment: Fragment() {
         studiesListAdapter.onClickListener = { studies ->
 
             val intent = Intent(context, StudiesDetailActivity::class.java)
-            intent.putExtra("idStudies", studies.idStudiesUser.toInt())
+            intent.putExtra("idStudiesUser", studies.idStudiesUser.toInt())
+            intent.putExtra("idNameStudies", studies.idNameStudies.toInt())
+            intent.putExtra("typeStudies", studies.typeStudies.toInt())
+            intent.putExtra("professionalFamilies", studies.professionalFamilies.toInt())
+            intent.putExtra("idSchool", studies.idSchool.toInt())
+            intent.putExtra("startYear", studies.startYear)
+            intent.putExtra("endYear", studies.endYear)
+            intent.putExtra("idFragment", 1)// 1 -> Modificar
+            startActivity(intent)
+        }
+
+        binding.vInsertStudiesCurriculumFragment.setOnClickListener {
+
+            val intent = Intent(context, StudiesDetailActivity::class.java)
+            intent.putExtra("idStudiesUser", 1) //Tiene que recibir un 1 para que sea null +-
+            intent.putExtra("idNameStudies", 1)
+            intent.putExtra("typeStudies", 1)
+            intent.putExtra("professionalFamilies", 1)
+            intent.putExtra("idSchool", 1)
+            intent.putExtra("startYear", "0000-00-00")
+            intent.putExtra("endYear", "0000-00-00")
+            intent.putExtra("idFragment", 2) // 2 -> Crear
             startActivity(intent)
         }
 
@@ -290,8 +311,20 @@ class CurriculumFragment: Fragment() {
 
             val intent = Intent(context, LanguagesDetailActivity::class.java)
             intent.putExtra("idLanguages", language.idLanguages.toInt())
+            intent.putExtra("idExperience", language.idExperience.toInt())
+            intent.putExtra("idFragment", 1) // 1 -> Modificar
             startActivity(intent)
         }
+
+        binding.vInsertLanguagesCurriculumFragment.setOnClickListener {
+
+            val intent = Intent(context, LanguagesDetailActivity::class.java)
+            intent.putExtra("idLanguages", 1)
+            intent.putExtra("idExperience", 1)
+            intent.putExtra("idFragment", 2) // 2 -> Crear
+            startActivity(intent)
+        }
+
 
         professioanlProyectsListAdapter.onClickListener = { professionalProyects ->
 
@@ -299,6 +332,10 @@ class CurriculumFragment: Fragment() {
             intent.putExtra("idProfessionalProyects", professionalProyects.idProfessionalProyects.toInt())
             startActivity(intent)
         }
+
+
+
+
 
 
     }

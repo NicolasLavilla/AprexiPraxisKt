@@ -24,8 +24,8 @@ class LanguagesRemoteImpl(
         )
     }
 
-    suspend fun getListLanguage(token: String): ListBasicLanguages {
-        return aprexiPraxisService.getListLanguages(
+    suspend fun getListBasicLanguages(token: String): ListBasicLanguages {
+        return aprexiPraxisService.getListBasicLanguages(
             token = token
         )
     }

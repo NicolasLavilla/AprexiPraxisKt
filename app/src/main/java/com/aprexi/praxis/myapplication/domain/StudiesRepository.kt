@@ -2,9 +2,9 @@ package com.aprexi.praxis.myapplication.domain
 
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
+import com.aprexi.praxis.myapplication.model.ListNameStudies
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ListTypeStudies
-import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
@@ -16,7 +16,7 @@ interface StudiesRepository {
 
     suspend fun getListTypeStudies(token: String): ListTypeStudies
 
-    suspend fun getNameStudies(idTypeStudies: Int, idProfessionalFamilies: Int, token: String): NameStudies
+    suspend fun getListNameStudies(idTypeStudies: Int, idProfessionalFamilies: Int, token: String): ListNameStudies
 
     fun saveStudies(studies: ListStudiesUser)
 
@@ -40,7 +40,7 @@ interface StudiesRepository {
         startYear: String,
         endYear: String,
         idSchool: Int,
-        idStudiesUser: Int,
+        idStudiesUser: Int?,
         token: String
     ): InsertStudiesUser
 

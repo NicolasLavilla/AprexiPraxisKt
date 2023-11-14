@@ -87,6 +87,14 @@
         <item name="android:maxLines">1</item>
     </style>
 
+    <style name="bar_top_bottom_style">
+        <item name="android:layout_marginEnd">25dp</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_width">24dp</item>
+        <item name="android:layout_height">24dp</item>
+
+    </style>
+
     <style name="row_styles_list_names">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
@@ -124,6 +132,19 @@
         <item name="android:elevation">10dp</item>
         <item name="android:gravity">center_vertical</item>
         <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
+        <item name="android:background">@drawable/spinner_background</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ems">10</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/tv_name_enterprise_offer_item</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">8dp</item>
+
     </style>
 
 </resources>

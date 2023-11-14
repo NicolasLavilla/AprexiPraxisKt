@@ -1,7 +1,7 @@
 package com.aprexi.praxis.myapplication.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.aprexi.praxis.myapplication.R
@@ -16,11 +16,25 @@ class StudiesDetailActivity : AppCompatActivity() {
 
         // Pasar argumentos al destino inicial
         // Verifica si se pasan los parámetros a través del Intent
-        val idStudies = intent.getIntExtra("idStudies", 0)
+        val idStudiesUser = intent.getIntExtra("idStudiesUser", 0)
+        val idNameStudies = intent.getIntExtra("idNameStudies", 0)
+        val typeStudies = intent.getIntExtra("typeStudies", 0)
+        val professionalFamilies = intent.getIntExtra("professionalFamilies", 0)
+        val idSchool = intent.getIntExtra("idSchool", 0)
+        val startYear = intent.getStringExtra("startYear")
+        val endYear = intent.getStringExtra("endYear") ?: ""
+        val idFragment = intent.getIntExtra("idFragment", 0)
 
         // Configura los argumentos para el fragmento
         val args = Bundle()
-        args.putInt("idStudies", idStudies)
+        args.putInt("idStudies", idStudiesUser)
+        args.putInt("idNameStudies", idNameStudies)
+        args.putInt("typeStudies", typeStudies)
+        args.putInt("professionalFamilies", professionalFamilies)
+        args.putInt("idSchool", idSchool)
+        args.putString("startYear", startYear)
+        args.putString("endYear", endYear)
+        args.putInt("idFragment", idFragment)
 
         navController.setGraph(R.navigation.studies_detail_navigation, args)
     }

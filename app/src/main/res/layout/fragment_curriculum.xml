@@ -201,6 +201,7 @@
                         android:textSize="18sp" />
 
                     <View
+                        android:id="@+id/v_insert_studies_curriculum_fragment"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="5dp"
@@ -256,6 +257,7 @@
                         android:textSize="18sp" />
 
                     <View
+                        android:id="@+id/v_insert_experience_curriculum_fragment"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="5dp"
@@ -312,6 +314,7 @@
                         android:textSize="18sp" />
 
                     <View
+                        android:id="@+id/v_insert_languages_curriculum_fragment"
                         android:layout_width="24dp"
                         android:layout_height="match_parent"
                         android:layout_marginStart="5dp"
@@ -368,6 +371,7 @@
                         android:textSize="18sp" />
 
                     <View
+                        android:id="@+id/v_insert_professional_proyects_curriculum_fragment"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginStart="5dp"

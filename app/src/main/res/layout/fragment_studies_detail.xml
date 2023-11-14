@@ -11,48 +11,94 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <View
+            android:id="@+id/v_back_bottom_studies"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/baseline_keyboard_backspace_24"
+            android:backgroundTint="@color/black" />
+
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title_studies_fragment"
             style="@style/bar_top_information"
             android:text="@string/title_estudies_fragment" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <View
+                android:id="@+id/tv_botton_trush_studies_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_delete_24"
+                android:backgroundTint="@color/rojo_candidatura"
+                android:visibility="gone"/>
+            <View
+                android:id="@+id/tv_botton_save_studies_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_save_24"
+                android:backgroundTint="@color/azul_candidatura"
+                android:visibility="gone"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/cl_container"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/llc_toolbar_studies_detail_fragment" />
+        app:layout_constraintTop_toBottomOf="@+id/llc_toolbar_studies_detail_fragment">
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/actv_type_studies_detail_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/cl_container" />
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/actv_type_studies_detail_fragment1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actv_type_studies_detail_fragment" />
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/acs_type_studies_detail_fragment"
+                style="@style/SpinnerStyle"/>
 
-    <androidx.appcompat.widget.AppCompatSpinner
-        android:id="@+id/actv_type_studies_detail_fragment2"
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/acs_professional_families_studies_detail_fragment"
+                style="@style/SpinnerStyle" />
+
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/acs_name_studies_detail_fragment"
+                style="@style/SpinnerStyle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tie_date_init_studies_detail_fragment"
+                android:hint="@string/date_init"
+                style="@style/SpinnerStyle"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tie_date_end_studies_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:hint="@string/end_date"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/acs_school_studies_detail_fragment"
+                style="@style/SpinnerStyle" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Button
+        android:id="@+id/btn_create_studies_detail_fragment"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
+        android:layout_height="60dp"
+        android:text="@string/add_bottom"
+        android:textColor="@color/white"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/actv_type_studies_detail_fragment1" />
+        app:layout_constraintStart_toStartOf="parent"/>
 
     <ProgressBar
         android:id="@+id/pb_studies_detail"
@@ -65,4 +111,3 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

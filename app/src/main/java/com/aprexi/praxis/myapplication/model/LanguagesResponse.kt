@@ -8,6 +8,7 @@ data class ListLanguagesUser (
 )
 
 data class LanguagesUser (
+    val idLanguagesUser: Long,
     val idLanguages: Long,
     val nameLanguages: String,
     val idExperience: Long,
@@ -36,13 +37,13 @@ data class DeleteLanguagesUser (
 )
 
 data class ListBasicLanguages (
-    val languages: List<BasicLanguages>,
+    val basicLanguages: List<BasicLanguage>,
     val success: Boolean,
     val idError: String? = null,
     val messageError: String? = null
 )
 
-data class BasicLanguages (
+data class BasicLanguage (
     val idLanguages: Long,
     val nameLanguages: String
 )

@@ -3,9 +3,9 @@ package com.aprexi.praxis.myapplication.data.studies.remote
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
+import com.aprexi.praxis.myapplication.model.ListNameStudies
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ListTypeStudies
-import com.aprexi.praxis.myapplication.model.NameStudies
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
@@ -29,8 +29,8 @@ class StudiesRemoteImpl(
         )
     }
 
-    suspend fun getNameStudies(idTypeStudies: Int, idProfessionalFamilies: Int ,token: String): NameStudies {
-        return aprexiPraxisService.getNameStudies(
+    suspend fun getListNameStudies(idTypeStudies: Int, idProfessionalFamilies: Int, token: String): ListNameStudies {
+        return aprexiPraxisService.getListNameStudies(
             idTypeStudies = idTypeStudies,
             idProfessionalFamilies = idProfessionalFamilies,
             token = token
@@ -71,7 +71,7 @@ class StudiesRemoteImpl(
         startYear: String,
         endYear: String,
         idSchool: Int,
-        idStudiesUser: Int,
+        idStudiesUser: Int?,
         token: String
     ): InsertStudiesUser {
         return aprexiPraxisService.insertStudiesUser(

@@ -83,6 +83,10 @@
     <string name="title_user_data_fragment">Datos de Usuario</string>
     <string name="title_experience_job_detail_fragment">Experiencia Laboral</string>
     <string name="title_professional_proyects_fragment">Proyectos Profesionales</string>
+    <string name="save_bottom">GUARDAR</string>
+    <string name="add_bottom">CREAR</string>
+    <string name="date_init">Fecha Inicio</string>
+    <string name="end_date">Fecha Fin</string>
 
 
 </resources>

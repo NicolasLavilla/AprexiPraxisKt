@@ -2,8 +2,6 @@ package com.aprexi.praxis.myapplication.domain.usercase
 
 import com.aprexi.praxis.myapplication.domain.StudiesRepository
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
-import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
-import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
 class InsertStudiesUserUseCause(
     private val studiesRepository: StudiesRepository
@@ -15,7 +13,7 @@ class InsertStudiesUserUseCause(
         startYear: String,
         endYear: String,
         idSchool: Int,
-        idStudiesUser: Int,
+        idStudiesUser: Int?,
         token: String
     ): InsertStudiesUser {
         return studiesRepository.insertStudiesUser(

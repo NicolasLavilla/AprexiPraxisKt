@@ -15,16 +15,10 @@
             app:destination="@id/detailRequestOfferFragment" />
     </fragment>
 
-
-
     <fragment
         android:id="@+id/offerFollowFragment"
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferFollowListFragment"
         tools:layout="@layout/fragment_offers_follow">
-
-       <!-- <action
-            android:id="@+id/action_offerFollowFragment_to_offerDetailFragment"
-            app:destination="@id/offerDetailFragment" />-->
 
     </fragment>
 
@@ -33,38 +27,12 @@
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.DetailRequestOfferFragment"
         tools:layout="@layout/fragment_detail_request_offer">
 
-        <!--<action
-            android:id="@+id/action_detailRequestOfferFragment_to_offerDetailFragment"
-            app:destination="@id/offerDetailFragment" />-->
     </fragment>
-
-    <!--<fragment
-        android:id="@+id/offerDetailFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferDetailFragment"
-        tools:layout="@layout/fragment_offer_detail">
-
-        <argument
-            android:name="idUser"
-            app:argType="integer" />
-
-        <argument
-            android:name="idOffer"
-            app:argType="integer" />
-
-        <action
-            android:id="@+id/action_offerDetailFragment_to_companyFragment"
-            app:destination="@id/companyFragment" />
-
-    </fragment>-->
 
     <fragment
         android:id="@+id/navOfferListFragment"
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferListFragment"
         tools:layout="@layout/fragment_offer_list">
-
-        <!--<action
-            android:id="@+id/action_offerListFragment_to_offerDetailFragment"
-            app:destination="@id/offerDetailFragment" />-->
 
     </fragment>
 

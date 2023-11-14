@@ -5,16 +5,90 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llc_toolbar_languages_detail_fragment"
         style="@style/toolbar_activities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/v_back_bottom_languages"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/baseline_keyboard_backspace_24"
+            android:backgroundTint="@color/black" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title_languages_fragment"
             style="@style/bar_top_information"
             android:text="@string/title_languages_fragment" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <View
+                android:id="@+id/tv_botton_trush_languages_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_delete_24"
+                android:backgroundTint="@color/rojo_candidatura"
+                android:visibility="gone"/>
+            <View
+                android:id="@+id/tv_botton_save_languages_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_save_24"
+                android:backgroundTint="@color/azul_candidatura"
+                android:visibility="gone"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/cl_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llc_toolbar_languages_detail_fragment">
+
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/acs_language_languages_detail_fragment"
+        style="@style/SpinnerStyle"/>
+
+
+    <androidx.appcompat.widget.AppCompatSpinner
+        android:id="@+id/acs_experience_langauges_detail_fragment"
+        style="@style/SpinnerStyle" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Button
+        android:id="@+id/btn_create_languages_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="@string/add_bottom"
+        android:textColor="@color/white"
+        android:layout_margin="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <ProgressBar
+        android:id="@+id/pb_languages_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
