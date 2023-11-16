@@ -304,6 +304,21 @@ class CurriculumFragment: Fragment() {
 
             val intent = Intent(context, ExperienceJobsUserDetailActivity::class.java)
             intent.putExtra("idExperienceJob", experience.idExperienceJobUser.toInt())
+            intent.putExtra("idCompany", experience.idCompany.toInt())
+            intent.putExtra("idLevelJob", experience.level.toInt())
+            intent.putExtra("idCategory", experience.idCategory.toInt())
+            intent.putExtra("idFragment", 1) // 1 -> Modificar
+            startActivity(intent)
+        }
+
+        binding.vInsertExperienceCurriculumFragment.setOnClickListener {
+
+            val intent = Intent(context, ExperienceJobsUserDetailActivity::class.java)
+            intent.putExtra("idExperienceJob", 1)
+            intent.putExtra("idCompany", 1)
+            intent.putExtra("idLevelJob", 1)
+            intent.putExtra("idCategory", 1)
+            intent.putExtra("idFragment", 2) // 2 -> Crear
             startActivity(intent)
         }
 
@@ -330,14 +345,17 @@ class CurriculumFragment: Fragment() {
 
             val intent = Intent(context, ProfessionalProyectsDetailActivity::class.java)
             intent.putExtra("idProfessionalProyects", professionalProyects.idProfessionalProyects.toInt())
+            intent.putExtra("idFragment", 1) // 1 -> Modificar
             startActivity(intent)
         }
 
+        binding.vInsertProfessionalProyectsCurriculumFragment.setOnClickListener {
 
-
-
-
-
+            val intent = Intent(context, ProfessionalProyectsDetailActivity::class.java)
+            intent.putExtra("idProfessionalProyects", 1)
+            intent.putExtra("idFragment", 2) // 2 -> Crear
+            startActivity(intent)
+        }
     }
 
     private fun handleSuccessFailed() {
@@ -366,5 +384,4 @@ class CurriculumFragment: Fragment() {
             .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
             .show()
     }
-
 }

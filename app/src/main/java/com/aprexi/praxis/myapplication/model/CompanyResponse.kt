@@ -24,7 +24,7 @@ data class Company (
 )
 
 data class ListBasicCompany (
-    val company: List<BasicCompany>,
+    val basicCompany: List<BasicCompany>,
     val success: Boolean,
     val idError: String? = null,
     val messageError: String? = null

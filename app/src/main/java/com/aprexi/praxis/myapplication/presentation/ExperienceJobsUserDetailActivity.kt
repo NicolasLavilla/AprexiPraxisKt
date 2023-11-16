@@ -17,10 +17,18 @@ class ExperienceJobsUserDetailActivity : AppCompatActivity() {
         // Pasar argumentos al destino inicial
         // Verifica si se pasan los parámetros a través del Intent
         val idExperienceJob = intent.getIntExtra("idExperienceJob", 0)
+        val idCompany = intent.getIntExtra("idCompany", 0)
+        val idLevelJob = intent.getIntExtra("idLevelJob", 0)
+        val idCategory = intent.getIntExtra("idCategory", 0)
+        val idFragment = intent.getIntExtra("idFragment", 2)
 
         // Configura los argumentos para el fragmento
         val args = Bundle()
         args.putInt("idExperienceJob", idExperienceJob)
+        args.putInt("idCompany", idCompany)
+        args.putInt("idLevelJob", idLevelJob)
+        args.putInt("idCategory", idCategory)
+        args.putInt("idFragment", idFragment)
 
         navController.setGraph(R.navigation.experience_job_detail_navigation, args)
     }

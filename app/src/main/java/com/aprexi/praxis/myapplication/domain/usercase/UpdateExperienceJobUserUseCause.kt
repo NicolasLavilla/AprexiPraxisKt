@@ -1,10 +1,7 @@
 package com.aprexi.praxis.myapplication.domain.usercase
 
 import com.aprexi.praxis.myapplication.domain.ExperienceJobRepository
-import com.aprexi.praxis.myapplication.domain.StudiesRepository
 import com.aprexi.praxis.myapplication.model.UpdateExperienceJobUser
-import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
-import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 
 class UpdateExperienceJobUserUseCause(
     private val experienceJobRepository: ExperienceJobRepository
@@ -18,7 +15,7 @@ class UpdateExperienceJobUserUseCause(
         descriptionJob: String,
         idCompany: Int,
         initDate: String,
-        endDate: String,
+        endDate: String?,
         idExperienceJobUser: Int,
         token: String
     ): UpdateExperienceJobUser {

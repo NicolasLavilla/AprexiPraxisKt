@@ -5,13 +5,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/tie_title_profesional_proyects_detail_fragment"
         style="@style/toolbar_activities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <View
-            android:id="@+id/v_back_bottom_company"
+            android:id="@+id/v_back_bottom_professional_proyects"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
@@ -23,6 +24,120 @@
             style="@style/bar_top_information"
             android:text="@string/title_professional_proyects_fragment" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <View
+                android:id="@+id/tv_botton_trush_professional_proyects_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_delete_24"
+                android:backgroundTint="@color/rojo_candidatura"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/tv_botton_save_professional_proyects_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_save_24"
+                android:backgroundTint="@color/azul_candidatura"
+                android:visibility="gone" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/cl_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tie_title_profesional_proyects_detail_fragment">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_name_title_job_professional_proyect_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:hint="@string/title_experience_job" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_description_job_professional_proyects_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:layout_height="wrap_content"
+                android:maxLines="20"
+                android:hint="@string/description_experience_job"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_web_professional_proyect_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:hint="@string/web_site_optional" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_job_professional_proyect_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:hint="@string/job_company" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tie_init_date_professional_proyect_detail_fragment"
+            style="@style/SpinnerStyle"
+            android:hint="@string/date_init" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tie_end_Date_professional_proyect_detail_fragment"
+            style="@style/SpinnerStyle"
+            android:hint="@string/end_date" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Button
+        android:id="@+id/btn_create_professional_proyects_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:text="@string/add_bottom"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_professional_proyects_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

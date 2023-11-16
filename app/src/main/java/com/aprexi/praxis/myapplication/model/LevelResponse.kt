@@ -9,5 +9,8 @@ data class ListLevelJob (
 
 data class LevelJob (
     val idLevelJob: Long,
-    val nameLevelJob: String
+    val nameLevelJob: String,
+    val success: Boolean,
+    val idError: String?,
+    val messageError: String?
 )

@@ -82,11 +82,15 @@
     <string name="title_languages_fragment">Idiomas</string>
     <string name="title_user_data_fragment">Datos de Usuario</string>
     <string name="title_experience_job_detail_fragment">Experiencia Laboral</string>
-    <string name="title_professional_proyects_fragment">Proyectos Profesionales</string>
+    <string name="title_professional_proyects_fragment">Proyectos</string>
     <string name="save_bottom">GUARDAR</string>
     <string name="add_bottom">CREAR</string>
     <string name="date_init">Fecha Inicio</string>
     <string name="end_date">Fecha Fin</string>
+    <string name="title_experience_job">Titulo del trabajo</string>
+    <string name="description_experience_job">Descripción del puesto de trabajo</string>
+    <string name="web_site_optional">Página Web (Opcional)</string>
+    <string name="job_company">Cargo (Gerente, Diseñador…) Opcional</string>
 
 
 </resources>

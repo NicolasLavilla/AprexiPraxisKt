@@ -13,6 +13,18 @@
         <argument
             android:name="idExperienceJob"
             app:argType="integer" />
+        <argument
+            android:name="idCompany"
+            app:argType="integer" />
+        <argument
+            android:name="idLevelJob"
+            app:argType="integer" />
+        <argument
+            android:name="idCategory"
+            app:argType="integer" />
+        <argument
+            android:name="idFragment"
+            app:argType="integer" />
 
     </fragment>
 </navigation>

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/llc_toolbar_experience_job_detail_fragment"
         style="@style/toolbar_activities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,6 +24,112 @@
             style="@style/bar_top_information"
             android:text="@string/title_experience_job_detail_fragment" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <View
+                android:id="@+id/tv_botton_trush_experience_job_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_delete_24"
+                android:backgroundTint="@color/rojo_candidatura"
+                android:visibility="gone" />
+
+            <View
+                android:id="@+id/tv_botton_save_experience_job_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_save_24"
+                android:backgroundTint="@color/azul_candidatura"
+                android:visibility="gone" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/cl_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:padding="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/llc_toolbar_experience_job_detail_fragment">
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_name_job_experience_job_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:hint="@string/title_experience_job" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/acs_level_job_experience_job_detail_fragment"
+            style="@style/SpinnerStyle" />
+
+        <androidx.appcompat.widget.AppCompatSpinner
+            android:id="@+id/acs_category_experience_job_detail_fragment"
+            style="@style/SpinnerStyle" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tie_description_job_experience_job_detail_fragment"
+                style="@style/SpinnerStyle"
+                android:layout_height="wrap_content"
+                android:maxLines="20"
+                android:hint="@string/description_experience_job"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/actv_company_experience_job_detail_fragment"
+            style="@style/SpinnerStyle"/>
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tie_init_date_experience_job_detail_fragment"
+            style="@style/SpinnerStyle"
+            android:hint="@string/date_init" />
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tie_end_Date_experience_job_detail_fragment"
+            style="@style/SpinnerStyle"
+            android:hint="@string/end_date" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <Button
+        android:id="@+id/btn_create_experience_job_detail_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_margin="20dp"
+        android:text="@string/add_bottom"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/pb_experience_job_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

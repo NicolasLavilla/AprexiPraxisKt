@@ -17,12 +17,12 @@ class ProfessionalProyectsDetailActivity : AppCompatActivity() {
         // Pasar argumentos al destino inicial
         // Verifica si se pasan los parámetros a través del Intent
         val idProfessionalProyects = intent.getIntExtra("idProfessionalProyects", 0)
-        //val idOffer = intent.getIntExtra("idOffer", 0)
+        val idFragment = intent.getIntExtra("idFragment", 0)
 
         // Configura los argumentos para el fragmento
         val args = Bundle()
         args.putInt("idProfessionalProyects", idProfessionalProyects)
-        //args.putInt("idOffer", idOffer)
+        args.putInt("idFragment", idFragment)
 
         navController.setGraph(R.navigation.professional_proyects_detail_navigation, args)
     }

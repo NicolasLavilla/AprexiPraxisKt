@@ -6,8 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.InsertProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.model.DeleteProfessionalProyectsUser
+import com.aprexi.praxis.myapplication.model.InsertProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
@@ -18,18 +20,24 @@ import kotlinx.coroutines.withContext
 typealias DeleteProfessionalProyectUserState = ResourceState<DeleteProfessionalProyectsUser>
 typealias UpdateProfessionalProyectUserState = ResourceState<UpdateProfessionalProyectsUser>
 typealias ProfessionalProyectsUserState = ResourceState<ProfessionalProyectsUser>
+typealias InsertProfessionalProyectsUserState = ResourceState<InsertProfessionalProyectsUser>
 
 class DetailProfessionalProyectsViewModel(
     private val deleteProfessionalProyectsUserUseCause: DeleteProfessionalProyectUserUseCause,
     private val updateProfessionalProyectsUserUseCause: UpdateProfessionalProyectUserUseCause,
-    private val getProfessionalProyectsUserUseCause: GetProfessionalProyectsUserUseCause
+    private val getProfessionalProyectsUserUseCause: GetProfessionalProyectsUserUseCause,
+    private val insertProfessionalProyectsUserCase: InsertProfessionalProyectUserUseCause
 ) : ViewModel() {
     private val _deleteProfessionalProyectUserLiveData =
         MutableLiveData<DeleteProfessionalProyectUserState>()
     private val _updateProfessionalProyectUserLiveData =
         MutableLiveData<UpdateProfessionalProyectUserState>()
     private val _professionalProyectsUserLiveData = MutableLiveData<ProfessionalProyectsUserState>()
+    private val _insertProyectsUserLiveData = MutableLiveData<InsertProfessionalProyectsUserState>()
 
+    fun insertProfessionalProyectLiveData(): LiveData<InsertProfessionalProyectsUserState> {
+        return _insertProyectsUserLiveData
+    }
     fun deleteProfessionalProyectLiveData(): LiveData<DeleteProfessionalProyectUserState> {
         return _deleteProfessionalProyectUserLiveData
     }
@@ -40,6 +48,51 @@ class DetailProfessionalProyectsViewModel(
 
     fun professionalProyectsUserLiveData(): LiveData<ProfessionalProyectsUserState> {
         return _professionalProyectsUserLiveData
+    }
+
+    fun insertProfessionalProyectUser(
+        idUser: Int,
+        nameProyect: String,
+        descriptionProyect: String,
+        websites: String,
+        job: String,
+        initDate: String,
+        endDate: String,
+        idProfessionalProyectUser: Int,
+        token: String
+    ) {
+        _insertProyectsUserLiveData.value = ResourceState.Loading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val insertProfessionalProyectUser = insertProfessionalProyectsUserCase.execute(
+                    idUser = idUser,
+                    nameProyect = nameProyect,
+                    descriptionProyect = descriptionProyect,
+                    websites = websites,
+                    job = job,
+                    initDate = initDate,
+                    endDate = endDate,
+                    idProfessionalProyectUser = idProfessionalProyectUser,
+                    token = token
+                )
+
+                withContext(Dispatchers.Main) {
+                    if (insertProfessionalProyectUser.success) {
+                        _insertProyectsUserLiveData.value =
+                            ResourceState.Success(insertProfessionalProyectUser)
+                    } else {
+                        _insertProyectsUserLiveData.value =
+                            ResourceState.SuccessFaild(insertProfessionalProyectUser)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _insertProyectsUserLiveData.value =
+                        ResourceState.Error(e.localizedMessage.orEmpty())
+                }
+            }
+        }
     }
 
     fun updateProfessionalProyectUser(

@@ -29,7 +29,7 @@ interface ExperienceJobRepository {
         descriptionJob: String,
         idCompany: Int,
         initDate: String,
-        endDate: String,
+        endDate: String?,
         idExperienceJobUser: Int,
         token: String
     ): UpdateExperienceJobUser

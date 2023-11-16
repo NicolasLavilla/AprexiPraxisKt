@@ -199,7 +199,7 @@ interface AprexiPraxisService {
         @Query("token") token: String
     ): ProfessionalProyectsUser
 
-    @DELETE("DeleteProfessionalProyectsUser.php")
+    @DELETE("DeleteProfessionalProyectUser.php")
     suspend fun deleteProfessionalProyectsJobUser(
         @Query("idUser") idUser: Int,
         @Query("idProfessionalProyectUser") idProfessionalProyectUser: Int,
@@ -237,7 +237,7 @@ interface AprexiPraxisService {
         @Query("descriptionJob") descriptionJob: String,
         @Query("idCompany") idCompany: Int,
         @Query("initDate") initDate: String,
-        @Query("endDate") endDate: String,
+        @Query("endDate") endDate: String?,
         @Query("idExperienceJobUser") idExperienceJobUser: Int,
         @Query("token") token: String
     ): UpdateExperienceJobUser

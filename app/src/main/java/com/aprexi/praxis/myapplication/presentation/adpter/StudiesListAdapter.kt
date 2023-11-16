@@ -33,7 +33,7 @@ class StudiesListAdapter: RecyclerView.Adapter<StudiesListAdapter.StudiesListVie
             if (item.startYear.isNotEmpty()) {
                 append(item.startYear)
             }
-            if (item.startYear.isNotEmpty()) {
+            if (item.endYear.isNotEmpty()) {
                 append(" - ")
                 append(item.endYear)
             }

@@ -264,8 +264,8 @@ val praxisModule = module {
     viewModel{CompanyViewModel(get())}
     viewModel{DetailStudiesViewModel(get(),get(),get(),get(),get(),get(),get(),get()) }
     viewModel{DetailLanguagesViewModel(get(),get(),get(),get(),get(),get()) }
-    viewModel{DetailProfessionalProyectsViewModel(get(),get(),get()) }
-    viewModel{DetailExperienceJobViewModel(get(),get(),get()) }
+    viewModel{DetailProfessionalProyectsViewModel(get(),get(),get(),get()) }
+    viewModel{DetailExperienceJobViewModel(get(),get(),get() ,get() ,get() ,get(),get()) }
     viewModel{DetailUserViewModel(get(),get()) }
 
 }

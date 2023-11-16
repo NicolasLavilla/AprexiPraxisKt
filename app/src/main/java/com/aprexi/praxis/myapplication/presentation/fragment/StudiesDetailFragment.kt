@@ -452,8 +452,6 @@ class StudiesDetailFragment : Fragment() {
     private fun handleSuccessListNameStudies(nameStudies: ListNameStudies) {
         showProgressBar(false)
 
-
-
         val adapter = NameStudiesAdapter(
             requireContext(),
             android.R.layout.simple_spinner_dropdown_item,
@@ -519,12 +517,6 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun initUI(studies: StudiesUser) {
-
-        Toast.makeText(
-            requireContext(),
-            "idFragment: " + args.idFragment + "  idStudies: " + args.idStudies,
-            Toast.LENGTH_SHORT
-        ).show()
 
         binding.tieDateInitStudiesDetailFragment.text = args.startYear
 
@@ -691,9 +683,9 @@ class StudiesDetailFragment : Fragment() {
 
     private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle(com.aprexi.praxis.myapplication.R.string.error)
+            .setTitle(R.string.error)
             .setMessage(error)
-            .setPositiveButton(com.aprexi.praxis.myapplication.R.string.action_ok) { _, _ -> action?.invoke() }
+            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
             .show()
     }
 
