@@ -13,7 +13,7 @@ interface UserRepository {
         surname2: String,
         gender: Int,
         mobile: Int,
-        email: String,
+        //email: String,
         dni: String,
         nie: String,
         passport: String,

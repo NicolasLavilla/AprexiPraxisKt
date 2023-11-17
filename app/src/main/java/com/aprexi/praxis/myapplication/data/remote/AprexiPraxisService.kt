@@ -16,6 +16,7 @@ import com.aprexi.praxis.myapplication.model.InsertStudiesUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
 import com.aprexi.praxis.myapplication.model.ListBasicCompany
 import com.aprexi.praxis.myapplication.model.ListBasicLanguages
+import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
 import com.aprexi.praxis.myapplication.model.ListCategory
 import com.aprexi.praxis.myapplication.model.ListDetailRequestOffer
 import com.aprexi.praxis.myapplication.model.ListExperience
@@ -214,7 +215,7 @@ interface AprexiPraxisService {
         @Query("surname2") surname2: String,
         @Query("gender") gender: Int,
         @Query("mobile") mobile: Int,
-        @Query("email") email: String,
+        //@Query("email") email: String,
         @Query("dni") dni: String,
         @Query("nie") nie: String,
         @Query("passport") passport: String,
@@ -345,7 +346,7 @@ interface AprexiPraxisService {
     ): ListNameStudies
 
     @GET("ListCompany.php")
-    suspend fun getListCompany(
+    suspend fun getListBasicCompany(
         @Query("token") token: String
     ): ListBasicCompany
 
@@ -373,6 +374,11 @@ interface AprexiPraxisService {
     suspend fun getListLicenses(
         @Query("token") token: String
     ): ListLicense
+
+    @GET("ListMunicipality.php")
+    suspend fun getListBasicMunicipality(
+        @Query("token") token: String
+    ): ListBasicMunicipality
 
 
 }

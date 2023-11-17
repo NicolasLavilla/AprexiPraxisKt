@@ -6,10 +6,10 @@ import com.aprexi.praxis.myapplication.model.ListBasicCompany
 class CompanyLocalImpl (
     private val memoryCache: MemoryCache
 ) {
-    fun getListCompany(): ListBasicCompany?{
+    fun getListBasicCompany(): ListBasicCompany?{
         return memoryCache.listCompany
     }
-    fun saveListCompany(listCompany: ListBasicCompany){
+    fun saveListBasicCompany(listCompany: ListBasicCompany){
         memoryCache.listCompany = listCompany
     }
 

@@ -1,6 +1,5 @@
 package com.aprexi.praxis.myapplication.model
 
-
 data class User (
     val idUser: Long,
     val name: String,
@@ -11,8 +10,8 @@ data class User (
     val mobile: Long,
     val email: String,
     val dni: String,
-    val nie: String? = null,
-    val passport: String? = null,
+    val nie: String,
+    val passport: String,
     val birthDate: String,
     val address: String,
     val idMunicipality: Long,

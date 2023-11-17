@@ -3,7 +3,6 @@ package com.aprexi.praxis.myapplication.data.user
 import com.aprexi.praxis.myapplication.data.user.local.UserLocalImpl
 import com.aprexi.praxis.myapplication.data.user.remote.UserRemoteImpl
 import com.aprexi.praxis.myapplication.domain.UserRepository
-import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
 import com.aprexi.praxis.myapplication.model.UpdateUser
 import com.aprexi.praxis.myapplication.model.User
 
@@ -32,7 +31,7 @@ class UserDataImpl(
         surname2: String,
         gender: Int,
         mobile: Int,
-        email: String,
+        //email: String,
         dni: String,
         nie: String,
         passport: String,
@@ -53,7 +52,7 @@ class UserDataImpl(
             surname2 = surname2,
             gender = gender,
             mobile = mobile,
-            email = email,
+            //email = email,
             dni = dni,
             nie = nie,
             passport = passport,

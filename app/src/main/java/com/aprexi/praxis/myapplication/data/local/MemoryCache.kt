@@ -2,6 +2,7 @@ package com.aprexi.praxis.myapplication.data.local
 
 import com.aprexi.praxis.myapplication.model.ListBasicCompany
 import com.aprexi.praxis.myapplication.model.ListBasicLanguages
+import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
 import com.aprexi.praxis.myapplication.model.ListCategory
 import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
@@ -34,6 +35,7 @@ class MemoryCache {
     var experience: ListExperience? = null
     var languagesBasic: ListBasicLanguages? = null
     var license: ListLicense? = null
+    var listMunicipality: ListBasicMunicipality? = null
 
     fun clearAll() {
         offerList = null
@@ -52,6 +54,7 @@ class MemoryCache {
         experience = null
         languagesBasic = null
         license = null
+        listMunicipality = null
     }
 
 }

@@ -1,7 +1,6 @@
 package com.aprexi.praxis.myapplication.data.user.remote
 
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
-import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
 import com.aprexi.praxis.myapplication.model.UpdateUser
 import com.aprexi.praxis.myapplication.model.User
 
@@ -19,7 +18,7 @@ class UserRemoteImpl(
         surname2: String,
         gender: Int,
         mobile: Int,
-        email: String,
+        //email: String,
         dni: String,
         nie: String,
         passport: String,
@@ -40,7 +39,7 @@ class UserRemoteImpl(
             surname2 = surname2,
             gender = gender,
             mobile = mobile,
-            email = email,
+            //email = email,
             dni = dni,
             nie = nie,
             passport = passport,

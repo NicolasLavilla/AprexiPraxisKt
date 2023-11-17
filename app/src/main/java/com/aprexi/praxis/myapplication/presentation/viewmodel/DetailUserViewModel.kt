@@ -4,8 +4,10 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.aprexi.praxis.myapplication.domain.usercase.GetListBasicMunicipalityUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetUserDataUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateUserUseCause
+import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.UpdateUser
 import kotlinx.coroutines.Dispatchers
@@ -14,14 +16,16 @@ import kotlinx.coroutines.withContext
 
 
 typealias UpdateUserState = ResourceState<UpdateUser>
-
+typealias ListBasicMunicipalityState = ResourceState<ListBasicMunicipality>
 
 class DetailUserViewModel(
     private val updateUserUseCause: UpdateUserUseCause,
-    private val getUserDataUseCase: GetUserDataUseCase
+    private val getUserDataUseCase: GetUserDataUseCase,
+    private val getListBasicMunicipalityUseCause: GetListBasicMunicipalityUseCause,
 ) : ViewModel() {
     private val _updateUserLiveData = MutableLiveData<UpdateUserState>()
     private val _userDataLiveData = MutableLiveData<UserState>()
+    private val _getListBasicMunicipalityDataLiveData = MutableLiveData<ListBasicMunicipalityState>()
 
     fun updateUserLiveData(): LiveData<UpdateUserState> {
         return _updateUserLiveData
@@ -31,13 +35,44 @@ class DetailUserViewModel(
         return _userDataLiveData
     }
 
+    fun getListBasicMunicipalityLiveData(): LiveData<ListBasicMunicipalityState> {
+        return _getListBasicMunicipalityDataLiveData
+    }
+
+    fun getListBasicMunicipality(token: String) {
+        _getListBasicMunicipalityDataLiveData.value = ResourceState.Loading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val listBasicMunicipality = getListBasicMunicipalityUseCause.execute(
+                    token = token
+                )
+
+                withContext(Dispatchers.Main) {
+                    if (listBasicMunicipality.success) {
+                        _getListBasicMunicipalityDataLiveData.value =
+                            ResourceState.Success(listBasicMunicipality)
+                    } else {
+                        _getListBasicMunicipalityDataLiveData.value =
+                            ResourceState.SuccessFaild(listBasicMunicipality)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _getListBasicMunicipalityDataLiveData.value =
+                        ResourceState.Error(e.localizedMessage.orEmpty())
+                }
+            }
+        }
+    }
+
     fun updateUser(
         name: String,
         surname1: String,
         surname2: String,
         gender: Int,
         mobile: Int,
-        email: String,
+        //email: String,
         dni: String,
         nie: String,
         passport: String,
@@ -62,7 +97,7 @@ class DetailUserViewModel(
                     surname2 = surname2,
                     gender = gender,
                     mobile = mobile,
-                    email = email,
+                    //email = email,
                     dni = dni,
                     nie = nie,
                     passport = passport,

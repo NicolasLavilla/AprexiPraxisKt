@@ -18,20 +18,20 @@ class CompanyDataImpl(
         token: String
     ): ListBasicCompany {
 
-        val cachedStudiesList = companyLocalImpl.getListCompany()
+        val cachedStudiesList = companyLocalImpl.getListBasicCompany()
 
         if (cachedStudiesList != null) {
             return cachedStudiesList
         } else {
             val resultListCompany: ListBasicCompany =
-                companyRemoteImpl.getListCompany(token = token)
+                companyRemoteImpl.getListBasicCompany(token = token)
             saveListCompany(resultListCompany)
             return resultListCompany
         }
     }
 
-    fun saveListCompany(listCompany: ListBasicCompany) {
-        companyLocalImpl.saveListCompany(listCompany)
+    private fun saveListCompany(listCompany: ListBasicCompany) {
+        companyLocalImpl.saveListBasicCompany(listCompany)
     }
 
 }

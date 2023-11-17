@@ -11,8 +11,8 @@ private val aprexiPraxisService: AprexiPraxisService
         return aprexiPraxisService.getCompany(idUser = idUser, idCompany = idCompany, token = token)
     }
 
-    suspend fun getListCompany( token: String): ListBasicCompany {
-        return aprexiPraxisService.getListCompany(token = token)
+    suspend fun getListBasicCompany(token: String): ListBasicCompany {
+        return aprexiPraxisService.getListBasicCompany(token = token)
     }
 
 }

@@ -27,6 +27,9 @@ import com.aprexi.praxis.myapplication.data.login.LoginDataImpl
 import com.aprexi.praxis.myapplication.data.token.TokenDataImpl
 import com.aprexi.praxis.myapplication.data.offer.local.OfferLocalImpl
 import com.aprexi.praxis.myapplication.data.login.local.LoginLocalImpl
+import com.aprexi.praxis.myapplication.data.municipality.MunicipalityDataImpl
+import com.aprexi.praxis.myapplication.data.municipality.local.MunicipalityLocalImpl
+import com.aprexi.praxis.myapplication.data.municipality.remote.MunicipalityRemoteImpl
 import com.aprexi.praxis.myapplication.data.offer.local.TokenLocalImpl
 import com.aprexi.praxis.myapplication.data.offer.remote.OfferRemoteImpl
 import com.aprexi.praxis.myapplication.data.offer.remote.LoginRemoteImpl
@@ -59,6 +62,7 @@ import com.aprexi.praxis.myapplication.domain.LanguagesRepository
 import com.aprexi.praxis.myapplication.domain.LevelRepository
 import com.aprexi.praxis.myapplication.domain.LicenseRepository
 import com.aprexi.praxis.myapplication.domain.LoginRepository
+import com.aprexi.praxis.myapplication.domain.MunicipalityRepository
 import com.aprexi.praxis.myapplication.domain.OfferRepository
 import com.aprexi.praxis.myapplication.domain.ProfessionalFamiliesRepository
 import com.aprexi.praxis.myapplication.domain.ProfessionalProyectsRepository
@@ -89,6 +93,7 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserUseCa
 import com.aprexi.praxis.myapplication.domain.usercase.GetFollowOffersUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListBasicMunicipalityUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListCategoryUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListExperienceUseCause
@@ -203,7 +208,12 @@ val praxisModule = module {
     factory { SchoolRemoteImpl(get()) }
     factory<SchoolRepository> { SchoolDataImpl(get(),get()) }
 
+    factory { MunicipalityLocalImpl(get()) }
+    factory { MunicipalityRemoteImpl(get()) }
+    factory<MunicipalityRepository> { MunicipalityDataImpl(get(),get()) }
 
+
+    factory { GetListBasicMunicipalityUseCause(get())}
     factory { GetListCategoryUseCause(get())}
     factory { GetListCompanyUseCause(get())}
     factory { GetListExperienceUseCause(get())}
@@ -266,6 +276,6 @@ val praxisModule = module {
     viewModel{DetailLanguagesViewModel(get(),get(),get(),get(),get(),get()) }
     viewModel{DetailProfessionalProyectsViewModel(get(),get(),get(),get()) }
     viewModel{DetailExperienceJobViewModel(get(),get(),get() ,get() ,get() ,get(),get()) }
-    viewModel{DetailUserViewModel(get(),get()) }
+    viewModel{DetailUserViewModel(get(),get(), get()) }
 
 }
