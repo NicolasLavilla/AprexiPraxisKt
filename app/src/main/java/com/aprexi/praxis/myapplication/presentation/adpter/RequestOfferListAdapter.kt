@@ -6,16 +6,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.RowOfferRequestListItemBinding
-import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.RequestOffer
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
-class RequestOfferListAdapter: RecyclerView.Adapter<RequestOfferListAdapter.RequestOfferListViewHolder>() {
+class RequestOfferListAdapter(
+    private val myUtils: Utils
+): RecyclerView.Adapter<RequestOfferListAdapter.RequestOfferListViewHolder>() {
 
     private var requestOfferList: List<RequestOffer> = emptyList()
+
 
     var onClickListener: (RequestOffer) -> Unit = {}
 
@@ -35,7 +35,7 @@ class RequestOfferListAdapter: RecyclerView.Adapter<RequestOfferListAdapter.Requ
         holder.title.text = item.offerTitle
         holder.nameCompany.text = item.nameCompany
         holder.nameState.text = item.nameState
-        holder.time.text = calculateElapsedTime(item.datePublication.toString())
+        holder.time.text = myUtils.calculateElapsedTime(item.datePublication)
         holder.circleState.setBackgroundResource(colorState(item.stateRequest.toInt()))
 
         if (!item.logoCompany.isNullOrEmpty()) {
@@ -81,24 +81,5 @@ class RequestOfferListAdapter: RecyclerView.Adapter<RequestOfferListAdapter.Requ
     fun submitList(list: List<RequestOffer>) {
         requestOfferList = list
         notifyDataSetChanged()
-    }
-
-    private fun calculateElapsedTime(datePublication: String): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val dateCreated = dateFormat.parse(datePublication)
-
-        val timeDifferenceMillis = currentDate.time - dateCreated.time
-        val seconds = timeDifferenceMillis / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val days = hours / 24
-
-        return when {
-            days > 0 -> "Hace $days días"
-            hours > 0 -> "Hace $hours horas"
-            minutes > 0 -> "Hace $minutes minutos"
-            else -> "Hace $seconds segundos"
-        }
     }
 }

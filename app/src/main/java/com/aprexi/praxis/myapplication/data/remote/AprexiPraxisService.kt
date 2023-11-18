@@ -1,5 +1,6 @@
 package com.aprexi.praxis.myapplication.data.remote
 
+import com.aprexi.praxis.myapplication.model.CheckEmail
 import com.aprexi.praxis.myapplication.model.CheckToken
 import com.aprexi.praxis.myapplication.model.Company
 import com.aprexi.praxis.myapplication.model.DeleteExperienceJobUser
@@ -13,6 +14,7 @@ import com.aprexi.praxis.myapplication.model.InsertExperienceJobUser
 import com.aprexi.praxis.myapplication.model.InsertLanguagesUser
 import com.aprexi.praxis.myapplication.model.InsertProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
+import com.aprexi.praxis.myapplication.model.InsertUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
 import com.aprexi.praxis.myapplication.model.ListBasicCompany
 import com.aprexi.praxis.myapplication.model.ListBasicLanguages
@@ -66,6 +68,9 @@ interface AprexiPraxisService {
 
     @GET("CheckToken.php")
     suspend fun getCheckToken(@Query("token") token: String): CheckToken
+
+    @GET("CheckEmail.php")
+    suspend fun getCheckEmail(@Query("email") email: String): CheckEmail
 
     @GET("LoginUser.php")
     suspend fun getLogin(@Query("email") email: String, @Query("password") password: String): Login
@@ -376,9 +381,27 @@ interface AprexiPraxisService {
     ): ListLicense
 
     @GET("ListMunicipality.php")
-    suspend fun getListBasicMunicipality(
-        @Query("token") token: String
-    ): ListBasicMunicipality
+    suspend fun getListBasicMunicipality(): ListBasicMunicipality
 
+    @POST("InsertUser.php")
+    suspend fun insertUser(
+        @Query("name") name: String,
+        @Query("surname1") surname1: String,
+        @Query("surname2") surname2: String,
+        @Query("gender") gender: Int,
+        @Query("mobile") mobile: Int,
+        @Query("email") email: String,
+        @Query("password") password: String,
+        @Query("dni") dni: String,
+        @Query("nie") nie: String,
+        @Query("passport") passport: String,
+        @Query("birthDate") birthDate: String,
+        @Query("address") address: String,
+        @Query("municipality") municipality: Int,
+        @Query("description") description: String,
+        @Query("workPermit") workPermit: Int,
+        @Query("autonomousDischarge") autonomousDischarge: Int,
+        @Query("ownVehicle") ownVehicle: Int
+    ): InsertUser
 
 }

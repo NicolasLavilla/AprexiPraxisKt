@@ -40,10 +40,11 @@ data class UpdateUser (
     val messageError: String? = null
 )
 
-data class RegisterUser (
+
+data class InsertUser (
     val success: Boolean,
-    val idError: String? = null,
-    val messageError: String? = null
+    val idError: Any? = null,
+    val messageError: Any? = null
 )
 
 data class CheckEmail (

@@ -5,10 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentCurriculumBinding
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
@@ -19,13 +19,13 @@ import com.aprexi.praxis.myapplication.model.User
 import com.aprexi.praxis.myapplication.presentation.ExperienceJobsUserDetailActivity
 import com.aprexi.praxis.myapplication.presentation.LanguagesDetailActivity
 import com.aprexi.praxis.myapplication.presentation.ProfessionalProyectsDetailActivity
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
 import com.aprexi.praxis.myapplication.presentation.StudiesDetailActivity
 import com.aprexi.praxis.myapplication.presentation.UserDataDetailActivity
 import com.aprexi.praxis.myapplication.presentation.adpter.ExperienceJobListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.LanguagesListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.ProfessionalProyectsListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.StudiesListAdapter
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.ExperienceJobListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LanguagesUserListState
@@ -35,20 +35,19 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UserState
 import com.bumptech.glide.Glide
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class CurriculumFragment: Fragment() {
 
-    private val binding: FragmentCurriculumBinding by lazy {
-        FragmentCurriculumBinding.inflate(layoutInflater)
-    }
-
-    private val studiesListAdapter = StudiesListAdapter()
+    private lateinit var binding: FragmentCurriculumBinding
+    private lateinit var progressBar: ProgressBar
+    private val myUtils: Utils by inject()
+    private val studiesListAdapter = StudiesListAdapter(myUtils)
     private val languagesListAdapter = LanguagesListAdapter()
     private val professioanlProyectsListAdapter = ProfessionalProyectsListAdapter()
-    private val experienceJobListAdapter = ExperienceJobListAdapter()
+    private val experienceJobListAdapter = ExperienceJobListAdapter(myUtils)
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val curriculumViewModel: CurriculumViewModel by activityViewModel()
     private var loginToken: String = ""
@@ -66,16 +65,16 @@ class CurriculumFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentCurriculumBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = binding.pbCurriculumFragment
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
-
     }
 
     private fun getTokenLoginPreference(){
@@ -120,7 +119,7 @@ class CurriculumFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(requireContext() ,e.toString())
         }
     }
 
@@ -135,89 +134,89 @@ class CurriculumFragment: Fragment() {
 
     private fun handleUserState(state: UserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> { }
         }
     }
 
     private fun handleExperienceJobUserState(state: ExperienceJobListState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> { }
         }
     }
 
     private fun handleLanguagesUserState(state: LanguagesUserListState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> { }
         }
     }
 
     private fun handleProfessionalProyectsUserState(state: ProfessionalProyectsUserListState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> { }
         }
     }
 
     private fun handleStudiesUserState(state: StudiesUserListState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> { }
         }
     }
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
             else -> { }
         }
     }
 
     private fun handleSuccessOfferDetail(user: User) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         userData = user
         initUI()
     }
 
     private fun handleSuccessOfferDetail(experienceUser: ListExperienceJobUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         experienceJob = experienceUser
         experienceJobListAdapter.submitList(experienceUser.experienceJobUser)
     }
 
     private fun handleSuccessOfferDetail(professionalProUser: ListProfessionalProyectsUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         professionalProyects = professionalProUser
         professioanlProyectsListAdapter.submitList(professionalProUser.professionalProyectsUser)
     }
 
     private fun handleSuccessOfferDetail(languagesUser: ListLanguagesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         languages = languagesUser
         languagesListAdapter.submitList(languagesUser.languagesUser)
     }
 
     private fun handleSuccessOfferDetail(studiesUser: ListStudiesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         studies = studiesUser
         studiesListAdapter.submitList(studiesUser.studiesUser)
     }
@@ -262,7 +261,7 @@ class CurriculumFragment: Fragment() {
         binding.tvLocationUserCurriculumFragment.text = userData.nameCcaa
         binding.tvDescriptionUserCurriculumFragment.text = userData.description
         binding.tvCountryUserCurriculumFragment.text = userData.nameCountry
-        binding.tvDateBirthdayUserCurriculumFragment.text = userData.birthDate
+        binding.tvDateBirthdayUserCurriculumFragment.text = myUtils.changeDateFormatEUR(userData.birthDate)
 
 
         studiesListAdapter.onClickListener = { studies ->
@@ -359,29 +358,12 @@ class CurriculumFragment: Fragment() {
     }
 
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
     }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun showProgressBar(show: Boolean) {
-        binding.pbCurriculumFragment.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
+        myUtils.redirectToLogin(requireContext())
     }
 }

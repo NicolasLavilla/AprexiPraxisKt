@@ -1,8 +1,6 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
-import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -11,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
@@ -29,7 +28,7 @@ import com.aprexi.praxis.myapplication.model.ListCategory
 import com.aprexi.praxis.myapplication.model.ListLevelJob
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.UpdateExperienceJobUser
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CategoryState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CompanyBasicState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DeleteExperienceJobUserState
@@ -40,18 +39,15 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.LevelJobState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UpdateExperienceJobUserState
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class ExperienceJobsDetailFragment : Fragment() {
 
-    private val binding: FragmentExperienceJobDetailBinding by lazy {
-        FragmentExperienceJobDetailBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentExperienceJobDetailBinding
+    private lateinit var progressBar: ProgressBar
+    private val myUtils: Utils by inject()
 
     private var loginToken: String = ""
     private var succesToken: Boolean = false
@@ -61,24 +57,22 @@ class ExperienceJobsDetailFragment : Fragment() {
     private var idLevelJob: Int = 0
     private var idCategory: Int = 0
     private var idCompany: Int = 0
-    private val calendar = Calendar.getInstance()
+    private val args: ExperienceJobsDetailFragmentArgs by navArgs()
+    private val detailExperienceJobViewModel: DetailExperienceJobViewModel by activityViewModel()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        calendar.time = Calendar.getInstance().time
+        binding = FragmentExperienceJobDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private val args: ExperienceJobsDetailFragmentArgs by navArgs()
-    private val detailExperienceJobViewModel: DetailExperienceJobViewModel by activityViewModel()
-    private val tokenViewModel: TokenViewModel by activityViewModel()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = binding.pbExperienceJobDetail
         initArgs()
         getTokenLoginPreference()
         initViewModel()
@@ -119,7 +113,7 @@ class ExperienceJobsDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(context = requireContext(),e.toString())
         }
     }
 
@@ -152,106 +146,106 @@ class ExperienceJobsDetailFragment : Fragment() {
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
 
     private fun handleDeleteExperienceJobUserState(state: DeleteExperienceJobUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleUpdateExperienceJobUserState(state: UpdateExperienceJobUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleInsertExperienceUserState(state: InsertExpereienceJobUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleLevelJobUserState(state: LevelJobState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListLevel(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleCategoryUserState(state: CategoryState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListCategory(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleCompanyBasicState(state: CompanyBasicState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListNameCompany(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleExperienceJobUserState(state: ExperienceJobUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessExperienceJobUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleSuccessListCategory(categoryListSuccess: ListCategory) {
         desplegableListCategory(categoryListSuccess)
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
     }
 
     private fun handleSuccessListLevel(levelJobSuccess: ListLevelJob) {
         desplegableListLevel(levelJobSuccess)
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
     }
 
     private fun handleSuccessListNameCompany(companyListSuccess: ListBasicCompany) {
         desplegableListNameCompany(companyListSuccess)
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
     }
 
     private fun handleSuccessExperienceJobUser(experience: ExperienceJobUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         initUI(experience)
     }
 
     private fun initUI(varExperience: ExperienceJobUser) {
-        var initDate: String = varExperience.initDate
-        var endDate: String = varExperience.endDate
+        var initDate: String = myUtils.changeDateFormatEUR(varExperience.initDate)
+        var endDate: String = myUtils.changeDateFormatEUR(varExperience.endDate)
 
 
         binding.vBackBottomExperienceJob.setOnClickListener {
@@ -259,14 +253,14 @@ class ExperienceJobsDetailFragment : Fragment() {
         }
 
         binding.tieInitDateExperienceJobDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieInitDateExperienceJobDetailFragment.setText(selectedDate)
                 initDate = selectedDate
             }
         }
 
         binding.tieEndDateExperienceJobDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieEndDateExperienceJobDetailFragment.setText(selectedDate)
                 endDate = selectedDate
             }
@@ -300,10 +294,10 @@ class ExperienceJobsDetailFragment : Fragment() {
 
         binding.tvBottonSaveExperienceJobFragment.setOnClickListener {
             updateExperienceJobUser(
-                nameJobs = binding.tieNameJobExperienceJobDetailFragment.text.toString(),
+                nameJobs = myUtils.capitalizeFirstLetter(binding.tieNameJobExperienceJobDetailFragment.text.toString()),
                 idLevelJob = idLevelJob,
                 idCategory = idCategory,
-                descriptionJob = binding.tieDescriptionJobExperienceJobDetailFragment.text.toString(),
+                descriptionJob = myUtils.capitalizeFirstLetter(binding.tieDescriptionJobExperienceJobDetailFragment.text.toString()),
                 idCompany = idCompany,
                 initDate = initDate,
                 endDate = endDate
@@ -312,10 +306,10 @@ class ExperienceJobsDetailFragment : Fragment() {
 
         binding.btnCreateExperienceJobDetailFragment.setOnClickListener {
             createExperienceJobUser(
-                nameJobs = binding.tieNameJobExperienceJobDetailFragment.text.toString(),
+                nameJobs = myUtils.capitalizeFirstLetter(binding.tieNameJobExperienceJobDetailFragment.text.toString()),
                 idLevelJob = idLevelJob,
                 idCategory = idCategory,
-                descriptionJob = binding.tieDescriptionJobExperienceJobDetailFragment.text.toString(),
+                descriptionJob = myUtils.capitalizeFirstLetter(binding.tieDescriptionJobExperienceJobDetailFragment.text.toString()),
                 idCompany = idCompany,
                 initDate = initDate,
                 endDate = endDate
@@ -344,8 +338,8 @@ class ExperienceJobsDetailFragment : Fragment() {
                 idUser = idUser,
                 nameJobs = nameJobs,
                 level = idLevelJob,
-                initDate = initDate,
-                endDate = endDate,
+                initDate = myUtils.changeDateFormatEU(initDate),
+                endDate = myUtils.changeDateFormatEU(endDate),
                 category = idCategory,
                 descriptionJob = descriptionJob,
                 idCompany = idCompany,
@@ -402,8 +396,8 @@ class ExperienceJobsDetailFragment : Fragment() {
                 idUser = idUser,
                 nameJobs = nameJobs,
                 level = idLevelJob,
-                initDate = initDate,
-                endDate = endDate,
+                initDate = myUtils.changeDateFormatEU(initDate),
+                endDate = myUtils.changeDateFormatEU(endDate),
                 category = idCategory,
                 descriptionJob = descriptionJob,
                 idCompany = idCompany,
@@ -626,7 +620,7 @@ class ExperienceJobsDetailFragment : Fragment() {
     }
 
     private fun handleSuccessInsertStudies(studies: InsertExperienceJobUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -636,7 +630,7 @@ class ExperienceJobsDetailFragment : Fragment() {
     }
 
     private fun handleSuccessUpdateStudies(studies: UpdateExperienceJobUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -646,7 +640,7 @@ class ExperienceJobsDetailFragment : Fragment() {
     }
 
     private fun handleSuccessDeleteStudies(studies: DeleteExperienceJobUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -655,54 +649,13 @@ class ExperienceJobsDetailFragment : Fragment() {
         }
     }
 
-    private fun showProgressBar(show: Boolean) {
-        binding.pbExperienceJobDetail.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
     }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun showDatePicker(listener: (String) -> Unit) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(year, month, dayOfMonth)
-
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = sdf.format(selectedDate.time)
-
-                listener.invoke(formattedDate)
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
+        myUtils.redirectToLogin(requireContext())
     }
 }

@@ -1,7 +1,5 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
-import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,7 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
-import android.widget.Toast
+import android.widget.ProgressBar
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -20,46 +18,46 @@ import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.UpdateUser
 import com.aprexi.praxis.myapplication.model.User
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailUserViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.ListBasicMunicipalityState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UpdateUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UserState
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class UserDetailFragment : Fragment() {
 
-    private val binding: FragmentUserDetailBinding by lazy {
-        FragmentUserDetailBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentUserDetailBinding
+    private lateinit var progressBar: ProgressBar
+    private val args: UserDetailFragmentArgs by navArgs()
+    private val userViewModel: DetailUserViewModel by activityViewModel()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
 
     private var loginToken: String = ""
     private var succesToken: Boolean = false
     private var idUser: Int = 0
     private var idMunicipality: Int = 0
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentUserDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private val args: UserDetailFragmentArgs by navArgs()
-    private val userViewModel: DetailUserViewModel by activityViewModel()
-    private val tokenViewModel: TokenViewModel by activityViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = binding.pbUserDetail
         initArgs()
         getTokenLoginPreference()
         initViewModel()
@@ -98,77 +96,77 @@ class UserDetailFragment : Fragment() {
                     token = loginToken
                 )
 
-                userViewModel.getListBasicMunicipality(token = loginToken)
+                userViewModel.getListBasicMunicipality()
 
             } else {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(context = requireContext(), error = e.toString())
         }
     }
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(show = false,progressBar = progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
 
     private fun handleUserState(state: UserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> handleSuccessExperienceJobUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error)
             else -> {}
         }
     }
 
     private fun handleListBasicMunicipalityState(state: ListBasicMunicipalityState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> handleSuccessListBasicMunicipality(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error)
             else -> {}
         }
     }
 
     private fun handleUpdateUserState(state: UpdateUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> handleSuccessUpdateUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error)
             else -> {}
         }
     }
 
     private fun handleSuccessUpdateUser(studies: UpdateUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(show = false,progressBar = progressBar)
 
         if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
         } else {
-            Toast.makeText(context, "No se ha podido actualizar", Toast.LENGTH_SHORT).show()
+            myUtils.showToast(context = requireContext(), message = "No se ha podido actualizar")
         }
     }
 
     private fun handleSuccessListBasicMunicipality(municipalityListSuccess: ListBasicMunicipality) {
         desplegableListNameMunicipality(municipalityListSuccess)
-        showProgressBar(false)
+        myUtils.showProgressBar(show = false,progressBar = progressBar)
     }
 
     private fun handleSuccessExperienceJobUser(user: User) {
-        showProgressBar(false)
+        myUtils.showProgressBar(show = false,progressBar = progressBar)
         initUI(user)
     }
 
     private fun initUI(user: User) {
-        var birthDate: String = user.birthDate
+        var birthDate: String = myUtils.changeDateFormatEUR(user.birthDate)
         var gender: Int = 0
         var workPermit: Int = 0
         var autonomousDischarge: Int = 0
@@ -199,12 +197,12 @@ class UserDetailFragment : Fragment() {
             binding.tiePassportUserDetailFragment.setText(user.passport ?: "")
         }
 
-        if (user.birthDate.isNotEmpty() && user.birthDate.isNotBlank()) {
-            binding.tieBirthDateUserDetailFragment.setText(user.birthDate ?: "")
+        if (birthDate.isNotEmpty() && birthDate.isNotBlank()) {
+            binding.tieBirthDateUserDetailFragment.setText(birthDate ?: "")
         }
 
         binding.tieBirthDateUserDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieBirthDateUserDetailFragment.setText(selectedDate)
                 birthDate = selectedDate
             }
@@ -236,9 +234,9 @@ class UserDetailFragment : Fragment() {
         binding.tvBottonSaveUserDetailFragment.setOnClickListener {
 
             if (binding.tieGenderMaleUserDetailFragment.isChecked) {
-                gender = 1
+                gender = myUtils.GENDER_MALE
             } else if (binding.tieGenderFemaleUserDetailFragment.isChecked) {
-                gender = 2
+                gender = myUtils.GENDER_FEMALE
             }
 
             workPermit = if (binding.cbWorkPermitUserDetailFragment.isChecked) {
@@ -259,20 +257,19 @@ class UserDetailFragment : Fragment() {
                 0
             }
 
-
             updateUserData(
-                name = binding.tieNameUserDetailFragment.text.toString(),
-                surname1 = binding.tieSurnameUserDetailFragment.text.toString(),
-                surname2 = binding.tieSecondSurnameUserDetailFragment.text.toString() ?: "",
+                name = myUtils.capitalizeFirstLetter(binding.tieNameUserDetailFragment.text.toString()),
+                surname1 = myUtils.capitalizeFirstLetter(binding.tieSurnameUserDetailFragment.text.toString()),
+                surname2 = myUtils.capitalizeFirstLetter(binding.tieSecondSurnameUserDetailFragment.text.toString()) ?: "",
                 gender = gender,
-                mobile = binding.tieMobileUserDetailFragment.text.toString().toInt(),
-                dni = binding.tieDniUserDetailFragment.text.toString() ?: "",
-                nie = binding.tieNieUserDetailFragment.text.toString() ?: "",
-                passport = binding.tiePassportUserDetailFragment.text.toString() ?: "",
-                birthDate = birthDate,
-                address = binding.tieAddressUserDetailFragment.text.toString() ?: "",
+                mobile = myUtils.capitalizeFirstLetter(binding.tieMobileUserDetailFragment.text.toString()).toInt(),
+                dni = myUtils.capitalizeFirstLetter(binding.tieDniUserDetailFragment.text.toString()) ?: "",
+                nie = myUtils.capitalizeFirstLetter(binding.tieNieUserDetailFragment.text.toString()) ?: "",
+                passport = myUtils.capitalizeFirstLetter(binding.tiePassportUserDetailFragment.text.toString()) ?: "",
+                birthDate = birthDate.trim(),
+                address = myUtils.capitalizeFirstLetter(binding.tieAddressUserDetailFragment.text.toString()) ?: "",
                 municipality = idMunicipality,
-                description = binding.tieDescriptionUserDetailFragment.text.toString() ?: "",
+                description = myUtils.capitalizeFirstLetter(binding.tieDescriptionUserDetailFragment.text.toString()) ?: "",
                 workPermit = workPermit,
                 autonomousDischarge = autonomousDischarge,
                 ownVehicle = ownVehicle
@@ -300,9 +297,8 @@ class UserDetailFragment : Fragment() {
 
         if ((name.isNotEmpty() || name.isNotBlank()) &&
             (surname1.isNotEmpty() || surname1.isNotBlank()) &&
-            (surname2.isNotEmpty() || surname2.isNotBlank()) &&
-            gender != 0 && verificationMobile(mobile.toString()) &&
-            verificationDni(dni) && verificationNie(nie) && verificationPassport(passport) &&
+            gender != 0 && myUtils.verificationMobile(mobile, binding.tieMobileUserDetailFragment) &&
+            myUtils.verificationDni(dni, binding.tieDniUserDetailFragment) && myUtils.verificationNie(nie, binding.tieNieUserDetailFragment) && myUtils.verificationPassport(passport, binding.tieMobileUserDetailFragment) &&
             (birthDate.isNotEmpty() || birthDate.isNotBlank()) &&
             (address.isNotEmpty() || address.isNotBlank()) &&
             (description.isNotEmpty() || description.isNotBlank()) &&
@@ -319,7 +315,7 @@ class UserDetailFragment : Fragment() {
                 dni = dni,
                 nie = nie,
                 passport = passport,
-                birthDate = birthDate,
+                birthDate = myUtils.changeDateFormatEU(birthDate),
                 address = address,
                 municipality = municipality,
                 description = description,
@@ -348,72 +344,11 @@ class UserDetailFragment : Fragment() {
                 binding.tieMunicipalityUserDetailFragment.background =
                     R.drawable.spinner_background_error.toDrawable()
             }
-
-            if (!verificationMobile(mobile.toString())) {
-                binding.tieMobileUserDetailFragment.background =
-                    R.drawable.spinner_background_error.toDrawable()
-            }
-
-            if (dni.isNotBlank()) {
-                if (!verificationDni(dni)) {
-                    binding.tieDniUserDetailFragment.background =
-                        R.drawable.spinner_background_error.toDrawable()
-                }
-            }
-
-            if (nie.isNotBlank()) {
-                if (!verificationNie(nie)) {
-                    binding.tieNieUserDetailFragment.background =
-                        R.drawable.spinner_background_error.toDrawable()
-                }
-            }
-
-            if (passport.isNotBlank()) {
-                if (!verificationPassport(passport)) {
-                    binding.tieMobileUserDetailFragment.background =
-                        R.drawable.spinner_background_error.toDrawable()
-                }
-            }
         }
-    }
-
-    /*private fun verificationMobile(numero: String): Boolean {
-
-        val regex = Regex("^\\+(?:[0-9] ?){6,14}[0-9]\$")
-        return regex.matches(numero)
-    }*/
-    private fun verificationMobile(numero: String): Boolean {
-        val regex = Regex("^\\+?([0-9]){9,14}\$")
-        return regex.matches(numero)
-    }
-
-    private fun verificationDni(dni: String): Boolean {
-
-        if (dni.isNotBlank() && dni.isNotEmpty()) {
-            val regex = Regex("^[0-9]{8}[A-Z]$")
-            return regex.matches(dni)
-        }
-        return true
-    }
-
-    private fun verificationNie(nie: String): Boolean {
-        if (nie.isNotBlank() && nie.isNotEmpty()) {
-            val regex = Regex("^[XYZ][0-9]{7}[A-Z]$")
-            return regex.matches(nie)
-        }
-        return true
-    }
-
-    private fun verificationPassport(passport: String): Boolean {
-        if (passport.isNotBlank() && passport.isNotEmpty()) {
-            val regex = Regex("^[A-Za-z0-9]{6,20}$")
-            return regex.matches(passport)
-        }
-        return true
     }
 
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(show = false,progressBar = progressBar)
         cleanTokenAndRedirectToLogin()
     }
 
@@ -463,49 +398,9 @@ class UserDetailFragment : Fragment() {
         })
     }
 
-    private fun showProgressBar(show: Boolean) {
-        binding.pbUserDetail.visibility = if (show) View.VISIBLE else View.GONE
-    }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun showDatePicker(listener: (String) -> Unit) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(year, month, dayOfMonth)
-
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = sdf.format(selectedDate.time)
-
-                listener.invoke(formattedDate)
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
+        myUtils.redirectToLogin(requireContext())
     }
 }

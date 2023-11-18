@@ -13,13 +13,14 @@ import com.aprexi.praxis.myapplication.databinding.FragmentLoginBinding
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.presentation.BottomActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.security.MessageDigest
 
 class LoginFragment : Fragment() {
 
@@ -29,6 +30,7 @@ class LoginFragment : Fragment() {
 
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val loginViewModel: LoginViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,8 +50,7 @@ class LoginFragment : Fragment() {
             val password: String = binding.etPasswordLoginActivity.text.toString()
 
             if (email.isNotEmpty() && password.isNotEmpty()) {
-                val hashedPassword = hashPassword(password)
-                loginViewModel.fetchLogin(email = email, password = hashedPassword)
+                loginViewModel.fetchLogin(email = email, password = myUtils.hashPassword(password))
             } else {
                 showToast("No puede estar vacío!")
             }
@@ -119,11 +120,6 @@ class LoginFragment : Fragment() {
 
     private fun saveTokenPreferences(result: Login) {
         tokenViewModel.saveTokenPreferences(result)
-    }
-
-    private fun hashPassword(password: String): String {
-        val md = MessageDigest.getInstance("SHA-256")
-        return md.digest(password.toByteArray()).joinToString("") { "%02x".format(it) }
     }
 
     private fun navigateToOfferListFragment() {

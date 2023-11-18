@@ -10,16 +10,16 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentSplashBinding
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.presentation.BottomActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class SplashFragment : Fragment() {
@@ -29,6 +29,7 @@ class SplashFragment : Fragment() {
     }
 
     private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -61,7 +62,7 @@ class SplashFragment : Fragment() {
                     redirectToLoginWithDelay()
                 }
             } catch (e: Exception) {
-                showErrorDialog(e.toString())
+                myUtils.showErrorDialog(context = requireContext(),e.toString())
             }
         }
     }
@@ -74,7 +75,7 @@ class SplashFragment : Fragment() {
             }
 
             is ResourceState.Error -> {
-                showErrorDialog(state.error)
+                myUtils.showErrorDialog(context = requireContext(),state.error)
             }
 
             else -> {}
@@ -103,20 +104,9 @@ class SplashFragment : Fragment() {
     private fun redirectToMainActivityWithDelay() {
         lifecycleScope.launch {
             delay(1500)
-            /*findNavController().navigate(
-                SplashFragmentDirections.actionSplashFragmentToOfferListFragment()
-            )*/
             val intent = Intent(requireContext(), BottomActivity::class.java)
             startActivity(intent)
         }
-    }
-
-    private fun showErrorDialog(error: String) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok, null)
-            .show()
     }
 
 }

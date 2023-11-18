@@ -1,11 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/tie_title_register_fragment"
+        style="@style/toolbar_activities"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <View
+            android:id="@+id/v_back_bottom_register_fragment"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="10dp"
+            android:background="@drawable/baseline_keyboard_backspace_24"
+            android:backgroundTint="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title_user_data_fragment"
+            style="@style/bar_top_information"
+            android:text="@string/title_register_fragment" />
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tie_title_register_fragment">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -23,6 +51,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="20"
                     android:hint="@string/name_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -37,6 +66,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="20"
                     android:hint="@string/surname_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -51,6 +81,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="20"
                     android:hint="@string/second_surname_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -87,9 +118,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
-                    android:hint="@string/mobile_register_fragment"/>
+                    android:hint="@string/mobile_register_fragment"
+                    android:maxLength="9"
+                    android:inputType="number" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/iet_space_iet_register_fragment">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tie_description_register_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/text_description"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -101,6 +149,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="50"
                     android:hint="@string/email_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -111,10 +160,11 @@
                 android:layout_marginBottom="@dimen/iet_space_iet_register_fragment">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tie_passwprd_register_fragment"
+                    android:id="@+id/tie_password_register_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:inputType="textPassword"
                     android:hint="@string/password_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -129,6 +179,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="9"
                     android:hint="@string/dni_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -143,6 +194,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="9"
                     android:hint="@string/nie_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -157,6 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
+                    android:maxLength="15"
                     android:hint="@string/passport_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -167,7 +220,7 @@
                 android:layout_marginBottom="@dimen/iet_space_iet_register_fragment">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/tie_date_register_fragment"
+                    android:id="@+id/tie_birthday_register_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:maxLines="1"
@@ -181,7 +234,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/iet_space_iet_register_fragment">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <androidx.appcompat.widget.AppCompatAutoCompleteTextView
                     android:id="@+id/tie_municipality_register_fragment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -189,6 +242,23 @@
                     android:hint="@string/municipality_register_fragment"/>
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/iet_space_iet_register_fragment">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tie_address_register_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/address"
+                    android:maxLength="50"
+                    android:maxLines="1" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
 
             <com.google.android.material.checkbox.MaterialCheckBox
                 android:id="@+id/cb_workPermit_register_fragment"
@@ -220,4 +290,14 @@
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
+
+    <ProgressBar
+        android:id="@+id/pb_register_fragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

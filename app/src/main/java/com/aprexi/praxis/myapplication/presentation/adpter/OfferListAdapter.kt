@@ -7,12 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aprexi.praxis.myapplication.databinding.RowOfferListItemBinding
 import com.aprexi.praxis.myapplication.model.Offer
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.bumptech.glide.Glide
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
-class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.OfferListViewHolder>() {
+class OfferListAdapter(
+    private val myUtils: Utils
+) : RecyclerView.Adapter<OfferListAdapter.OfferListViewHolder>() {
 
     private var offerList: List<Offer> = emptyList()
 
@@ -36,7 +36,7 @@ class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.OfferListViewHold
         holder.ubicationTextView.text = item.nameMunicipality
         holder.vacantTextView.text = item.numVacancies.toString()
         holder.modalityTextView.text = item.nameModality
-        holder.timeTextView.text = calculateElapsedTime(item.datePublication.toString())
+        holder.timeTextView.text = myUtils.calculateElapsedTime(item.datePublication)
         holder.salaryTextView.text = item.salary.toString()
         holder.inscriptionTextView.visibility =
             if (item.requestOffer.toInt() == 1) View.VISIBLE else View.GONE
@@ -70,24 +70,5 @@ class OfferListAdapter : RecyclerView.Adapter<OfferListAdapter.OfferListViewHold
         val timeTextView = binding.tvTimeOfferListItem
         val salaryTextView = binding.tvSalaryOfferListItem
         val inscriptionTextView = binding.tvInscriptionOfferListItem
-    }
-
-    private fun calculateElapsedTime(datePublication: String): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val dateCreated = dateFormat.parse(datePublication)
-
-        val timeDifferenceMillis = currentDate.time - dateCreated.time
-        val seconds = timeDifferenceMillis / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val days = hours / 24
-
-        return when {
-            days > 0 -> "Hace $days días"
-            hours > 0 -> "Hace $hours horas"
-            minutes > 0 -> "Hace $minutes minutos"
-            else -> "Hace $seconds segundos"
-        }
     }
 }

@@ -1,14 +1,13 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
-import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
@@ -30,30 +29,31 @@ import com.aprexi.praxis.myapplication.model.School
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.TypeStudy
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DeleteStudiesUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailStudiesViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.InsertStudiesState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.NameStudiesState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.ProfessionalFamiliesState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.SchoolState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.StudiesUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
-import com.aprexi.praxis.myapplication.presentation.viewmodel.StudiesUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TypeStudiesState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UpdateStudiesUserState
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class StudiesDetailFragment : Fragment() {
 
-    private val binding: FragmentStudiesDetailBinding by lazy {
-        FragmentStudiesDetailBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentStudiesDetailBinding
+    private lateinit var progressBar: ProgressBar
+
+    private val args: StudiesDetailFragmentArgs by navArgs()
+    private val studiesViewModel: DetailStudiesViewModel by activityViewModel()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
 
     private var loginToken: String = ""
     private var succesToken: Boolean = false
@@ -65,24 +65,20 @@ class StudiesDetailFragment : Fragment() {
     private var idNameStudies: Int = 0
     private var initDate: String = ""
     private var endDate: String? = null
-    private val calendar = Calendar.getInstance()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        calendar.time = Calendar.getInstance().time
+        binding = FragmentStudiesDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    private val args: StudiesDetailFragmentArgs by navArgs()
-    private val studiesViewModel: DetailStudiesViewModel by activityViewModel()
-    private val tokenViewModel: TokenViewModel by activityViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = binding.pbStudiesDetail
         initArgs()
         getTokenLoginPreference()
         initViewModel()
@@ -126,7 +122,7 @@ class StudiesDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(requireContext() ,e.toString())
         }
     }
 
@@ -153,89 +149,89 @@ class StudiesDetailFragment : Fragment() {
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
 
     private fun handleStudiesUserState(state: StudiesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleUpdateStudiesUserState(state: UpdateStudiesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleDeleteStudiesUserState(state: DeleteStudiesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleInsertStudiesUserState(state: InsertStudiesState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleTypeStudiesState(state: TypeStudiesState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListTypeStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleNameStudiesState(state: NameStudiesState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListNameStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleProfessionalFamiliesState(state: ProfessionalFamiliesState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListProfessionalFamilies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleSchoolState(state: SchoolState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListSchool(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -262,7 +258,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessListSchool(school: ListSchool) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         val argSchool: Int = args.idSchool
 
@@ -323,7 +319,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessListProfessionalFamilies(professionalFamilies: ListProfessionalFamilies) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         val profFamilies: Int = args.professionalFamilies
 
@@ -386,7 +382,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessListTypeStudies(typeStudies: ListTypeStudies) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         val idType: Int = args.typeStudies
 
@@ -450,7 +446,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessListNameStudies(nameStudies: ListNameStudies) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         val adapter = NameStudiesAdapter(
             requireContext(),
@@ -482,7 +478,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessUpdateStudies(studies: UpdateStudiesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(studies.success){
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -492,7 +488,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessDeleteStudies(studies: DeleteStudiesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(studies.success){
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -502,7 +498,7 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessInsertStudies(studies: InsertStudiesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(studies.success){
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -512,16 +508,16 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessOfferDetail(studies: StudiesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         initUI(studies)
     }
 
     private fun initUI(studies: StudiesUser) {
 
-        binding.tieDateInitStudiesDetailFragment.text = args.startYear
+        binding.tieDateInitStudiesDetailFragment.text = myUtils.changeDateFormatEUR(args.startYear)
 
         if (args.endYear.isNotEmpty()){
-            binding.tieDateEndStudiesDetailFragment.text = args.endYear
+            binding.tieDateEndStudiesDetailFragment.text = myUtils.changeDateFormatEUR(args.endYear)
         }
 
         binding.vBackBottomStudies.setOnClickListener {
@@ -529,14 +525,14 @@ class StudiesDetailFragment : Fragment() {
         }
 
         binding.tieDateInitStudiesDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieDateInitStudiesDetailFragment.setText(selectedDate)
                 initDate = selectedDate
             }
         }
 
         binding.tieDateEndStudiesDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieDateEndStudiesDetailFragment.setText(selectedDate)
                 endDate = selectedDate
             }
@@ -579,8 +575,8 @@ class StudiesDetailFragment : Fragment() {
             studiesViewModel.updateStudiesUser(
                 idUser = idUser,
                 idNameStudies = idNameStudies,
-                startYear = initDate,
-                endYear = endDate ?: "",
+                startYear = myUtils.changeDateFormatEU(initDate),
+                endYear = myUtils.changeDateFormatEU(endDate ?: ""),
                 idSchool = idSchool,
                 idStudiesUser = idStudiesUs,
                 token = loginToken
@@ -600,8 +596,8 @@ class StudiesDetailFragment : Fragment() {
             studiesViewModel.insertStudies(
                 idUser = idUser,
                 idNameStudies = idNameStudies,
-                startYear = initDate,
-                endYear = endDate ?: "",
+                startYear = myUtils.changeDateFormatEU(initDate),
+                endYear = myUtils.changeDateFormatEU(endDate ?: "") ,
                 idSchool = idSchool,
                 idStudiesUser = 18,
                 token = loginToken
@@ -638,55 +634,12 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
-    }
-
-    private fun showProgressBar(show: Boolean) {
-        binding.pbStudiesDetail.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
+        myUtils.redirectToLogin(requireContext())
     }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    fun showDatePicker(listener: (String) -> Unit) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(year, month, dayOfMonth)
-
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = sdf.format(selectedDate.time)
-
-                listener.invoke(formattedDate)
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
-
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
-    }
-
 }

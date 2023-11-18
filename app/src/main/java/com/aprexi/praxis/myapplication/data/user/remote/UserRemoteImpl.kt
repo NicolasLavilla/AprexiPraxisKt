@@ -1,6 +1,8 @@
 package com.aprexi.praxis.myapplication.data.user.remote
 
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
+import com.aprexi.praxis.myapplication.model.CheckEmail
+import com.aprexi.praxis.myapplication.model.InsertUser
 import com.aprexi.praxis.myapplication.model.UpdateUser
 import com.aprexi.praxis.myapplication.model.User
 
@@ -10,6 +12,10 @@ class UserRemoteImpl(
 
     suspend fun userData( idUser: Int, token: String): User {
         return aprexiPraxisService.getUserData(idUser = idUser, token = token)
+    }
+
+    suspend fun getCheckEmail( email: String): CheckEmail {
+        return aprexiPraxisService.getCheckEmail(email = email)
     }
 
     suspend fun updateUser(
@@ -51,6 +57,46 @@ class UserRemoteImpl(
             autonomousDischarge = autonomousDischarge,
             ownVehicle = ownVehicle,
             token = token
+        )
+    }
+
+    suspend fun insertUser(
+        name: String,
+        surname1: String,
+        surname2: String,
+        gender: Int,
+        mobile: Int,
+        email: String,
+        password: String,
+        dni: String,
+        nie: String,
+        passport: String,
+        birthDate: String,
+        address: String,
+        municipality: Int,
+        description: String,
+        workPermit: Int,
+        autonomousDischarge: Int,
+        ownVehicle: Int
+    ): InsertUser {
+        return aprexiPraxisService.insertUser(
+            name = name,
+            surname1 = surname1,
+            surname2 = surname2,
+            gender = gender,
+            mobile = mobile,
+            email = email,
+            password = password,
+            dni = dni,
+            nie = nie,
+            passport = passport,
+            birthDate = birthDate,
+            address = address,
+            municipality = municipality,
+            description = description,
+            workPermit = workPermit,
+            autonomousDischarge = autonomousDischarge,
+            ownVehicle = ownVehicle
         )
     }
 }

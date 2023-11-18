@@ -22,35 +22,35 @@ import com.aprexi.praxis.myapplication.data.license.LicenseDataImpl
 import com.aprexi.praxis.myapplication.data.license.local.LicenseLocalImpl
 import com.aprexi.praxis.myapplication.data.license.remote.LicenseRemoteImpl
 import com.aprexi.praxis.myapplication.data.local.MemoryCache
-import com.aprexi.praxis.myapplication.data.offer.OfferDataImpl
 import com.aprexi.praxis.myapplication.data.login.LoginDataImpl
-import com.aprexi.praxis.myapplication.data.token.TokenDataImpl
-import com.aprexi.praxis.myapplication.data.offer.local.OfferLocalImpl
 import com.aprexi.praxis.myapplication.data.login.local.LoginLocalImpl
 import com.aprexi.praxis.myapplication.data.municipality.MunicipalityDataImpl
 import com.aprexi.praxis.myapplication.data.municipality.local.MunicipalityLocalImpl
 import com.aprexi.praxis.myapplication.data.municipality.remote.MunicipalityRemoteImpl
+import com.aprexi.praxis.myapplication.data.offer.OfferDataImpl
+import com.aprexi.praxis.myapplication.data.offer.local.OfferLocalImpl
 import com.aprexi.praxis.myapplication.data.offer.local.TokenLocalImpl
-import com.aprexi.praxis.myapplication.data.offer.remote.OfferRemoteImpl
 import com.aprexi.praxis.myapplication.data.offer.remote.LoginRemoteImpl
+import com.aprexi.praxis.myapplication.data.offer.remote.OfferRemoteImpl
 import com.aprexi.praxis.myapplication.data.professionalFamilies.ProfessionalFamiliesDataImpl
 import com.aprexi.praxis.myapplication.data.professionalFamilies.local.ProfessionalFamiliesLocalImpl
 import com.aprexi.praxis.myapplication.data.professionalFamilies.remote.ProfessionalFamiliesRemoteImpl
-import com.aprexi.praxis.myapplication.data.token.remote.TokenRemoteImpl
+import com.aprexi.praxis.myapplication.data.professionalProyects.ProfessionalProyectsImpl
+import com.aprexi.praxis.myapplication.data.professionalProyects.local.ProfessionalProyectsLocalImpl
+import com.aprexi.praxis.myapplication.data.professionalProyects.remote.ProfessionalProyectsRemoteImpl
 import com.aprexi.praxis.myapplication.data.remote.ApiClient
 import com.aprexi.praxis.myapplication.data.remote.AprexiPraxisService
 import com.aprexi.praxis.myapplication.data.requestOffer.RequestOfferDataImpl
 import com.aprexi.praxis.myapplication.data.requestOffer.local.RequestOfferLocalImpl
 import com.aprexi.praxis.myapplication.data.requestOffer.remote.RequestOfferRemoteImpl
-import com.aprexi.praxis.myapplication.data.professionalProyects.ProfessionalProyectsImpl
-import com.aprexi.praxis.myapplication.data.professionalProyects.local.ProfessionalProyectsLocalImpl
-import com.aprexi.praxis.myapplication.data.professionalProyects.remote.ProfessionalProyectsRemoteImpl
 import com.aprexi.praxis.myapplication.data.school.SchoolDataImpl
 import com.aprexi.praxis.myapplication.data.school.local.SchoolLocalImpl
 import com.aprexi.praxis.myapplication.data.school.remote.SchoolRemoteImpl
 import com.aprexi.praxis.myapplication.data.studies.StudiesDataImpl
 import com.aprexi.praxis.myapplication.data.studies.local.StudiesLocalImpl
 import com.aprexi.praxis.myapplication.data.studies.remote.StudiesRemoteImpl
+import com.aprexi.praxis.myapplication.data.token.TokenDataImpl
+import com.aprexi.praxis.myapplication.data.token.remote.TokenRemoteImpl
 import com.aprexi.praxis.myapplication.data.user.UserDataImpl
 import com.aprexi.praxis.myapplication.data.user.local.UserLocalImpl
 import com.aprexi.praxis.myapplication.data.user.remote.UserRemoteImpl
@@ -77,15 +77,11 @@ import com.aprexi.praxis.myapplication.domain.usercase.DeleteFollowOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteStudiesUserUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenPreferencesUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetLoginTokenPreferencesUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetLoginUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetOfferUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowCompanyOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.FollowOfferUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetCheckEmailUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenPreferencesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetCheckTokenUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetCompanyUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetDetailRequestOfferListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserListUseCause
@@ -103,8 +99,12 @@ import com.aprexi.praxis.myapplication.domain.usercase.GetListLicenseUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListProfessionalFamiliesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListSchoolUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListTypeStudiesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetLoginTokenPreferencesUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetLoginUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetNameStudiesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListCompanyUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetOfferListUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetRequestOfferListUseCause
@@ -115,12 +115,21 @@ import com.aprexi.praxis.myapplication.domain.usercase.InsertExperienceJobUserUs
 import com.aprexi.praxis.myapplication.domain.usercase.InsertLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.InsertProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.InsertStudiesUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.InsertUserUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.RequestOfferUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.SaveTokenPreferencesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateExperienceJobUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateProfessionalProyectUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateStudiesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateUserUseCause
+import com.aprexi.praxis.myapplication.presentation.adpter.DetailRequestOfferListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.ExperienceJobListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.FollowOfferListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.RequestOfferListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.StudiesListAdapter
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CompanyViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailExperienceJobViewModel
@@ -133,6 +142,7 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferRequestViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferViewModel
+import com.aprexi.praxis.myapplication.presentation.viewmodel.RegisterViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
@@ -168,7 +178,7 @@ val praxisModule = module {
     factory { CompanyRemoteImpl(get()) }
     factory<CompanyRepository> { CompanyDataImpl(get(),get()) }
 
-    factory { UserLocalImpl() }
+    factory { UserLocalImpl(get()) }
     factory { UserRemoteImpl(get()) }
     factory<UserRepository> { UserDataImpl(get(),get()) }
 
@@ -212,7 +222,16 @@ val praxisModule = module {
     factory { MunicipalityRemoteImpl(get()) }
     factory<MunicipalityRepository> { MunicipalityDataImpl(get(),get()) }
 
+    factory { RequestOfferListAdapter(get()) }
+    factory { OfferListAdapter(get()) }
+    factory { FollowOfferListAdapter(get()) }
+    factory { DetailRequestOfferListAdapter(get()) }
+    factory { StudiesListAdapter(get()) }
+    factory { ExperienceJobListAdapter(get()) }
 
+    factory { Utils() }
+
+    factory { GetCheckEmailUseCause(get())}
     factory { GetListBasicMunicipalityUseCause(get())}
     factory { GetListCategoryUseCause(get())}
     factory { GetListCompanyUseCause(get())}
@@ -263,6 +282,7 @@ val praxisModule = module {
     factory { FollowCompanyOfferUseCause(get()) }
     factory { GetOfferListUseCause(get()) }
     factory { GetOfferUseCause(get()) }
+    factory { InsertUserUseCause(get())}
 
     viewModel{OfferViewModel(get(),get(),get(),get(),get(),get(),get())}
     viewModel{CurriculumViewModel(get(),get(),get(),get(),get()) }
@@ -276,6 +296,7 @@ val praxisModule = module {
     viewModel{DetailLanguagesViewModel(get(),get(),get(),get(),get(),get()) }
     viewModel{DetailProfessionalProyectsViewModel(get(),get(),get(),get()) }
     viewModel{DetailExperienceJobViewModel(get(),get(),get() ,get() ,get() ,get(),get()) }
-    viewModel{DetailUserViewModel(get(),get(), get()) }
+    viewModel{DetailUserViewModel(get(),get(),get()) }
+    viewModel{RegisterViewModel(get(),get()) }
 
 }

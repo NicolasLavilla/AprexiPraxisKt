@@ -64,6 +64,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/name_register_fragment"
+                    android:maxLength="20"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -78,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/surname_register_fragment"
+                    android:maxLength="20"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -92,6 +94,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/second_surname_register_fragment"
+                    android:maxLength="20"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -158,6 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/dni_register_fragment"
+                    android:maxLength="9"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -172,6 +176,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/nie_register_fragment"
+                    android:maxLength="9"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -186,6 +191,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/passport_register_fragment"
+                    android:maxLength="15"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -219,6 +225,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
+                    android:maxLength="50"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>

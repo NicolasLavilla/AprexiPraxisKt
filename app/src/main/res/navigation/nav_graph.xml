@@ -12,9 +12,7 @@
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
-        <!--<action
-            android:id="@+id/action_splashFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />-->
+
     </fragment>
 
     <fragment
@@ -24,127 +22,14 @@
         <action
             android:id="@+id/action_loginFragment_to_RegisterFragment"
             app:destination="@id/registerFragment" />
-        <!--<action
-            android:id="@+id/action_loginFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />-->
+
     </fragment>
 
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.aprexi.praxis.myapplication.presentation.fragment.RegisterFragment"
         tools:layout="@layout/fragment_register">
-        <!--<action
-            android:id="@+id/action_RegisterFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />-->
-    </fragment>
-
-    <!--
-    <fragment
-        android:id="@+id/navOfferListFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferListFragment"
-        tools:layout="@layout/fragment_offer_list">
-
-        <action
-            android:id="@+id/action_offerListFragment_to_offerDetailFragment"
-            app:destination="@id/offerDetailFragment" />
-        <action
-            android:id="@+id/action_offerListFragment_to_curriculumFragment"
-            app:destination="@id/navCurriculumFragment" />
-        <action
-            android:id="@+id/action_offerListFragment_to_myOffersFragment"
-            app:destination="@id/navMyOffersFragment" />
-        <action
-            android:id="@+id/action_offerListFragment_self"
-            app:destination="@id/navOfferListFragment" />
 
     </fragment>
 
-    <fragment
-        android:id="@+id/navMyOffersFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.MyOffersFragment"
-        tools:layout="@layout/fragment_my_offers">
-
-
-        <action
-            android:id="@+id/action_myOffersFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />
-        <action
-            android:id="@+id/action_myOffersFragment_to_curriculumFragment"
-            app:destination="@id/navCurriculumFragment" />
-        <action
-            android:id="@+id/action_navMyOffersFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/navCurriculumFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.CurriculumFragment"
-        tools:layout="@layout/fragment_curriculum">
-
-        <action
-            android:id="@+id/action_curriculumFragment_to_offerListFragment"
-            app:destination="@id/navOfferListFragment" />
-        <action
-            android:id="@+id/action_curriculumFragment_to_myOffersFragment"
-            app:destination="@id/navMyOffersFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/offerDetailFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferDetailFragment"
-        tools:layout="@layout/fragment_offer_detail">
-
-        <argument
-            android:name="idUser"
-            app:argType="integer" />
-
-        <argument
-            android:name="idOffer"
-            app:argType="integer" />
-
-        <action
-            android:id="@+id/action_offerDetailFragment_to_companyFragment"
-            app:destination="@id/companyFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/companyFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.CompanyFragment"
-        tools:layout="@layout/fragment_company">
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/detailRequestOfferFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.DetailRequestOfferFragment"
-        tools:layout="@layout/fragment_detail_request_offer">
-
-        <action
-            android:id="@+id/action_detailRequestOfferFragment_to_offerDetailFragment"
-            app:destination="@id/offerDetailFragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/offerFollowFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferFollowListFragment"
-        tools:layout="@layout/fragment_offers_follow">
-
-        <action
-            android:id="@+id/action_offerFollowFragment_to_offerDetailFragment"
-            app:destination="@id/offerDetailFragment" />
-
-    </fragment>
-
-    <fragment
-        android:id="@+id/offerRequestListFragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.OfferRequestListFragment"
-        tools:layout="@layout/fragment_offer_request">
-
-        <action
-            android:id="@+id/action_offerRequestListFragment_to_detailRequestOfferFragment"
-            app:destination="@id/detailRequestOfferFragment" />
-    </fragment>
-    -->
 </navigation>

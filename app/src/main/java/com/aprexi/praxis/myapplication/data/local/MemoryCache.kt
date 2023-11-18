@@ -16,6 +16,7 @@ import com.aprexi.praxis.myapplication.model.ListRequestOffer
 import com.aprexi.praxis.myapplication.model.ListSchool
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ListTypeStudies
+import com.aprexi.praxis.myapplication.model.User
 
 class MemoryCache {
 
@@ -36,6 +37,7 @@ class MemoryCache {
     var languagesBasic: ListBasicLanguages? = null
     var license: ListLicense? = null
     var listMunicipality: ListBasicMunicipality? = null
+    var userData: User? = null
 
     fun clearAll() {
         offerList = null
@@ -55,6 +57,7 @@ class MemoryCache {
         languagesBasic = null
         license = null
         listMunicipality = null
+        userData = null
     }
 
 }

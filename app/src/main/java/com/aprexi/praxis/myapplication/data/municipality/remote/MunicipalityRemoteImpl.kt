@@ -6,7 +6,7 @@ import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
 class MunicipalityRemoteImpl (
     private val aprexiPraxisService: AprexiPraxisService
 ) {
-    suspend fun getListBasicMunicipality( token: String): ListBasicMunicipality {
-        return aprexiPraxisService.getListBasicMunicipality(token = token)
+    suspend fun getListBasicMunicipality(): ListBasicMunicipality {
+        return aprexiPraxisService.getListBasicMunicipality()
     }
 }

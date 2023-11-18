@@ -5,36 +5,30 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.viewpager2.widget.ViewPager2
-import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentOffersFollowBinding
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.presentation.OfferDetailActivity
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
 import com.aprexi.praxis.myapplication.presentation.adpter.FollowOfferListAdapter
-import com.aprexi.praxis.myapplication.presentation.adpter.OfferListAdapter
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.FollowOfferListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferFollowViewModel
-import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class OfferFollowListFragment: Fragment() {
 
-    private val binding: FragmentOffersFollowBinding by lazy {
-        FragmentOffersFollowBinding.inflate(layoutInflater)
-    }
-
-    private val followOfferListAdapter = FollowOfferListAdapter()
+    private lateinit var binding: FragmentOffersFollowBinding
+    private lateinit var progressBar: ProgressBar
+    private val myUtils: Utils by inject()
+    private val followOfferListAdapter = FollowOfferListAdapter(myUtils)
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val offerFollowViewModel: OfferFollowViewModel by activityViewModel()
     private var loginToken: String = ""
@@ -46,17 +40,17 @@ class OfferFollowListFragment: Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentOffersFollowBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = binding.pbFollowOfferList
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
         initUI()
-
     }
 
     private fun initViewModel() {
@@ -66,21 +60,21 @@ class OfferFollowListFragment: Fragment() {
 
     private fun handleOfferListState(state: FollowOfferListState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccess(state.result)
             is ResourceState.SuccessFaild -> handleSuccessResponse()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(),state.error)
             else -> {}
         }
     }
 
     private fun handleSuccess(result: ListOffersResponse) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         followOfferListAdapter.submitList(result.offer)
     }
 
     private fun handleSuccessResponse() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
     }
 
@@ -89,14 +83,6 @@ class OfferFollowListFragment: Fragment() {
         binding.rvOfferListFollowOffersFragment.layoutManager = LinearLayoutManager(requireContext())
 
         followOfferListAdapter.onClickListener = { offer ->
-
-            /*findNavController().navigate(
-                OfferFollowListFragmentDirections.actionOfferFollowFragmentToOfferDetailFragment(
-                //MyOffersFragmentDirections.actionNavMyOffersFragmentToOfferDetailFragment(
-                    idUser = idUser,
-                    idOffer = offer.idOffer.toInt(),
-                )
-            )*/
 
             val intent = Intent(context, OfferDetailActivity::class.java)
             intent.putExtra("idUser", idUser)
@@ -107,15 +93,11 @@ class OfferFollowListFragment: Fragment() {
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { redirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(),state.error) { myUtils.redirectToLogin(requireContext()) }
             else -> {}
         }
-    }
-
-    private fun showProgressBar(show: Boolean) {
-        binding.pbFollowOfferList.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     private fun getTokenLoginPreference(){
@@ -136,25 +118,12 @@ class OfferFollowListFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(context = requireContext(), e.toString())
         }
     }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
+        myUtils.redirectToLogin(requireContext())
     }
 }

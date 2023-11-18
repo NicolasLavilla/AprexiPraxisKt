@@ -1,11 +1,10 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
-import android.app.DatePickerDialog
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
@@ -18,7 +17,7 @@ import com.aprexi.praxis.myapplication.model.InsertProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DeleteProfessionalProyectUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailProfessionalProyectsViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.InsertProfessionalProyectsUserState
@@ -26,18 +25,14 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.ProfessionalProyec
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UpdateProfessionalProyectUserState
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class ProfessionalProyectDetailFragment : Fragment() {
 
-    private val binding: FragmentProfessionalProyectsDetailBinding by lazy {
-        FragmentProfessionalProyectsDetailBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentProfessionalProyectsDetailBinding
+    private lateinit var progressBar: ProgressBar
 
     private var loginToken: String = ""
     private var succesToken: Boolean = false
@@ -50,16 +45,19 @@ class ProfessionalProyectDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentProfessionalProyectsDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     private val args: ProfessionalProyectDetailFragmentArgs by navArgs()
     private val detailProfessionalProyectsViewModel: DetailProfessionalProyectsViewModel by activityViewModel()
     private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = binding.pbProfessionalProyectsDetail
         initArgs()
         getTokenLoginPreference()
         initViewModel()
@@ -97,7 +95,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(context = requireContext(), error = e.toString())
         }
     }
 
@@ -112,55 +110,75 @@ class ProfessionalProyectDetailFragment : Fragment() {
 
     private fun handleInsertProfessionalProyectsUserState(state: InsertProfessionalProyectsUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertProfessionalProyect(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(
+                context = requireContext(),
+                state.error
+            )
+
             else -> {}
         }
     }
 
     private fun handleUpdateProfessionalProyectState(state: UpdateProfessionalProyectUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateProfessionalProyect(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(
+                context = requireContext(),
+                state.error
+            )
+
             else -> {}
         }
     }
 
     private fun handleDeleteProfessionalProyectUserState(state: DeleteProfessionalProyectUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteProfessionalProyect(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(
+                context = requireContext(),
+                state.error
+            )
+
             else -> {}
         }
     }
 
     private fun handleProfessionalProyectsUserState(state: ProfessionalProyectsUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessProfessionalProyectsUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(
+                context = requireContext(),
+                state.error
+            )
+
             else -> {}
         }
     }
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(
+                context = requireContext(),
+                state.error
+            ) { cleanTokenAndRedirectToLogin() }
+
             else -> {}
         }
     }
 
     private fun handleSuccessInsertProfessionalProyect(professionalProyects: InsertProfessionalProyectsUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if (professionalProyects.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -170,7 +188,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
     }
 
     private fun handleSuccessUpdateProfessionalProyect(professionalProyects: UpdateProfessionalProyectsUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if (professionalProyects.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -180,7 +198,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
     }
 
     private fun handleSuccessDeleteProfessionalProyect(professionalProyects: DeleteProfessionalProyectsUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if (professionalProyects.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -190,13 +208,13 @@ class ProfessionalProyectDetailFragment : Fragment() {
     }
 
     private fun handleSuccessProfessionalProyectsUser(professionalProyects: ProfessionalProyectsUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         initUI(professionalProyects)
     }
 
     private fun initUI(professionalProyects: ProfessionalProyectsUser) {
-        var initDate: String = professionalProyects.initDate
-        var endDate: String = professionalProyects.endDate ?: ""
+        var initDate: String = myUtils.changeDateFormatEUR(professionalProyects.initDate)
+        var endDate: String = myUtils.changeDateFormatEUR(professionalProyects.endDate ?: "")
 
 
         binding.vBackBottomProfessionalProyects.setOnClickListener {
@@ -204,14 +222,14 @@ class ProfessionalProyectDetailFragment : Fragment() {
         }
 
         binding.tieInitDateProfessionalProyectDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieInitDateProfessionalProyectDetailFragment.setText(selectedDate)
                 initDate = selectedDate
             }
         }
 
         binding.tieEndDateProfessionalProyectDetailFragment.setOnClickListener {
-            showDatePicker { selectedDate ->
+            myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieEndDateProfessionalProyectDetailFragment.setText(selectedDate)
                 endDate = selectedDate
             }
@@ -226,7 +244,9 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 binding.tieDescriptionJobProfessionalProyectsDetailFragment.setText(
                     professionalProyects.descriptionProyect
                 )
-                binding.tieNameTitleJobProfessionalProyectDetailFragment.setText(professionalProyects.nameProyect)
+                binding.tieNameTitleJobProfessionalProyectDetailFragment.setText(
+                    professionalProyects.nameProyect
+                )
                 binding.tieWebProfessionalProyectDetailFragment.setText(professionalProyects.websites)
                 binding.tieJobProfessionalProyectDetailFragment.setText(professionalProyects.job)
 
@@ -248,24 +268,24 @@ class ProfessionalProyectDetailFragment : Fragment() {
 
         binding.tvBottonSaveProfessionalProyectsFragment.setOnClickListener {
             updateProfessionalProyectsUser(
-                nameProyect = binding.tieNameTitleJobProfessionalProyectDetailFragment.text.toString(),
-                descriptionProyect = binding.tieDescriptionJobProfessionalProyectsDetailFragment.text.toString(),
+                nameProyect = myUtils.capitalizeFirstLetter(binding.tieNameTitleJobProfessionalProyectDetailFragment.text.toString()),
+                descriptionProyect = myUtils.capitalizeFirstLetter(binding.tieDescriptionJobProfessionalProyectsDetailFragment.text.toString()),
                 initDate = initDate,
                 endDate = endDate,
-                websites = binding.tieWebProfessionalProyectDetailFragment.text.toString(),
-                job = binding.tieJobProfessionalProyectDetailFragment.text.toString(),
+                websites = myUtils.capitalizeFirstLetter(binding.tieWebProfessionalProyectDetailFragment.text.toString()),
+                job = myUtils.capitalizeFirstLetter(binding.tieJobProfessionalProyectDetailFragment.text.toString()),
                 idProfessionalProyectUser = idProfessionalProyects
             )
         }
 
         binding.btnCreateProfessionalProyectsDetailFragment.setOnClickListener {
             createProfessionalProyectsUser(
-                nameProyect = binding.tieNameTitleJobProfessionalProyectDetailFragment.text.toString(),
-                descriptionProyect = binding.tieDescriptionJobProfessionalProyectsDetailFragment.text.toString(),
+                nameProyect = myUtils.capitalizeFirstLetter(binding.tieNameTitleJobProfessionalProyectDetailFragment.text.toString()),
+                descriptionProyect = myUtils.capitalizeFirstLetter(binding.tieDescriptionJobProfessionalProyectsDetailFragment.text.toString()),
                 initDate = initDate,
                 endDate = endDate,
-                websites = binding.tieWebProfessionalProyectDetailFragment.text.toString(),
-                job = binding.tieJobProfessionalProyectDetailFragment.text.toString(),
+                websites = myUtils.capitalizeFirstLetter(binding.tieWebProfessionalProyectDetailFragment.text.toString()),
+                job = myUtils.capitalizeFirstLetter(binding.tieJobProfessionalProyectDetailFragment.text.toString()),
                 idProfessionalProyectUser = idProfessionalProyects
             )
         }
@@ -292,8 +312,8 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 idUser = idUser,
                 nameProyect = nameProyect,
                 descriptionProyect = descriptionProyect,
-                initDate = initDate,
-                endDate = endDate,
+                initDate = myUtils.changeDateFormatEU(initDate),
+                endDate = myUtils.changeDateFormatEU(endDate),
                 websites = websites,
                 job = job,
                 idProfessionalProyectUser = idProfessionalProyectUser,
@@ -329,8 +349,8 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 idUser = idUser,
                 nameProyect = nameProyect,
                 descriptionProyect = descriptionProyect,
-                initDate = initDate,
-                endDate = endDate,
+                initDate = myUtils.changeDateFormatEU(initDate),
+                endDate = myUtils.changeDateFormatEU(endDate),
                 websites = websites,
                 job = job,
                 idProfessionalProyectUser = idProfessionalProyectUser,
@@ -349,7 +369,6 @@ class ProfessionalProyectDetailFragment : Fragment() {
         }
     }
 
-
     private fun deleteProfessionalProyectsUser() {
 
         if (idProfessionalProyects != 0) {
@@ -361,54 +380,13 @@ class ProfessionalProyectDetailFragment : Fragment() {
         }
     }
 
-    private fun showProgressBar(show: Boolean) {
-        binding.pbProfessionalProyectsDetail.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
     }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun showDatePicker(listener: (String) -> Unit) {
-        val calendar = Calendar.getInstance()
-        val year = calendar.get(Calendar.YEAR)
-        val month = calendar.get(Calendar.MONTH)
-        val day = calendar.get(Calendar.DAY_OF_MONTH)
-
-        val datePickerDialog = DatePickerDialog(
-            requireContext(),
-            { _, year, month, dayOfMonth ->
-                val selectedDate = Calendar.getInstance()
-                selectedDate.set(year, month, dayOfMonth)
-
-                val sdf = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
-                val formattedDate = sdf.format(selectedDate.time)
-
-                listener.invoke(formattedDate)
-            },
-            year,
-            month,
-            day
-        )
-        datePickerDialog.show()
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
+        myUtils.redirectToLogin(requireContext())
     }
 }

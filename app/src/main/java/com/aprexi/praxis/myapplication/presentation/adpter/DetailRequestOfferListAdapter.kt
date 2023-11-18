@@ -7,11 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.RowOfferDetailRequestListItemBinding
 import com.aprexi.praxis.myapplication.model.DetailRequestOffer
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 
-class DetailRequestOfferListAdapter: RecyclerView.Adapter<DetailRequestOfferListAdapter.DetailRequestOfferListViewHolder>() {
+class DetailRequestOfferListAdapter(
+    private val myUtils: Utils
+): RecyclerView.Adapter<DetailRequestOfferListAdapter.DetailRequestOfferListViewHolder>() {
 
     private var detailRequestOfferList: List<DetailRequestOffer> = emptyList()
 
@@ -34,7 +34,7 @@ class DetailRequestOfferListAdapter: RecyclerView.Adapter<DetailRequestOfferList
         holder.titleState.text = item.nameState
         holder.titleState.setTextColor(colorState(item.stateRequest.toInt()))
         holder.descriptionState.text = item.descriptionActionRequest
-        holder.time.text = calculateElapsedTime(item.dateRequest)
+        holder.time.text = myUtils.calculateElapsedTime(item.dateRequest)
     }
 
     private fun colorState(state: Int): Int{
@@ -72,25 +72,4 @@ class DetailRequestOfferListAdapter: RecyclerView.Adapter<DetailRequestOfferList
         detailRequestOfferList = list
         notifyDataSetChanged()
     }
-
-    private fun calculateElapsedTime(datePublication: String): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val dateCreated = dateFormat.parse(datePublication)
-
-        val timeDifferenceMillis = currentDate.time - dateCreated.time
-        val seconds = timeDifferenceMillis / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val days = hours / 24
-
-        return when {
-            days > 0 -> "Hace $days días"
-            hours > 0 -> "Hace $hours horas"
-            minutes > 0 -> "Hace $minutes minutos"
-            else -> "Hace $seconds segundos"
-        }
-    }
-
-
 }

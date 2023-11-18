@@ -4,5 +4,5 @@ import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
 
 interface MunicipalityRepository {
 
-    suspend fun getListBasicMunicipality(token: String): ListBasicMunicipality
+    suspend fun getListBasicMunicipality(): ListBasicMunicipality
 }

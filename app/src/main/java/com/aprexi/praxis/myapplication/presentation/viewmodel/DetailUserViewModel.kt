@@ -21,7 +21,7 @@ typealias ListBasicMunicipalityState = ResourceState<ListBasicMunicipality>
 class DetailUserViewModel(
     private val updateUserUseCause: UpdateUserUseCause,
     private val getUserDataUseCase: GetUserDataUseCase,
-    private val getListBasicMunicipalityUseCause: GetListBasicMunicipalityUseCause,
+    private val getListBasicMunicipalityUseCause: GetListBasicMunicipalityUseCause
 ) : ViewModel() {
     private val _updateUserLiveData = MutableLiveData<UpdateUserState>()
     private val _userDataLiveData = MutableLiveData<UserState>()
@@ -31,6 +31,7 @@ class DetailUserViewModel(
         return _updateUserLiveData
     }
 
+
     fun userDataLiveData(): LiveData<UserState> {
         return _userDataLiveData
     }
@@ -39,14 +40,15 @@ class DetailUserViewModel(
         return _getListBasicMunicipalityDataLiveData
     }
 
-    fun getListBasicMunicipality(token: String) {
+
+
+
+    fun getListBasicMunicipality() {
         _getListBasicMunicipalityDataLiveData.value = ResourceState.Loading()
 
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val listBasicMunicipality = getListBasicMunicipalityUseCause.execute(
-                    token = token
-                )
+                val listBasicMunicipality = getListBasicMunicipalityUseCause.execute()
 
                 withContext(Dispatchers.Main) {
                     if (listBasicMunicipality.success) {

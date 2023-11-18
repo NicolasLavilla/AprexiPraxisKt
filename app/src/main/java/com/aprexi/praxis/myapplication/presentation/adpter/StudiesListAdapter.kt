@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aprexi.praxis.myapplication.databinding.RowListStudiesBinding
 import com.aprexi.praxis.myapplication.model.StudiesUser
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 
-class StudiesListAdapter: RecyclerView.Adapter<StudiesListAdapter.StudiesListViewHolder>() {
+class StudiesListAdapter(
+    private val myUtils: Utils
+): RecyclerView.Adapter<StudiesListAdapter.StudiesListViewHolder>() {
 
     private var studiesUserList: List<StudiesUser> = emptyList()
 
@@ -31,11 +34,11 @@ class StudiesListAdapter: RecyclerView.Adapter<StudiesListAdapter.StudiesListVie
 
         val fullDate = buildString {
             if (item.startYear.isNotEmpty()) {
-                append(item.startYear)
+                append(myUtils.transformDateFormatMMYYYY(item.startYear))
             }
             if (item.endYear.isNotEmpty()) {
                 append(" - ")
-                append(item.endYear)
+                append(myUtils.transformDateFormatMMYYYY(item.endYear))
             }
         }
         holder.dateStudies.text = fullDate

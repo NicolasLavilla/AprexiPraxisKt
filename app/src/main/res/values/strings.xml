@@ -93,6 +93,7 @@
     <string name="job_company">Cargo (Gerente, Diseñador…) Opcional</string>
     <string name="birthdate_user">Fecha de nacimiento</string>
     <string name="address">Dirección</string>
+    <string name="title_register_fragment">Registro</string>
 
 
 </resources>

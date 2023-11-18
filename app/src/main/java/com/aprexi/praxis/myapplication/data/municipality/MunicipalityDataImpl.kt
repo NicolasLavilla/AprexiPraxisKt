@@ -11,9 +11,7 @@ class MunicipalityDataImpl(
 ) : MunicipalityRepository {
 
 
-    override suspend fun getListBasicMunicipality(
-        token: String
-    ): ListBasicMunicipality {
+    override suspend fun getListBasicMunicipality(): ListBasicMunicipality {
 
         val cachedMunicipalityList = municipalityLocalImpl.getListBasicMunicipality()
 
@@ -21,7 +19,7 @@ class MunicipalityDataImpl(
             return cachedMunicipalityList
         } else {
             val resultListCompany: ListBasicMunicipality =
-                municipalityRemoteImpl.getListBasicMunicipality(token = token)
+                municipalityRemoteImpl.getListBasicMunicipality()
             saveListBasicMunicipality(resultListCompany)
             return resultListCompany
         }

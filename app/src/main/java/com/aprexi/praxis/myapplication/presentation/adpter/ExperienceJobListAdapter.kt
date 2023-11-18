@@ -6,8 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.aprexi.praxis.myapplication.databinding.RowListExperienceBinding
 import com.aprexi.praxis.myapplication.model.ExperienceJobUser
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 
-class ExperienceJobListAdapter: RecyclerView.Adapter<ExperienceJobListAdapter.ExperienceJobListViewHolder>() {
+class ExperienceJobListAdapter(
+    private val myUtils: Utils
+): RecyclerView.Adapter<ExperienceJobListAdapter.ExperienceJobListViewHolder>() {
 
     private var experienceJobUserList: List<ExperienceJobUser> = emptyList()
 
@@ -31,11 +34,11 @@ class ExperienceJobListAdapter: RecyclerView.Adapter<ExperienceJobListAdapter.Ex
 
         val fullDate = buildString {
             if (item.initDate.isNotEmpty()) {
-                append(item.initDate)
+                append(myUtils.transformDateFormatMMYYYY(item.initDate))
             }
             if (item.endDate.isNotEmpty()) {
                 append(" - ")
-                append(item.endDate)
+                append(myUtils.transformDateFormatMMYYYY(item.endDate))
             }
         }
         holder.dateExperienceJob.text = fullDate

@@ -7,7 +7,7 @@ class GetListBasicMunicipalityUseCause (
     private val municipalityRepository: MunicipalityRepository
 ) {
 
-    suspend fun execute(token: String): ListBasicMunicipality {
-        return municipalityRepository.getListBasicMunicipality( token = token)
+    suspend fun execute(): ListBasicMunicipality {
+        return municipalityRepository.getListBasicMunicipality()
     }
 }

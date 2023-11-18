@@ -2,13 +2,13 @@ package com.aprexi.praxis.myapplication.presentation.fragment
 
 import android.R
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
@@ -25,7 +25,7 @@ import com.aprexi.praxis.myapplication.model.ListBasicLanguages
 import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DeleteLanguagesUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DetailLanguagesViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.ExperienceState
@@ -35,15 +35,14 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.LanguagesUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.UpdateLanguagesUserState
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class LanguagesDetailFragment: Fragment() {
 
-    private val binding: FragmentLanguagesDetailBinding by lazy {
-        FragmentLanguagesDetailBinding.inflate(layoutInflater)
-    }
+    private lateinit var binding: FragmentLanguagesDetailBinding
+    private lateinit var progressBar: ProgressBar
 
     private var loginToken: String = ""
     private var succesToken: Boolean = false
@@ -52,22 +51,24 @@ class LanguagesDetailFragment: Fragment() {
     private var idLanguages: Int = 0
     private var idExperience: Int = 0
     private var idFragment: Int = 0
+    private val args: LanguagesDetailFragmentArgs by navArgs()
+    private val languagesViewModel: DetailLanguagesViewModel by activityViewModel()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentLanguagesDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
-
-    private val args: LanguagesDetailFragmentArgs by navArgs()
-    private val languagesViewModel: DetailLanguagesViewModel by activityViewModel()
-    private val tokenViewModel: TokenViewModel by activityViewModel()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        progressBar = binding.pbLanguagesDetail
         initArgs()
         getTokenLoginPreference()
         initViewModel()
@@ -96,7 +97,7 @@ class LanguagesDetailFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(requireContext() ,e.toString())
         }
     }
 
@@ -127,75 +128,75 @@ class LanguagesDetailFragment: Fragment() {
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
 
     private fun handleExperienceState(state: ExperienceState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListExperience(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleLanguagesState(state: LanguagesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessLanguagesUserDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleLanguagesBasicState(state: LanguagesBasicState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListBasicLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleUpdateLanguagesUserState(state: UpdateLanguagesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleInsertLanguagesUserState(state: InsertLanguagesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleDeleteStudiesUserState(state: DeleteLanguagesUserState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
             else -> {}
         }
     }
 
     private fun handleSuccessLanguagesUserDetail(language: LanguagesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         idLanguagesUser = language.idLanguagesUser.toInt()
         idLanguages = language.idLanguages.toInt()
@@ -229,7 +230,7 @@ class LanguagesDetailFragment: Fragment() {
     }
 
     private fun handleSuccessListExperience(experience: ListExperience) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         val idExp: Int = idExperience
 
@@ -292,7 +293,7 @@ class LanguagesDetailFragment: Fragment() {
     }
 
     private fun handleSuccessListBasicLanguages(language: ListBasicLanguages) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         val idLanguage: Int = idLanguages
 
@@ -319,9 +320,7 @@ class LanguagesDetailFragment: Fragment() {
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 val selectedItem = language.basicLanguages[position]
                 // Realiza alguna acción con el elemento seleccionado
-
                 idLanguages = selectedItem.idLanguages.toInt()
-
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -412,7 +411,7 @@ class LanguagesDetailFragment: Fragment() {
     }
 
     private fun handleSuccessInsertLanguages(languages: InsertLanguagesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(languages.success){
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -422,7 +421,7 @@ class LanguagesDetailFragment: Fragment() {
     }
 
     private fun handleSuccessDeleteLanguages(languages: DeleteLanguagesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(languages.success){
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -432,7 +431,7 @@ class LanguagesDetailFragment: Fragment() {
     }
 
     private fun handleSuccessUpdateLanguages(languges: UpdateLanguagesUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(languges.success){
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -442,29 +441,13 @@ class LanguagesDetailFragment: Fragment() {
     }
 
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
-    }
-
-    private fun showProgressBar(show: Boolean) {
-        binding.pbLanguagesDetail.visibility = if (show) View.VISIBLE else View.GONE
     }
 
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
+        myUtils.redirectToLogin(requireContext())
     }
 
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(com.aprexi.praxis.myapplication.R.string.error)
-            .setMessage(error)
-            .setPositiveButton(com.aprexi.praxis.myapplication.R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
-    }
 }

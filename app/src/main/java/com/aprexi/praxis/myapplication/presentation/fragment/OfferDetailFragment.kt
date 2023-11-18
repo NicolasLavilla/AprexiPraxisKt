@@ -1,15 +1,14 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.aprexi.praxis.myapplication.R
@@ -19,7 +18,7 @@ import com.aprexi.praxis.myapplication.model.FollowOfferUser
 import com.aprexi.praxis.myapplication.model.Offer
 import com.aprexi.praxis.myapplication.model.RequestOfferUser
 import com.aprexi.praxis.myapplication.model.ResourceState
-import com.aprexi.praxis.myapplication.presentation.SplashActivity
+import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.DeleteFollowOfferState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.FollowOfferState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.OfferDetailState
@@ -29,19 +28,18 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
 import com.bumptech.glide.Glide
 import com.google.android.material.appbar.AppBarLayout
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
-import java.text.SimpleDateFormat
-import java.util.Calendar
-import java.util.Locale
 
 class OfferDetailFragment : Fragment() {
 
-    private val binding: FragmentOfferDetailBinding by lazy {
-        FragmentOfferDetailBinding.inflate(layoutInflater)
-    }
-
+    private lateinit var binding: FragmentOfferDetailBinding
+    private lateinit var progressBar: ProgressBar
+    private val args: OfferDetailFragmentArgs by navArgs()
+    private val tokenViewModel: TokenViewModel by activityViewModel()
+    private val offersViewModel: OfferViewModel by activityViewModel()
+    private val myUtils: Utils by inject()
     private var loginToken: String = ""
     private var succesToken: Boolean = false
     private var followOffer: Boolean = false
@@ -51,16 +49,13 @@ class OfferDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentOfferDetailBinding.inflate(inflater, container, false)
         return binding.root
     }
 
-    private val args: OfferDetailFragmentArgs by navArgs()
-    private val tokenViewModel: TokenViewModel by activityViewModel()
-    private val offersViewModel: OfferViewModel by activityViewModel()
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = binding.pbOfferDetail
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
@@ -87,7 +82,7 @@ class OfferDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            showErrorDialog(e.toString())
+            myUtils.showErrorDialog(requireContext(),e.toString())
         }
     }
 
@@ -101,94 +96,94 @@ class OfferDetailFragment : Fragment() {
 
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
-            is ResourceState.Success -> showProgressBar(false)
-            is ResourceState.Error -> showErrorDialog(state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
             else -> { }
         }
     }
 
     private fun handleDeleteFollowOfferDetailState(state: DeleteFollowOfferState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteFollowOffer(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext(),state.error)
             else -> { }
         }
     }
 
     private fun handleFollowOfferDetailState(state: FollowOfferState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessFollowOffer(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext(),state.error)
             else -> { }
         }
     }
 
     private fun handleRequestOfferDetailState(state: RequestOfferState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessRequestOffer(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext(),state.error)
             else -> { }
         }
     }
 
     private fun handleOfferDetailState(state: OfferDetailState) {
         when (state) {
-            is ResourceState.Loading -> showProgressBar(true)
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> showErrorDialog(state.error)
+            is ResourceState.Error -> myUtils.showErrorDialog(requireContext(),state.error)
             else -> { }
         }
     }
 
     private fun handleSuccessFollowOffer(result: FollowOfferUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(result.success){
             followOfferXml()
 
-        }else if (!result.success){
+        }else{
             Toast.makeText(this.context, "No se ha podido guardar!", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun handleSuccessDeleteFollowOffer(result: DeleteFollowOfferUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(result.success){
             noFollowOfferXml()
 
-        }else if (!result.success){
+        }else{
             Toast.makeText(this.context, "No se ha podido desguardar!", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun handleSuccessRequestOffer(result: RequestOfferUser) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
 
         if(result.success){
             binding.btnRequestOfferDetailFragment.isEnabled = false
             binding.btnRequestOfferDetailFragment.text = getString(R.string.is_request_offer_detail_fragment)
 
-        }else if (!result.success){
+        }else{
             Toast.makeText(this.context, "No te has podido inscribir!", Toast.LENGTH_SHORT).show()
         }
     }
 
     private fun handleSuccessOfferDetail(offer: Offer) {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         initUI(offer)
     }
 
     private fun handleSuccessFailed() {
-        showProgressBar(false)
+        myUtils.showProgressBar(false, progressBar)
         cleanTokenAndRedirectToLogin()
     }
 
@@ -200,7 +195,7 @@ class OfferDetailFragment : Fragment() {
         binding.tvTitleOfferDetailFragment.text = offer.offerTitle
         binding.tvMunicipalityOfferDetailFragment.text = offer.nameMunicipality
         binding.tvSalaryOfferDetailFragment.text = offer.salary.toString()
-        binding.tvTimeOfferDetailFragment.text = calculateElapsedTime(offer.datePublication)
+        binding.tvTimeOfferDetailFragment.text = myUtils.calculateElapsedTime(offer.datePublication)
         binding.tvVacantOfferDetailFragment.text = offer.numVacancies.toString() + " inscritos"
         binding.tvInscriptionsOfferDetailFragment.text = offer.numRegistered.toString() + " vacantes"
         binding.tvModalityOfferDetailFragment.text = offer.nameModality
@@ -287,44 +282,8 @@ class OfferDetailFragment : Fragment() {
         binding.fabOfferDetailFragment.setImageResource(R.drawable.baseline_favorite_border_24)
     }
 
-    private fun showProgressBar(show: Boolean) {
-        binding.pbOfferDetail.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
     private fun cleanTokenAndRedirectToLogin() {
         tokenViewModel.cleanTokenPreferences()
-        redirectToLogin()
-    }
-
-    private fun redirectToLogin() {
-        val intent = Intent(requireContext(), SplashActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun calculateElapsedTime(datePublication: String): String {
-        val currentDate = Calendar.getInstance().time
-        val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
-        val dateCreated = dateFormat.parse(datePublication)
-
-        val timeDifferenceMillis = currentDate.time - dateCreated.time
-        val seconds = timeDifferenceMillis / 1000
-        val minutes = seconds / 60
-        val hours = minutes / 60
-        val days = hours / 24
-
-        return when {
-            days > 0 -> "Hace $days días"
-            hours > 0 -> "Hace $hours horas"
-            minutes > 0 -> "Hace $minutes minutos"
-            else -> "Hace $seconds segundos"
-        }
-    }
-
-    private fun showErrorDialog(error: String, action: (() -> Unit)? = null) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok) { _, _ -> action?.invoke() }
-            .show()
+        myUtils.redirectToLogin(requireContext())
     }
 }
