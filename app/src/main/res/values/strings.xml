@@ -12,6 +12,7 @@
     <string name="tv_inscription_offer_list_item">INSCRITO</string>
     <string name="error">Error</string>
     <string name="action_ok">Aceptar</string>
+    <string name="action_cancel">Cancelar</string>
     <string name="action_retry">Reintentar</string>
     <string name="text_search_fragment_offer_list">Todas las Ofertas de Zaragoza</string>
     <string name="buscador">Buscador</string>
@@ -71,6 +72,8 @@
     <string name="title_notifications">Notifications</string>
     <string name="detail_request_offer_title">Detalle de la solicitud</string>
 
+
+    <string name="message_show_dialog_delete">Se va a eliminar</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="sector_company">Sector Empresa</string>
     <string name="text_description">Descripción</string>

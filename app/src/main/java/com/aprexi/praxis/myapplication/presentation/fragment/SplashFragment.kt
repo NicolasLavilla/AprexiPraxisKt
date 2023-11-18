@@ -62,7 +62,7 @@ class SplashFragment : Fragment() {
                     redirectToLoginWithDelay()
                 }
             } catch (e: Exception) {
-                myUtils.showErrorDialog(context = requireContext(),e.toString())
+                myUtils.showError(context = requireContext(),e.toString())
             }
         }
     }
@@ -75,7 +75,7 @@ class SplashFragment : Fragment() {
             }
 
             is ResourceState.Error -> {
-                myUtils.showErrorDialog(context = requireContext(),state.error)
+                myUtils.showError(context = requireContext(),state.error)
             }
 
             else -> {}

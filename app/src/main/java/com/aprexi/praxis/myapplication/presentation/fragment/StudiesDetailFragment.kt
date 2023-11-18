@@ -86,7 +86,7 @@ class StudiesDetailFragment : Fragment() {
 
     }
 
-    private fun initArgs(){
+    private fun initArgs() {
         idStudiesUs = args.idStudies
         idProfessionalFamilies = args.professionalFamilies
         idTypeStudies = args.typeStudies
@@ -122,7 +122,7 @@ class StudiesDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(requireContext() ,e.toString())
+            myUtils.showError(requireContext(), e.toString())
         }
     }
 
@@ -137,13 +137,20 @@ class StudiesDetailFragment : Fragment() {
 
     private fun initViewModel() {
         studiesViewModel.schoolLiveData().observe(viewLifecycleOwner, this::handleSchoolState)
-        studiesViewModel.professionalFamiliesLiveData().observe(viewLifecycleOwner, this::handleProfessionalFamiliesState)
-        studiesViewModel.typeStudiesLiveData().observe(viewLifecycleOwner, this::handleTypeStudiesState)
-        studiesViewModel.nameStudiesLiveData().observe(viewLifecycleOwner, this::handleNameStudiesState)
-        studiesViewModel.studiesUserLiveData().observe(viewLifecycleOwner, this::handleStudiesUserState)
-        studiesViewModel.insertStudiesLiveData().observe(viewLifecycleOwner, this::handleInsertStudiesUserState)
-        studiesViewModel.updateStudiesUserLiveData().observe(viewLifecycleOwner, this::handleUpdateStudiesUserState)
-        studiesViewModel.deleteStudiesUserLiveData().observe(viewLifecycleOwner, this::handleDeleteStudiesUserState)
+        studiesViewModel.professionalFamiliesLiveData()
+            .observe(viewLifecycleOwner, this::handleProfessionalFamiliesState)
+        studiesViewModel.typeStudiesLiveData()
+            .observe(viewLifecycleOwner, this::handleTypeStudiesState)
+        studiesViewModel.nameStudiesLiveData()
+            .observe(viewLifecycleOwner, this::handleNameStudiesState)
+        studiesViewModel.studiesUserLiveData()
+            .observe(viewLifecycleOwner, this::handleStudiesUserState)
+        studiesViewModel.insertStudiesLiveData()
+            .observe(viewLifecycleOwner, this::handleInsertStudiesUserState)
+        studiesViewModel.updateStudiesUserLiveData()
+            .observe(viewLifecycleOwner, this::handleUpdateStudiesUserState)
+        studiesViewModel.deleteStudiesUserLiveData()
+            .observe(viewLifecycleOwner, this::handleDeleteStudiesUserState)
         tokenViewModel.getTokenLiveData().observe(viewLifecycleOwner, this::handleTokenState)
     }
 
@@ -151,7 +158,11 @@ class StudiesDetailFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error -> myUtils.showError(
+                requireContext(),
+                state.error
+            ) { cleanTokenAndRedirectToLogin() }
+
             else -> {}
         }
     }
@@ -161,7 +172,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -171,7 +182,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -181,7 +192,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -191,7 +202,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -201,7 +212,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListTypeStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -211,7 +222,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListNameStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -221,7 +232,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListProfessionalFamilies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -231,7 +242,7 @@ class StudiesDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListSchool(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
             else -> {}
         }
     }
@@ -281,7 +292,12 @@ class StudiesDetailFragment : Fragment() {
         }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = school.school[position]
                 // Realiza alguna acción con el elemento seleccionado
                 idSchool = selectedItem.idSchool.toInt()
@@ -334,7 +350,8 @@ class StudiesDetailFragment : Fragment() {
         spinner.adapter = adapter
 
         // Busca la posición del elemento con idProfessionalFamilies
-        val positionOfIdProfessionalFamilies = professionalFamilies.professionalFamilies.indexOfFirst { it.idProfessionalFamilies.toInt() == profFamilies }
+        val positionOfIdProfessionalFamilies =
+            professionalFamilies.professionalFamilies.indexOfFirst { it.idProfessionalFamilies.toInt() == profFamilies }
 
         // Establece la selección del Spinner a la posición del elemento con idProfessionalFamilies
         if (positionOfIdProfessionalFamilies != -1) {
@@ -342,7 +359,12 @@ class StudiesDetailFragment : Fragment() {
         }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = professionalFamilies.professionalFamilies[position]
                 // Realiza alguna acción con el elemento seleccionado
                 idProfessionalFamilies = selectedItem.idProfessionalFamilies.toInt()
@@ -398,7 +420,8 @@ class StudiesDetailFragment : Fragment() {
         spinner.adapter = adapter
 
         // Busca la posición del elemento con idType
-        val positionOfIdType = typeStudies.typeStudies.indexOfFirst { it.idTypeStudies.toInt() == idType }
+        val positionOfIdType =
+            typeStudies.typeStudies.indexOfFirst { it.idTypeStudies.toInt() == idType }
 
         // Establece la selección del Spinner a la posición del elemento con idType
         if (positionOfIdType != -1) {
@@ -406,7 +429,12 @@ class StudiesDetailFragment : Fragment() {
         }
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+            override fun onItemSelected(
+                parent: AdapterView<*>?,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
                 val selectedItem = typeStudies.typeStudies[position]
                 // Realiza alguna acción con el elemento seleccionado
 
@@ -480,9 +508,9 @@ class StudiesDetailFragment : Fragment() {
     private fun handleSuccessUpdateStudies(studies: UpdateStudiesUser) {
         myUtils.showProgressBar(false, progressBar)
 
-        if(studies.success){
+        if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
-        }else{
+        } else {
             Toast.makeText(context, "No se ha podido actualizar", Toast.LENGTH_SHORT).show()
         }
     }
@@ -490,9 +518,9 @@ class StudiesDetailFragment : Fragment() {
     private fun handleSuccessDeleteStudies(studies: DeleteStudiesUser) {
         myUtils.showProgressBar(false, progressBar)
 
-        if(studies.success){
+        if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
-        }else{
+        } else {
             Toast.makeText(context, "No se ha podido borrar", Toast.LENGTH_SHORT).show()
         }
     }
@@ -500,9 +528,9 @@ class StudiesDetailFragment : Fragment() {
     private fun handleSuccessInsertStudies(studies: InsertStudiesUser) {
         myUtils.showProgressBar(false, progressBar)
 
-        if(studies.success){
+        if (studies.success) {
             requireActivity().onBackPressedDispatcher.onBackPressed()
-        }else{
+        } else {
             Toast.makeText(context, "No se ha podido insertar", Toast.LENGTH_SHORT).show()
         }
     }
@@ -514,10 +542,13 @@ class StudiesDetailFragment : Fragment() {
 
     private fun initUI(studies: StudiesUser) {
 
-        binding.tieDateInitStudiesDetailFragment.text = myUtils.changeDateFormatEUR(args.startYear)
+        initDate = myUtils.changeDateFormatEUR(args.startYear)
+        endDate = myUtils.changeDateFormatEUR(args.endYear)
 
-        if (args.endYear.isNotEmpty()){
-            binding.tieDateEndStudiesDetailFragment.text = myUtils.changeDateFormatEUR(args.endYear)
+        binding.tieDateInitStudiesDetailFragment.text = initDate
+
+        if (args.endYear.isNotEmpty()) {
+            binding.tieDateEndStudiesDetailFragment.text = endDate
         }
 
         binding.vBackBottomStudies.setOnClickListener {
@@ -572,6 +603,7 @@ class StudiesDetailFragment : Fragment() {
     private fun updateStudies() {
 
         if (idTypeStudies != 0 && idProfessionalFamilies != 0 && idSchool != 0 && idNameStudies != 0 && initDate.isNotEmpty()) {
+
             studiesViewModel.updateStudiesUser(
                 idUser = idUser,
                 idNameStudies = idNameStudies,
@@ -581,12 +613,18 @@ class StudiesDetailFragment : Fragment() {
                 idStudiesUser = idStudiesUs,
                 token = loginToken
             )
-        }else{
-            binding.acsTypeStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.acsNameStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.acsSchoolStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.acsProfessionalFamiliesStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.tieDateInitStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
+
+        } else {
+            binding.acsTypeStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.acsNameStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.acsSchoolStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.acsProfessionalFamiliesStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.tieDateInitStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
         }
     }
 
@@ -597,28 +635,36 @@ class StudiesDetailFragment : Fragment() {
                 idUser = idUser,
                 idNameStudies = idNameStudies,
                 startYear = myUtils.changeDateFormatEU(initDate),
-                endYear = myUtils.changeDateFormatEU(endDate ?: "") ,
+                endYear = myUtils.changeDateFormatEU(endDate ?: ""),
                 idSchool = idSchool,
                 idStudiesUser = 18,
                 token = loginToken
             )
-        }else{
-            binding.acsTypeStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.acsNameStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.acsSchoolStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.acsProfessionalFamiliesStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
-            binding.tieDateInitStudiesDetailFragment.background = R.drawable.spinner_background_error.toDrawable()
+        } else {
+            binding.acsTypeStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.acsNameStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.acsSchoolStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.acsProfessionalFamiliesStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
+            binding.tieDateInitStudiesDetailFragment.background =
+                R.drawable.spinner_background_error.toDrawable()
         }
     }
 
     private fun deleteStudies() {
-
-        if (args.idStudies != 0) {
-            studiesViewModel.deleteStudiesUser(
-                idUser = idUser,
-                idStudiesUser = args.idStudies,
-                token = loginToken
-            )
+        myUtils.showConfirmationDialog(requireContext(), requireContext().getString(R.string.message_show_dialog_delete)) { confirmed ->
+            if (confirmed && args.idStudies != 0) {
+                studiesViewModel.deleteStudiesUser(
+                    idUser = idUser,
+                    idStudiesUser = args.idStudies,
+                    token = loginToken
+                )
+            } else {
+                // Lógica si el usuario cancela la acción
+            }
         }
     }
 

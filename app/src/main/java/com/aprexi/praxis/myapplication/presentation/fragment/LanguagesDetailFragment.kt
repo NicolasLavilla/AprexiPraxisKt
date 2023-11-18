@@ -97,7 +97,7 @@ class LanguagesDetailFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(requireContext() ,e.toString())
+            myUtils.showError(requireContext() ,e.toString())
         }
     }
 
@@ -130,7 +130,7 @@ class LanguagesDetailFragment: Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
@@ -140,7 +140,7 @@ class LanguagesDetailFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListExperience(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -150,7 +150,7 @@ class LanguagesDetailFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessLanguagesUserDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -160,7 +160,7 @@ class LanguagesDetailFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListBasicLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -170,7 +170,7 @@ class LanguagesDetailFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -180,7 +180,7 @@ class LanguagesDetailFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -190,7 +190,7 @@ class LanguagesDetailFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteLanguages(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -401,12 +401,14 @@ class LanguagesDetailFragment: Fragment() {
 
     private fun deleteLanguages() {
 
-        if (idLanguagesUser != 0) {
-            languagesViewModel.deleteLanguagesUser(
-                idUser = idUser,
-                idLanguagesUser = idLanguagesUser,
-                token = loginToken
-            )
+        myUtils.showConfirmationDialog(requireContext(), requireContext().getString(com.aprexi.praxis.myapplication.R.string.message_show_dialog_delete)) { confirmed ->
+            if (confirmed && idLanguagesUser != 0) {
+                languagesViewModel.deleteLanguagesUser(
+                    idUser = idUser,
+                    idLanguagesUser = idLanguagesUser,
+                    token = loginToken
+                )
+            }
         }
     }
 

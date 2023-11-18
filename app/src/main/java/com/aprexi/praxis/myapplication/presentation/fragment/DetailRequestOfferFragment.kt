@@ -84,7 +84,7 @@ class DetailRequestOfferFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(requireContext() ,e.toString())
+            myUtils.showError(requireContext() ,e.toString())
         }
     }
 
@@ -100,7 +100,7 @@ class DetailRequestOfferFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleOfferDetailSuccess(state.result) //initUI()
             is ResourceState.SuccessFaild -> handleSuccessResponse()
-            is ResourceState.Error ->  myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error ->  myUtils.showError(requireContext() ,state.error)
             else -> { }
         }
     }
@@ -115,7 +115,7 @@ class DetailRequestOfferFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleDetailRequestOfferListSuccess(state.result)
             is ResourceState.SuccessFaild -> handleSuccessResponse()
-            is ResourceState.Error ->  myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error ->  myUtils.showError(requireContext() ,state.error)
             else -> { }
         }
     }
@@ -124,7 +124,7 @@ class DetailRequestOfferFragment: Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error ->  myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error ->  myUtils.showError(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }

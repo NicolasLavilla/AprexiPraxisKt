@@ -165,7 +165,4 @@ class CurriculumViewModel(
         }
     }
 
-
-
-
 }

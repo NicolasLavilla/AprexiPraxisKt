@@ -5,10 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
+import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentLoginBinding
 import com.aprexi.praxis.myapplication.model.Login
 import com.aprexi.praxis.myapplication.model.ResourceState
@@ -18,16 +17,13 @@ import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LoginViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenViewModel
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.activityViewModel
 
 class LoginFragment : Fragment() {
 
-    private val binding: FragmentLoginBinding by lazy {
-        FragmentLoginBinding.inflate(layoutInflater)
-    }
-
+    private lateinit var binding: FragmentLoginBinding
+    private lateinit var progressBar: ProgressBar
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val loginViewModel: LoginViewModel by activityViewModel()
     private val myUtils: Utils by inject()
@@ -37,12 +33,13 @@ class LoginFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        binding = FragmentLoginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        progressBar = binding.pbLoginFragment
         initViewModel()
 
         binding.btnLoginLoginActivity.setOnClickListener {
@@ -52,7 +49,7 @@ class LoginFragment : Fragment() {
             if (email.isNotEmpty() && password.isNotEmpty()) {
                 loginViewModel.fetchLogin(email = email, password = myUtils.hashPassword(password))
             } else {
-                showToast("No puede estar vacío!")
+                myUtils.showToast(context = requireContext(),"No puede estar vacío!")
             }
         }
 
@@ -73,16 +70,16 @@ class LoginFragment : Fragment() {
     private fun handleTokenState(state: TokenDetailState) {
         when (state) {
             is ResourceState.Loading -> {
-                showProgressBar(true)
+                myUtils.showProgressBar(true, progressBar)
             }
 
             is ResourceState.Success -> {
-                showProgressBar(false)
+                myUtils.showProgressBar(false, progressBar)
             }
 
             is ResourceState.Error -> {
-                showProgressBar(false)
-                showErrorDialog(state.error) { retryLogin() }
+                myUtils.showProgressBar(false, progressBar)
+                myUtils.showError( context = requireContext(),state.error) { retryLogin() }
             }
 
             else -> {}
@@ -92,18 +89,18 @@ class LoginFragment : Fragment() {
     private fun handleLoginState(state: LoginDetailState) {
         when (state) {
             is ResourceState.Loading -> {
-                showProgressBar(true)
+                myUtils.showProgressBar(true, progressBar)
             }
 
             is ResourceState.Success -> {
-                showProgressBar(false)
+                myUtils.showProgressBar(false, progressBar)
                 saveTokenPreferences(state.result)
                 initUI(state.result)
             }
 
             is ResourceState.Error -> {
-                showProgressBar(false)
-                showErrorDialog(state.error) { retryLogin() }
+                myUtils.showProgressBar(false, progressBar)
+                myUtils.showError( context = requireContext(),state.error) { retryLogin() }
             }
 
             else -> {}
@@ -114,7 +111,7 @@ class LoginFragment : Fragment() {
         if (result.success) {
             navigateToOfferListFragment()
         } else {
-            showToast("Credenciales incorrectas")
+            myUtils.showToast(context = requireContext(),"Credenciales incorrectas")
         }
     }
 
@@ -123,7 +120,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun navigateToOfferListFragment() {
-        //findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToOfferListFragment())
         val intent = Intent(requireContext(), BottomActivity::class.java)
         startActivity(intent)
     }
@@ -137,24 +133,5 @@ class LoginFragment : Fragment() {
             email = binding.etEmailLoginActivity.text.toString(),
             password = binding.etPasswordLoginActivity.text.toString()
         )
-    }
-
-    private fun showToast(message: String) {
-        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-    }
-
-    private fun showProgressBar(show: Boolean) {
-        binding.pbLoginFragment.visibility = if (show) View.VISIBLE else View.GONE
-    }
-
-    private fun showErrorDialog(error: String, onRetry: () -> Unit) {
-        MaterialAlertDialogBuilder(requireContext())
-            .setTitle(R.string.error)
-            .setMessage(error)
-            .setPositiveButton(R.string.action_ok, null)
-            .setNegativeButton(R.string.action_retry) { _, _ ->
-                onRetry()
-            }
-            .show()
     }
 }

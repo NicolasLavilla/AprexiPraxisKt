@@ -18,6 +18,19 @@
             style="@style/bar_top_information"
             android:text="@string/curriculum" />
 
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end">
+
+            <View
+                android:id="@+id/v_botton_qr_curriculum_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_qr_code_24"
+                android:backgroundTint="@color/azul_candidatura"/>
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
     </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.core.widget.NestedScrollView

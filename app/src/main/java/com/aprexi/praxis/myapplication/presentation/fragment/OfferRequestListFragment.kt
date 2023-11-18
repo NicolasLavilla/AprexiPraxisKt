@@ -74,7 +74,7 @@ class OfferRequestListFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(context = requireContext(),e.toString())
+            myUtils.showError(context = requireContext(),e.toString())
         }
     }
 
@@ -88,7 +88,7 @@ class OfferRequestListFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccess(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error -> myUtils.showError(context = requireContext(),state.error)
             else -> { }
         }
     }
@@ -97,7 +97,7 @@ class OfferRequestListFragment: Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error -> myUtils.showError(context = requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
             else -> { }
         }
     }

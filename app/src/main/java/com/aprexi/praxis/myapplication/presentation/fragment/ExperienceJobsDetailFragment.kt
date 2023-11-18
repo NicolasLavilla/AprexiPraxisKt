@@ -113,7 +113,7 @@ class ExperienceJobsDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(context = requireContext(),e.toString())
+            myUtils.showError(context = requireContext(),e.toString())
         }
     }
 
@@ -148,7 +148,7 @@ class ExperienceJobsDetailFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
@@ -158,7 +158,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -168,7 +168,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -178,7 +178,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertStudies(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -188,7 +188,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListLevel(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -198,7 +198,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListCategory(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -208,7 +208,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListNameCompany(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -218,7 +218,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessExperienceJobUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error ->  myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error ->  myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -439,12 +439,14 @@ class ExperienceJobsDetailFragment : Fragment() {
 
     private fun deleteExperienceJobUser() {
 
-        if (idExperienceJobs != 0) {
-            detailExperienceJobViewModel.deleteExperienceJobUser(
-                idUser = idUser,
-                idExperienceJobUser = idExperienceJobs,
-                token = loginToken
-            )
+        myUtils.showConfirmationDialog(requireContext(), requireContext().getString(R.string.message_show_dialog_delete)) { confirmed ->
+            if (confirmed && idExperienceJobs != 0) {
+                detailExperienceJobViewModel.deleteExperienceJobUser(
+                    idUser = idUser,
+                    idExperienceJobUser = idExperienceJobs,
+                    token = loginToken
+                )
+            }
         }
     }
 

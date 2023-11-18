@@ -63,7 +63,7 @@ class OfferFollowListFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccess(state.result)
             is ResourceState.SuccessFaild -> handleSuccessResponse()
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(),state.error)
+            is ResourceState.Error -> myUtils.showError(context = requireContext(),state.error)
             else -> {}
         }
     }
@@ -95,7 +95,7 @@ class OfferFollowListFragment: Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(),state.error) { myUtils.redirectToLogin(requireContext()) }
+            is ResourceState.Error -> myUtils.showError(context = requireContext(),state.error) { myUtils.redirectToLogin(requireContext()) }
             else -> {}
         }
     }
@@ -118,7 +118,7 @@ class OfferFollowListFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(context = requireContext(), e.toString())
+            myUtils.showError(context = requireContext(), e.toString())
         }
     }
 

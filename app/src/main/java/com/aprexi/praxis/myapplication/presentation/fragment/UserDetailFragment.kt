@@ -102,7 +102,7 @@ class UserDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(context = requireContext(), error = e.toString())
+            myUtils.showError(context = requireContext(), error = e.toString())
         }
     }
 
@@ -110,7 +110,7 @@ class UserDetailFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(show = false,progressBar = progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error -> myUtils.showError(context = requireContext(), error = state.error) { cleanTokenAndRedirectToLogin() }
             else -> {}
         }
     }
@@ -120,7 +120,7 @@ class UserDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> handleSuccessExperienceJobUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error)
+            is ResourceState.Error -> myUtils.showError(context = requireContext(), error = state.error)
             else -> {}
         }
     }
@@ -130,7 +130,7 @@ class UserDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> handleSuccessListBasicMunicipality(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error)
+            is ResourceState.Error -> myUtils.showError(context = requireContext(), error = state.error)
             else -> {}
         }
     }
@@ -140,7 +140,7 @@ class UserDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(show = true,progressBar = progressBar)
             is ResourceState.Success -> handleSuccessUpdateUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(context = requireContext(), error = state.error)
+            is ResourceState.Error -> myUtils.showError(context = requireContext(), error = state.error)
             else -> {}
         }
     }

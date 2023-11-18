@@ -229,7 +229,7 @@ class Utils {
         return true
     }
 
-    fun showErrorDialog(context: Context, error: String, action: (() -> Unit)? = null) {
+    fun showError(context: Context, error: String, action: (() -> Unit)? = null) {
         MaterialAlertDialogBuilder(context)
             .setTitle(R.string.error)
             .setMessage(error)
@@ -273,5 +273,30 @@ class Utils {
         val formattedDate = outputDateFormat.format(date!!)
 
         return formattedDate.replaceFirstChar { it.uppercase() }
+    }
+
+    fun showErrorDialog(context: Context,error: String, onRetry: () -> Unit) {
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.error)
+            .setMessage(error)
+            .setPositiveButton(R.string.action_ok, null)
+            .setNegativeButton(R.string.action_retry) { _, _ ->
+                onRetry()
+            }
+            .show()
+    }
+
+    fun showConfirmationDialog(context: Context, message: String, callback: (Boolean) -> Unit) {
+        MaterialAlertDialogBuilder(context)
+            .setTitle(R.string.error)
+            .setMessage(message)
+            .setPositiveButton(R.string.action_ok) { _, _ ->
+                callback(true)
+            }
+            .setNegativeButton(R.string.action_cancel) { _, _ ->
+                callback(false)
+            }
+            .setCancelable(false)
+            .show()
     }
 }

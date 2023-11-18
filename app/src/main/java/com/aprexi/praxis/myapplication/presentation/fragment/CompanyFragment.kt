@@ -75,7 +75,7 @@ class CompanyFragment: Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(requireContext() ,e.toString())
+            myUtils.showError(requireContext() ,e.toString())
         }
     }
 
@@ -89,7 +89,7 @@ class CompanyFragment: Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true,progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> { }
         }
     }
@@ -98,7 +98,7 @@ class CompanyFragment: Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true,progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false,progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error) { cleanTokenAndRedirectToLogin() }
             else -> { }
         }
     }

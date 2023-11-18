@@ -95,7 +95,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showErrorDialog(context = requireContext(), error = e.toString())
+            myUtils.showError(context = requireContext(), error = e.toString())
         }
     }
 
@@ -113,7 +113,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertProfessionalProyect(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(
+            is ResourceState.Error -> myUtils.showError(
                 context = requireContext(),
                 state.error
             )
@@ -127,7 +127,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessUpdateProfessionalProyect(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(
+            is ResourceState.Error -> myUtils.showError(
                 context = requireContext(),
                 state.error
             )
@@ -141,7 +141,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteProfessionalProyect(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(
+            is ResourceState.Error -> myUtils.showError(
                 context = requireContext(),
                 state.error
             )
@@ -155,7 +155,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessProfessionalProyectsUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(
+            is ResourceState.Error -> myUtils.showError(
                 context = requireContext(),
                 state.error
             )
@@ -168,7 +168,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(
+            is ResourceState.Error -> myUtils.showError(
                 context = requireContext(),
                 state.error
             ) { cleanTokenAndRedirectToLogin() }
@@ -371,12 +371,14 @@ class ProfessionalProyectDetailFragment : Fragment() {
 
     private fun deleteProfessionalProyectsUser() {
 
-        if (idProfessionalProyects != 0) {
-            detailProfessionalProyectsViewModel.deleteProfessionalProyectUser(
-                idUser = idUser,
-                idProfessionalProyectUser = idProfessionalProyects,
-                token = loginToken
-            )
+        myUtils.showConfirmationDialog(requireContext(), requireContext().getString(com.aprexi.praxis.myapplication.R.string.message_show_dialog_delete)) { confirmed ->
+            if (confirmed && idProfessionalProyects != 0) {
+                detailProfessionalProyectsViewModel.deleteProfessionalProyectUser(
+                    idUser = idUser,
+                    idProfessionalProyectUser = idProfessionalProyects,
+                    token = loginToken
+                )
+            }
         }
     }
 

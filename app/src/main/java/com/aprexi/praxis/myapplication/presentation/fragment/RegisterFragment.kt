@@ -84,7 +84,7 @@ class RegisterFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error) { }
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error) { }
             else -> {}
         }
     }
@@ -94,7 +94,7 @@ class RegisterFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessListBasicMunicipality(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
@@ -104,7 +104,7 @@ class RegisterFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessInsertUser(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed(state.result)
-            is ResourceState.Error -> myUtils.showErrorDialog(requireContext() ,state.error)
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
             else -> {}
         }
     }
