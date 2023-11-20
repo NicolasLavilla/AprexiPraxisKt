@@ -7,15 +7,16 @@
 
     <fragment
         android:id="@+id/license_detail_fragment"
-        android:name="com.aprexi.praxis.myapplication.presentation.fragment.LanguagesDetailFragment"
-        tools:layout="@layout/fragment_languages_detail">
+        android:name="com.aprexi.praxis.myapplication.presentation.fragment.LicenseDetailFragment"
+        tools:layout="@layout/fragment_license_detail">
 
         <argument
-            android:name="idLanguages"
+            android:name="idLicenseUser"
             app:argType="integer" />
         <argument
-            android:name="idExperience"
+            android:name="idLicense"
             app:argType="integer" />
+
         <argument
             android:name="idFragment"
             app:argType="integer" />

@@ -97,6 +97,7 @@
     <string name="birthdate_user">Fecha de nacimiento</string>
     <string name="address">Dirección</string>
     <string name="title_register_fragment">Registro</string>
+    <string name="title_license_detail_fragment">Carnets</string>
 
 
 </resources>

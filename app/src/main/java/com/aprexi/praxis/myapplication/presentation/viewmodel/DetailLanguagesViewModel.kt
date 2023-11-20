@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.aprexi.praxis.myapplication.domain.usercase.DeleteLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetListExperienceUseCause
-import com.aprexi.praxis.myapplication.domain.usercase.GetListLanguagesBasicUseCause
+import com.aprexi.praxis.myapplication.domain.usercase.GetListBasicLanguagesUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.InsertLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.UpdateLanguagesUserUseCause
 import com.aprexi.praxis.myapplication.model.DeleteLanguagesUser
@@ -34,7 +34,7 @@ class DetailLanguagesViewModel(
     private val getLanguagesUserUseCause: GetLanguagesUserUseCause,
     private val insertLanguagesUserUseCause: InsertLanguagesUserUseCause,
     private val getListExperienceUseCause: GetListExperienceUseCause,
-    private val getListBasicLanguagesBasicUseCause: GetListLanguagesBasicUseCause
+    private val getListBasicLanguagesBasicUseCause: GetListBasicLanguagesUseCause
 ) : ViewModel() {
     private val _deleteLanguagesUserLiveData = MutableLiveData<DeleteLanguagesUserState>()
     private val _updateLanguagesUserLiveData = MutableLiveData<UpdateLanguagesUserState>()

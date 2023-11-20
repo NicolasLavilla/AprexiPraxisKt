@@ -12,23 +12,28 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.aprexi.praxis.myapplication.databinding.FragmentCurriculumBinding
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
+import com.aprexi.praxis.myapplication.model.ListLicenseUser
 import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ResourceState
 import com.aprexi.praxis.myapplication.model.User
 import com.aprexi.praxis.myapplication.presentation.ExperienceJobsUserDetailActivity
 import com.aprexi.praxis.myapplication.presentation.LanguagesDetailActivity
+import com.aprexi.praxis.myapplication.presentation.LicenseDetailActivity
 import com.aprexi.praxis.myapplication.presentation.ProfessionalProyectsDetailActivity
 import com.aprexi.praxis.myapplication.presentation.StudiesDetailActivity
 import com.aprexi.praxis.myapplication.presentation.UserDataDetailActivity
 import com.aprexi.praxis.myapplication.presentation.adpter.ExperienceJobListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.LanguagesListAdapter
+import com.aprexi.praxis.myapplication.presentation.adpter.LicenseListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.ProfessionalProyectsListAdapter
 import com.aprexi.praxis.myapplication.presentation.adpter.StudiesListAdapter
 import com.aprexi.praxis.myapplication.presentation.utils.Utils
 import com.aprexi.praxis.myapplication.presentation.viewmodel.CurriculumViewModel
 import com.aprexi.praxis.myapplication.presentation.viewmodel.ExperienceJobListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.LanguagesUserListState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.LicenseUserListState
+import com.aprexi.praxis.myapplication.presentation.viewmodel.LicenseUserState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.ProfessionalProyectsUserListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.StudiesUserListState
 import com.aprexi.praxis.myapplication.presentation.viewmodel.TokenDetailState
@@ -47,6 +52,7 @@ class CurriculumFragment: Fragment() {
     private val studiesListAdapter = StudiesListAdapter(myUtils)
     private val languagesListAdapter = LanguagesListAdapter()
     private val professioanlProyectsListAdapter = ProfessionalProyectsListAdapter()
+    private val licenseListAdapter = LicenseListAdapter()
     private val experienceJobListAdapter = ExperienceJobListAdapter(myUtils)
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val curriculumViewModel: CurriculumViewModel by activityViewModel()
@@ -55,6 +61,7 @@ class CurriculumFragment: Fragment() {
     private var idUser: Int = 0
 
     private lateinit var studies: ListStudiesUser
+    private lateinit var license: ListLicenseUser
     private lateinit var experienceJob: ListExperienceJobUser
     private lateinit var languages: ListLanguagesUser
     private lateinit var professionalProyects: ListProfessionalProyectsUser
@@ -115,6 +122,11 @@ class CurriculumFragment: Fragment() {
                     token = loginToken
                 )
 
+                curriculumViewModel.fetchLicenseUser(
+                    idUser = idUser,
+                    token = loginToken
+                )
+
             } else {
                 cleanTokenAndRedirectToLogin()
             }
@@ -129,6 +141,7 @@ class CurriculumFragment: Fragment() {
         curriculumViewModel.getLanguagesUserLiveData().observe(viewLifecycleOwner, this::handleLanguagesUserState)
         curriculumViewModel.getStudiesUserLiveData().observe(viewLifecycleOwner, this::handleStudiesUserState)
         curriculumViewModel.getProfessionalProyectsUserLiveData().observe(viewLifecycleOwner, this::handleProfessionalProyectsUserState)
+        curriculumViewModel.getLicenseUserLiveData().observe(viewLifecycleOwner, this::handleLicenseUserState)
         tokenViewModel.getTokenLiveData().observe(viewLifecycleOwner, this::handleTokenState)
     }
 
@@ -171,6 +184,17 @@ class CurriculumFragment: Fragment() {
             else -> { }
         }
     }
+
+    private fun handleLicenseUserState(state: LicenseUserListState) {
+        when (state) {
+            is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
+            is ResourceState.Success -> handleLicenseOfferDetail(state.result)
+            is ResourceState.SuccessFaild -> handleSuccessFailed()
+            is ResourceState.Error -> myUtils.showError(requireContext() ,state.error)
+            else -> { }
+        }
+    }
+
 
     private fun handleStudiesUserState(state: StudiesUserListState) {
         when (state) {
@@ -221,6 +245,13 @@ class CurriculumFragment: Fragment() {
         studiesListAdapter.submitList(studiesUser.studiesUser)
     }
 
+    private fun handleLicenseOfferDetail(licenseUser: ListLicenseUser) {
+        myUtils.showProgressBar(false, progressBar)
+        license = licenseUser
+        licenseListAdapter.submitList(licenseUser.licenseUser)
+    }
+
+
     private fun initUI() {
 
         binding.rvListStudiesUserCurriculumFragment.adapter = studiesListAdapter
@@ -234,6 +265,9 @@ class CurriculumFragment: Fragment() {
 
         binding.rvListProyectsUserCurriculumFragment.adapter = professioanlProyectsListAdapter
         binding.rvListProyectsUserCurriculumFragment.layoutManager = LinearLayoutManager(requireContext())
+
+        binding.rvListLicensesUserCurriculumFragment.adapter = licenseListAdapter
+        binding.rvListLicensesUserCurriculumFragment.layoutManager = LinearLayoutManager(requireContext())
 
 
         if (!userData.image.isNullOrBlank()) {
@@ -274,7 +308,7 @@ class CurriculumFragment: Fragment() {
             intent.putExtra("idSchool", studies.idSchool.toInt())
             intent.putExtra("startYear", studies.startYear)
             intent.putExtra("endYear", studies.endYear)
-            intent.putExtra("idFragment", 1)// 1 -> Modificar
+            intent.putExtra("idFragment",  myUtils.MODIFICATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -288,7 +322,7 @@ class CurriculumFragment: Fragment() {
             intent.putExtra("idSchool", 1)
             intent.putExtra("startYear", "0000-00-00")
             intent.putExtra("endYear", "0000-00-00")
-            intent.putExtra("idFragment", 2) // 2 -> Crear
+            intent.putExtra("idFragment",  myUtils.CREATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -306,7 +340,7 @@ class CurriculumFragment: Fragment() {
             intent.putExtra("idCompany", experience.idCompany.toInt())
             intent.putExtra("idLevelJob", experience.level.toInt())
             intent.putExtra("idCategory", experience.idCategory.toInt())
-            intent.putExtra("idFragment", 1) // 1 -> Modificar
+            intent.putExtra("idFragment", myUtils.MODIFICATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -317,7 +351,7 @@ class CurriculumFragment: Fragment() {
             intent.putExtra("idCompany", 1)
             intent.putExtra("idLevelJob", 1)
             intent.putExtra("idCategory", 1)
-            intent.putExtra("idFragment", 2) // 2 -> Crear
+            intent.putExtra("idFragment", myUtils.CREATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -326,7 +360,7 @@ class CurriculumFragment: Fragment() {
             val intent = Intent(context, LanguagesDetailActivity::class.java)
             intent.putExtra("idLanguages", language.idLanguages.toInt())
             intent.putExtra("idExperience", language.idExperience.toInt())
-            intent.putExtra("idFragment", 1) // 1 -> Modificar
+            intent.putExtra("idFragment", myUtils.MODIFICATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -335,7 +369,7 @@ class CurriculumFragment: Fragment() {
             val intent = Intent(context, LanguagesDetailActivity::class.java)
             intent.putExtra("idLanguages", 1)
             intent.putExtra("idExperience", 1)
-            intent.putExtra("idFragment", 2) // 2 -> Crear
+            intent.putExtra("idFragment", myUtils.CREATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -344,7 +378,7 @@ class CurriculumFragment: Fragment() {
 
             val intent = Intent(context, ProfessionalProyectsDetailActivity::class.java)
             intent.putExtra("idProfessionalProyects", professionalProyects.idProfessionalProyects.toInt())
-            intent.putExtra("idFragment", 1) // 1 -> Modificar
+            intent.putExtra("idFragment", myUtils.MODIFICATE_FRAGMENT)
             startActivity(intent)
         }
 
@@ -352,7 +386,25 @@ class CurriculumFragment: Fragment() {
 
             val intent = Intent(context, ProfessionalProyectsDetailActivity::class.java)
             intent.putExtra("idProfessionalProyects", 1)
-            intent.putExtra("idFragment", 2) // 2 -> Crear
+            intent.putExtra("idFragment", myUtils.CREATE_FRAGMENT)
+            startActivity(intent)
+        }
+
+        licenseListAdapter.onClickListener = { license ->
+
+            val intent = Intent(context, LicenseDetailActivity::class.java)
+            intent.putExtra("idLicense", license.idLicense.toInt())
+            intent.putExtra("idLicenseUser", license.idLicenseUser.toInt())
+            intent.putExtra("idFragment", myUtils.MODIFICATE_FRAGMENT)
+            startActivity(intent)
+        }
+
+        binding.vInsertLicensesCurriculumFragment.setOnClickListener {
+
+            val intent = Intent(context, LicenseDetailActivity::class.java)
+            intent.putExtra("idLicense", 1)
+            intent.putExtra("idLicenseUser", 1)
+            intent.putExtra("idFragment", myUtils.CREATE_FRAGMENT)
             startActivity(intent)
         }
     }

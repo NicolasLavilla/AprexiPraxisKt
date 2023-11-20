@@ -6,16 +6,19 @@ import com.aprexi.praxis.myapplication.model.Company
 import com.aprexi.praxis.myapplication.model.DeleteExperienceJobUser
 import com.aprexi.praxis.myapplication.model.DeleteFollowOfferUser
 import com.aprexi.praxis.myapplication.model.DeleteLanguagesUser
+import com.aprexi.praxis.myapplication.model.DeleteLicenseUser
 import com.aprexi.praxis.myapplication.model.DeleteProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.DeleteStudiesUser
 import com.aprexi.praxis.myapplication.model.ExperienceJobUser
 import com.aprexi.praxis.myapplication.model.FollowOfferUser
 import com.aprexi.praxis.myapplication.model.InsertExperienceJobUser
 import com.aprexi.praxis.myapplication.model.InsertLanguagesUser
+import com.aprexi.praxis.myapplication.model.InsertLicenseUser
 import com.aprexi.praxis.myapplication.model.InsertProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.InsertStudiesUser
 import com.aprexi.praxis.myapplication.model.InsertUser
 import com.aprexi.praxis.myapplication.model.LanguagesUser
+import com.aprexi.praxis.myapplication.model.LicenseUser
 import com.aprexi.praxis.myapplication.model.ListBasicCompany
 import com.aprexi.praxis.myapplication.model.ListBasicLanguages
 import com.aprexi.praxis.myapplication.model.ListBasicMunicipality
@@ -25,7 +28,8 @@ import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.ListLevelJob
-import com.aprexi.praxis.myapplication.model.ListLicense
+import com.aprexi.praxis.myapplication.model.ListBasicLicense
+import com.aprexi.praxis.myapplication.model.ListLicenseUser
 import com.aprexi.praxis.myapplication.model.ListNameStudies
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListProfessionalFamilies
@@ -41,6 +45,7 @@ import com.aprexi.praxis.myapplication.model.RequestOfferUser
 import com.aprexi.praxis.myapplication.model.StudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateExperienceJobUser
 import com.aprexi.praxis.myapplication.model.UpdateLanguagesUser
+import com.aprexi.praxis.myapplication.model.UpdateLicenseUser
 import com.aprexi.praxis.myapplication.model.UpdateProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.UpdateStudiesUser
 import com.aprexi.praxis.myapplication.model.UpdateUser
@@ -376,9 +381,9 @@ interface AprexiPraxisService {
     ): ListBasicLanguages
 
     @GET("ListLicense.php")
-    suspend fun getListLicenses(
+    suspend fun getListBasicLicenses(
         @Query("token") token: String
-    ): ListLicense
+    ): ListBasicLicense
 
     @GET("ListMunicipality.php")
     suspend fun getListBasicMunicipality(): ListBasicMunicipality
@@ -403,5 +408,41 @@ interface AprexiPraxisService {
         @Query("autonomousDischarge") autonomousDischarge: Int,
         @Query("ownVehicle") ownVehicle: Int
     ): InsertUser
+
+    @POST("InsertLicenseUser.php")
+    suspend fun insertLicenseUser(
+        @Query("idUser") idUser: Int,
+        @Query("idLicenseUser") idLicenseUser: Int,
+        @Query("idLicense") idLicense: Int,
+        @Query("token") token: String
+    ): InsertLicenseUser
+
+    @PUT("UpdateLicenseUser.php")
+    suspend fun updateLicenseUser(
+        @Query("idUser") idUser: Int,
+        @Query("idLicense") idLicense: Int,
+        @Query("idLicenseUser") idLicenseUser: Int,
+        @Query("token") token: String
+    ): UpdateLicenseUser
+
+    @DELETE("DeleteLicenseUser.php")
+    suspend fun deleteLicenseUser(
+        @Query("idUser") idUser: Int,
+        @Query("idLicenseUser") idLicenseUser: Int,
+        @Query("token") token: String
+    ): DeleteLicenseUser
+
+    @GET("ListLicenseUser.php")
+    suspend fun getLicenseUserList(
+        @Query("idUser") idUser: Int,
+        @Query("token") token: String
+    ): ListLicenseUser
+
+    @GET("LicenseUser.php")
+    suspend fun getLicenseUser(
+        @Query("idUser") idUser: Int,
+        @Query("idLicenseUser") idLicenseUser: Int,
+        @Query("token") token: String
+    ): LicenseUser
 
 }

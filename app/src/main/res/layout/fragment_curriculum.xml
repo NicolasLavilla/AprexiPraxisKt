@@ -23,11 +23,24 @@
             android:layout_height="wrap_content"
             android:gravity="end">
 
+
+            <View
+                android:id="@+id/v_botton_download_cv_curriculum_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_cloud_download_24"
+                android:backgroundTint="@color/azul_candidatura" />
+
             <View
                 android:id="@+id/v_botton_qr_curriculum_fragment"
                 style="@style/bar_top_bottom_style"
                 android:background="@drawable/baseline_qr_code_24"
-                android:backgroundTint="@color/azul_candidatura"/>
+                android:backgroundTint="@color/azul_candidatura" />
+
+            <View
+                android:id="@+id/v_botton_menu_curriculum_fragment"
+                style="@style/bar_top_bottom_style"
+                android:background="@drawable/baseline_more_vert_24"
+                android:backgroundTint="@color/azul_candidatura" />
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -40,16 +53,15 @@
         android:background="@color/fondo_gris_azulado_super_claro"
         android:fillViewport="true"
         android:orientation="vertical"
-        app:layout_constraintTop_toBottomOf="@+id/ll_bar_detail_request"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_bar_detail_request">
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
 
 
             <androidx.cardview.widget.CardView
@@ -76,9 +88,9 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="15dp"
                         android:scaleType="centerCrop"
-                        app:strokeWidth="1dp"
                         android:src="@drawable/baseline_person_24"
-                        app:shapeAppearanceOverlay="@style/rounded_image_view_rounded"/>
+                        app:shapeAppearanceOverlay="@style/rounded_image_view_rounded"
+                        app:strokeWidth="1dp" />
 
                     <androidx.appcompat.widget.LinearLayoutCompat
                         android:layout_width="match_parent"
@@ -188,8 +200,8 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -236,16 +248,15 @@
                         android:nestedScrollingEnabled="true"
                         android:orientation="vertical"
                         tools:itemCount="3"
-                        tools:listitem="@layout/row_list_studies" >
-                    </androidx.recyclerview.widget.RecyclerView>
+                        tools:listitem="@layout/row_list_studies"></androidx.recyclerview.widget.RecyclerView>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -293,16 +304,15 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         tools:itemCount="3"
-                        tools:listitem="@layout/row_list_experience" >
-                    </androidx.recyclerview.widget.RecyclerView>
+                        tools:listitem="@layout/row_list_experience"></androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -349,7 +359,7 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         tools:itemCount="3"
-                        tools:listitem="@layout/row_list_language" >
+                        tools:listitem="@layout/row_list_language">
 
                     </androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
@@ -358,8 +368,8 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginBottom="20dp">
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -396,8 +406,8 @@
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="35dp"
                     android:layout_margin="5dp"
+                    android:layout_marginBottom="35dp"
                     android:gravity="center">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -406,20 +416,80 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:orientation="vertical"
+                        tools:itemCount="3"
                         tools:listitem="@layout/row_list_proyects_professionals">
+
+                    </androidx.recyclerview.widget.RecyclerView>
+                </RelativeLayout>
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="23dp"
+                    android:gravity="start"
+                    android:orientation="horizontal">
+
+                    <View
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:background="@drawable/baseline_assignment_24"
+                        android:backgroundTint="@color/black" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="Carnets:"
+                        android:textColor="@color/black"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:id="@+id/v_insert_licenses_curriculum_fragment"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_marginStart="5dp"
+                        android:background="@drawable/baseline_add_24"
+                        android:backgroundTint="@color/black" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:layout_marginBottom="35dp"
+                    android:gravity="center">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/rv_list_licenses_user_curriculum_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="horizontal"
+                        tools:itemCount="3"
+                        tools:listitem="@layout/row_list_license">
 
                     </androidx.recyclerview.widget.RecyclerView>
                 </RelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.appcompat.widget.LinearLayoutCompat>
     </androidx.core.widget.NestedScrollView>
+
     <ProgressBar
         android:id="@+id/pb_curriculum_fragment"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

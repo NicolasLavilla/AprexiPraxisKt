@@ -33,7 +33,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
 
     private lateinit var binding: FragmentProfessionalProyectsDetailBinding
     private lateinit var progressBar: ProgressBar
-
+    private lateinit var professionalProyects: ProfessionalProyectsUser
     private var loginToken: String = ""
     private var succesToken: Boolean = false
     private var idUser: Int = 0
@@ -62,6 +62,10 @@ class ProfessionalProyectDetailFragment : Fragment() {
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
+
+        if (idFragment == myUtils.CREATE_FRAGMENT) {
+            initUI()
+        }
     }
 
     private fun initArgs() {
@@ -85,12 +89,13 @@ class ProfessionalProyectDetailFragment : Fragment() {
         try {
             if (succesToken) {
                 tokenViewModel.fetchCheckToken(loginToken)
-                detailProfessionalProyectsViewModel.getProfessionalProyectsUser(
-                    idUser = idUser,
-                    idProfessionalProyectsUser = idProfessionalProyects,
-                    token = loginToken
-                )
-
+                if (idFragment == myUtils.MODIFICATE_FRAGMENT) {
+                    detailProfessionalProyectsViewModel.getProfessionalProyectsUser(
+                        idUser = idUser,
+                        idProfessionalProyectsUser = idProfessionalProyects,
+                        token = loginToken
+                    )
+                }
             } else {
                 cleanTokenAndRedirectToLogin()
             }
@@ -207,15 +212,50 @@ class ProfessionalProyectDetailFragment : Fragment() {
         }
     }
 
-    private fun handleSuccessProfessionalProyectsUser(professionalProyects: ProfessionalProyectsUser) {
+    private fun handleSuccessProfessionalProyectsUser(professionalProy: ProfessionalProyectsUser) {
         myUtils.showProgressBar(false, progressBar)
-        initUI(professionalProyects)
+        professionalProyects = professionalProy
+        initUI()
     }
 
-    private fun initUI(professionalProyects: ProfessionalProyectsUser) {
-        var initDate: String = myUtils.changeDateFormatEUR(professionalProyects.initDate)
-        var endDate: String = myUtils.changeDateFormatEUR(professionalProyects.endDate ?: "")
+    private fun initUI() {
+        val initDate: String = when (idFragment) {
+            myUtils.MODIFICATE_FRAGMENT -> {
+                val initDateFormatted = myUtils.changeDateFormatEUR(professionalProyects.initDate)
+                binding.apply {
+                    tvBottonSaveProfessionalProyectsFragment.visibility = View.VISIBLE
+                    tvBottonTrushProfessionalProyectsFragment.visibility = View.VISIBLE
+                    btnCreateProfessionalProyectsDetailFragment.visibility = View.GONE
+                    tieInitDateProfessionalProyectDetailFragment.text = initDateFormatted
+                    tieDescriptionJobProfessionalProyectsDetailFragment.setText(
+                        professionalProyects.descriptionProyect
+                    )
+                    tieNameTitleJobProfessionalProyectDetailFragment.setText(
+                        professionalProyects.nameProyect
+                    )
+                    tieWebProfessionalProyectDetailFragment.setText(professionalProyects.websites)
+                    tieJobProfessionalProyectDetailFragment.setText(professionalProyects.job)
 
+                    val endDateFormatted = myUtils.changeDateFormatEUR(professionalProyects.endDate ?: "")
+                    if (endDateFormatted.isNotEmpty()) {
+                        tieEndDateProfessionalProyectDetailFragment.text = endDateFormatted
+                    }
+                }
+                initDateFormatted
+            }
+            myUtils.CREATE_FRAGMENT -> {
+                binding.apply {
+                    tvBottonTrushProfessionalProyectsFragment.visibility = View.GONE
+                    tvBottonSaveProfessionalProyectsFragment.visibility = View.GONE
+                    btnCreateProfessionalProyectsDetailFragment.visibility = View.VISIBLE
+                }
+                "" // You might want to initialize this with a default value
+            }
+            else -> {
+                // Handle other values of idFragment if needed
+                ""
+            }
+        }
 
         binding.vBackBottomProfessionalProyects.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -224,45 +264,12 @@ class ProfessionalProyectDetailFragment : Fragment() {
         binding.tieInitDateProfessionalProyectDetailFragment.setOnClickListener {
             myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieInitDateProfessionalProyectDetailFragment.setText(selectedDate)
-                initDate = selectedDate
             }
         }
 
         binding.tieEndDateProfessionalProyectDetailFragment.setOnClickListener {
             myUtils.showDatePicker(requireContext()) { selectedDate ->
                 binding.tieEndDateProfessionalProyectDetailFragment.setText(selectedDate)
-                endDate = selectedDate
-            }
-        }
-
-        when (idFragment) {
-            1 -> { //Actualizar
-                binding.tvBottonSaveProfessionalProyectsFragment.visibility = View.VISIBLE
-                binding.tvBottonTrushProfessionalProyectsFragment.visibility = View.VISIBLE
-                binding.btnCreateProfessionalProyectsDetailFragment.visibility = View.GONE
-                binding.tieInitDateProfessionalProyectDetailFragment.text = initDate
-                binding.tieDescriptionJobProfessionalProyectsDetailFragment.setText(
-                    professionalProyects.descriptionProyect
-                )
-                binding.tieNameTitleJobProfessionalProyectDetailFragment.setText(
-                    professionalProyects.nameProyect
-                )
-                binding.tieWebProfessionalProyectDetailFragment.setText(professionalProyects.websites)
-                binding.tieJobProfessionalProyectDetailFragment.setText(professionalProyects.job)
-
-                if (endDate.isNotEmpty()) {
-                    binding.tieEndDateProfessionalProyectDetailFragment.text = endDate
-                }
-            }
-
-            2 -> {//Crear
-                binding.tvBottonTrushProfessionalProyectsFragment.visibility = View.GONE
-                binding.tvBottonSaveProfessionalProyectsFragment.visibility = View.GONE
-                binding.btnCreateProfessionalProyectsDetailFragment.visibility = View.VISIBLE
-            }
-
-            else -> {
-                // Manejo para otros valores de idFragment si es necesario
             }
         }
 
@@ -271,7 +278,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 nameProyect = myUtils.capitalizeFirstLetter(binding.tieNameTitleJobProfessionalProyectDetailFragment.text.toString()),
                 descriptionProyect = myUtils.capitalizeFirstLetter(binding.tieDescriptionJobProfessionalProyectsDetailFragment.text.toString()),
                 initDate = initDate,
-                endDate = endDate,
+                endDate = binding.tieEndDateProfessionalProyectDetailFragment.text.toString(),
                 websites = myUtils.capitalizeFirstLetter(binding.tieWebProfessionalProyectDetailFragment.text.toString()),
                 job = myUtils.capitalizeFirstLetter(binding.tieJobProfessionalProyectDetailFragment.text.toString()),
                 idProfessionalProyectUser = idProfessionalProyects
@@ -283,7 +290,7 @@ class ProfessionalProyectDetailFragment : Fragment() {
                 nameProyect = myUtils.capitalizeFirstLetter(binding.tieNameTitleJobProfessionalProyectDetailFragment.text.toString()),
                 descriptionProyect = myUtils.capitalizeFirstLetter(binding.tieDescriptionJobProfessionalProyectsDetailFragment.text.toString()),
                 initDate = initDate,
-                endDate = endDate,
+                endDate = binding.tieEndDateProfessionalProyectDetailFragment.text.toString(),
                 websites = myUtils.capitalizeFirstLetter(binding.tieWebProfessionalProyectDetailFragment.text.toString()),
                 job = myUtils.capitalizeFirstLetter(binding.tieJobProfessionalProyectDetailFragment.text.toString()),
                 idProfessionalProyectUser = idProfessionalProyects

@@ -65,6 +65,7 @@ class StudiesDetailFragment : Fragment() {
     private var idNameStudies: Int = 0
     private var initDate: String = ""
     private var endDate: String? = null
+    private var idFragment: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -84,6 +85,10 @@ class StudiesDetailFragment : Fragment() {
         initViewModel()
         handleAuthentication()
 
+        if (idFragment == myUtils.CREATE_FRAGMENT){
+            initUI()
+        }
+
     }
 
     private fun initArgs() {
@@ -94,17 +99,21 @@ class StudiesDetailFragment : Fragment() {
         idNameStudies = args.idNameStudies
         initDate = args.startYear
         endDate = args.endYear
+        idFragment = args.idFragment
     }
 
     private fun handleAuthentication() {
         try {
             if (succesToken) {
                 tokenViewModel.fetchCheckToken(loginToken)
-                studiesViewModel.getStudiesUser(
-                    idUser = idUser,
-                    idStudiesUser = idStudiesUs,
-                    token = loginToken
-                )
+
+                if (args.idFragment == myUtils.MODIFICATE_FRAGMENT) {
+                    studiesViewModel.getStudiesUser(
+                        idUser = idUser,
+                        idStudiesUser = idStudiesUs,
+                        token = loginToken
+                    )
+                }
 
                 studiesViewModel.getListSchool(
                     token = loginToken
@@ -378,7 +387,6 @@ class StudiesDetailFragment : Fragment() {
         }
     }
 
-
     class TypeStudiesAdapter(
         context: Context,
         resource: Int,
@@ -537,10 +545,10 @@ class StudiesDetailFragment : Fragment() {
 
     private fun handleSuccessOfferDetail(studies: StudiesUser) {
         myUtils.showProgressBar(false, progressBar)
-        initUI(studies)
+        initUI()
     }
 
-    private fun initUI(studies: StudiesUser) {
+    private fun initUI() {
 
         initDate = myUtils.changeDateFormatEUR(args.startYear)
         endDate = myUtils.changeDateFormatEUR(args.endYear)
@@ -655,7 +663,10 @@ class StudiesDetailFragment : Fragment() {
     }
 
     private fun deleteStudies() {
-        myUtils.showConfirmationDialog(requireContext(), requireContext().getString(R.string.message_show_dialog_delete)) { confirmed ->
+        myUtils.showConfirmationDialog(
+            requireContext(),
+            requireContext().getString(R.string.message_show_dialog_delete)
+        ) { confirmed ->
             if (confirmed && args.idStudies != 0) {
                 studiesViewModel.deleteStudiesUser(
                     idUser = idUser,

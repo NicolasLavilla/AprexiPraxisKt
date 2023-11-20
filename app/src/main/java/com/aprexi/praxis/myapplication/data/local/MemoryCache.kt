@@ -8,7 +8,7 @@ import com.aprexi.praxis.myapplication.model.ListExperience
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
 import com.aprexi.praxis.myapplication.model.ListLevelJob
-import com.aprexi.praxis.myapplication.model.ListLicense
+import com.aprexi.praxis.myapplication.model.ListBasicLicense
 import com.aprexi.praxis.myapplication.model.ListOffersResponse
 import com.aprexi.praxis.myapplication.model.ListProfessionalFamilies
 import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
@@ -35,7 +35,7 @@ class MemoryCache {
     var category: ListCategory? = null
     var experience: ListExperience? = null
     var languagesBasic: ListBasicLanguages? = null
-    var license: ListLicense? = null
+    var listBasicLicense: ListBasicLicense? = null
     var listMunicipality: ListBasicMunicipality? = null
     var userData: User? = null
 
@@ -55,7 +55,7 @@ class MemoryCache {
         category = null
         experience = null
         languagesBasic = null
-        license = null
+        listBasicLicense = null
         listMunicipality = null
         userData = null
     }

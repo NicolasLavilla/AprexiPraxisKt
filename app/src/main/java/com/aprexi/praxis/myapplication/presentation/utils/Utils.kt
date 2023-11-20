@@ -20,8 +20,10 @@ import java.util.Locale
 
 class Utils {
 
-    val GENDER_MALE = 1
-    val GENDER_FEMALE = 2
+    val GENDER_MALE: Int = 1
+    val GENDER_FEMALE: Int = 2
+    val MODIFICATE_FRAGMENT: Int = 1
+    val CREATE_FRAGMENT: Int = 2
 
     fun changeDateFormatEU(fecha: String): String {
         // Formato actual de la fecha

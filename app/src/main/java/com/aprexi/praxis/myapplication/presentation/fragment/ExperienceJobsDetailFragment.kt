@@ -57,6 +57,7 @@ class ExperienceJobsDetailFragment : Fragment() {
     private var idLevelJob: Int = 0
     private var idCategory: Int = 0
     private var idCompany: Int = 0
+    private lateinit var varExperience: ExperienceJobUser
     private val args: ExperienceJobsDetailFragmentArgs by navArgs()
     private val detailExperienceJobViewModel: DetailExperienceJobViewModel by activityViewModel()
     private val tokenViewModel: TokenViewModel by activityViewModel()
@@ -77,6 +78,10 @@ class ExperienceJobsDetailFragment : Fragment() {
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
+
+        if (idFragment == myUtils.CREATE_FRAGMENT) {
+            initUI()
+        }
     }
 
     private fun initArgs() {
@@ -91,11 +96,14 @@ class ExperienceJobsDetailFragment : Fragment() {
         try {
             if (succesToken) {
                 tokenViewModel.fetchCheckToken(loginToken)
-                detailExperienceJobViewModel.getExperienceJobUser(
-                    idUser = idUser,
-                    idExperienceJobUser = idExperienceJobs,
-                    token = loginToken
-                )
+
+                if (idFragment == myUtils.MODIFICATE_FRAGMENT) {
+                    detailExperienceJobViewModel.getExperienceJobUser(
+                        idUser = idUser,
+                        idExperienceJobUser = idExperienceJobs,
+                        token = loginToken
+                    )
+                }
 
                 detailExperienceJobViewModel.getListCategory(
                     token = loginToken
@@ -240,13 +248,14 @@ class ExperienceJobsDetailFragment : Fragment() {
 
     private fun handleSuccessExperienceJobUser(experience: ExperienceJobUser) {
         myUtils.showProgressBar(false, progressBar)
-        initUI(experience)
+        varExperience = experience
+
+        initUI()
     }
 
-    private fun initUI(varExperience: ExperienceJobUser) {
-        var initDate: String = myUtils.changeDateFormatEUR(varExperience.initDate)
-        var endDate: String = myUtils.changeDateFormatEUR(varExperience.endDate)
-
+    private fun initUI() {
+        var initDate: String = ""
+        var endDate: String = ""
 
         binding.vBackBottomExperienceJob.setOnClickListener {
             requireActivity().onBackPressedDispatcher.onBackPressed()
@@ -267,28 +276,35 @@ class ExperienceJobsDetailFragment : Fragment() {
         }
 
         when (idFragment) {
-            1 -> { //Actualizar
-                binding.tvBottonSaveExperienceJobFragment.visibility = View.VISIBLE
-                binding.tvBottonTrushExperienceJobFragment.visibility = View.VISIBLE
-                binding.btnCreateExperienceJobDetailFragment.visibility = View.GONE
-                binding.tieInitDateExperienceJobDetailFragment.text = initDate
-                binding.tieDescriptionJobExperienceJobDetailFragment.setText(varExperience.descriptionJob)
-                binding.tieNameJobExperienceJobDetailFragment.setText(varExperience.nameJobs)
-                binding.actvCompanyExperienceJobDetailFragment.setText(varExperience.nameCompany)
+            myUtils.MODIFICATE_FRAGMENT -> {
+                initDate = myUtils.changeDateFormatEUR(varExperience.initDate)
+                endDate = myUtils.changeDateFormatEUR(varExperience.endDate)
 
-                if (endDate.isNotEmpty()) {
-                    binding.tieEndDateExperienceJobDetailFragment.text = endDate
+                binding.apply {
+                    tvBottonSaveExperienceJobFragment.visibility = View.VISIBLE
+                    tvBottonTrushExperienceJobFragment.visibility = View.VISIBLE
+                    btnCreateExperienceJobDetailFragment.visibility = View.GONE
+                    tieInitDateExperienceJobDetailFragment.text = initDate
+                    tieDescriptionJobExperienceJobDetailFragment.setText(varExperience.descriptionJob)
+                    tieNameJobExperienceJobDetailFragment.setText(varExperience.nameJobs)
+                    actvCompanyExperienceJobDetailFragment.setText(varExperience.nameCompany)
+
+                    if (endDate.isNotEmpty()) {
+                        tieEndDateExperienceJobDetailFragment.text = endDate
+                    }
                 }
             }
 
-            2 -> {//Crear
-                binding.tvBottonTrushExperienceJobFragment.visibility = View.GONE
-                binding.tvBottonSaveExperienceJobFragment.visibility = View.GONE
-                binding.btnCreateExperienceJobDetailFragment.visibility = View.VISIBLE
+            myUtils.CREATE_FRAGMENT -> {
+                binding.apply {
+                    tvBottonTrushExperienceJobFragment.visibility = View.GONE
+                    tvBottonSaveExperienceJobFragment.visibility = View.GONE
+                    btnCreateExperienceJobDetailFragment.visibility = View.VISIBLE
+                }
             }
 
             else -> {
-                // Manejo para otros valores de idFragment si es necesario
+                // Handle other values of idFragment if needed
             }
         }
 
@@ -320,6 +336,7 @@ class ExperienceJobsDetailFragment : Fragment() {
             deleteExperienceJobUser()
         }
     }
+
 
     private fun updateExperienceJobUser(
         nameJobs: String,

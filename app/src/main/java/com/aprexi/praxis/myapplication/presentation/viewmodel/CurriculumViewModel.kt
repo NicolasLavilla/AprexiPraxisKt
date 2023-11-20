@@ -6,11 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.aprexi.praxis.myapplication.domain.usercase.GetExperienceJobUserListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetLanguagesListUseCase
+import com.aprexi.praxis.myapplication.domain.usercase.GetLicenseListUseCase
+import com.aprexi.praxis.myapplication.domain.usercase.GetLicenseUserUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetProfessionalProyectsListUseCase
 import com.aprexi.praxis.myapplication.domain.usercase.GetStudiesListUseCause
 import com.aprexi.praxis.myapplication.domain.usercase.GetUserDataUseCase
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
+import com.aprexi.praxis.myapplication.model.ListLicenseUser
 import com.aprexi.praxis.myapplication.model.ListProfessionalProyectsUser
 import com.aprexi.praxis.myapplication.model.ListStudiesUser
 import com.aprexi.praxis.myapplication.model.ResourceState
@@ -24,12 +27,14 @@ typealias LanguagesUserListState = ResourceState<ListLanguagesUser>
 typealias UserState = ResourceState<User>
 typealias StudiesUserListState = ResourceState<ListStudiesUser>
 typealias ProfessionalProyectsUserListState = ResourceState<ListProfessionalProyectsUser>
+typealias LicenseUserListState = ResourceState<ListLicenseUser>
 class CurriculumViewModel(
     private val getExperienceJobUserListUseCause: GetExperienceJobUserListUseCause,
     private val getLanguagesListUseCase: GetLanguagesListUseCase,
     private val getUserDataUseCase: GetUserDataUseCase,
     private val getStudiesListUseCause: GetStudiesListUseCause,
-    private val getProfessionalProyectsListUseCause: GetProfessionalProyectsListUseCase
+    private val getProfessionalProyectsListUseCause: GetProfessionalProyectsListUseCase,
+    private val getLicenseListUseCase: GetLicenseListUseCase
 ): ViewModel() {
 
     private val _experienceJobUserLiveData = MutableLiveData<ExperienceJobListState>()
@@ -37,7 +42,12 @@ class CurriculumViewModel(
     private val _userDataLiveData = MutableLiveData<UserState>()
     private val _studiesUserDataLiveData = MutableLiveData<StudiesUserListState>()
     private val _professionalProyectsUserDataLiveData = MutableLiveData<ProfessionalProyectsUserListState>()
+    private val _licenseUserDataLiveData = MutableLiveData<LicenseUserListState>()
 
+
+    fun getLicenseUserLiveData(): LiveData<LicenseUserListState> {
+        return _licenseUserDataLiveData
+    }
     fun getExperienceJobUserLiveData(): LiveData<ExperienceJobListState> {
         return _experienceJobUserLiveData
     }
@@ -54,6 +64,29 @@ class CurriculumViewModel(
         return _professionalProyectsUserDataLiveData
     }
 
+
+
+    fun fetchLicenseUser(idUser: Int , token: String) {
+        _licenseUserDataLiveData.value = ResourceState.Loading()
+
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val studies = getLicenseListUseCase.execute(idUser = idUser, token = token)
+
+                withContext(Dispatchers.Main) {
+                    if (studies.success){
+                        _licenseUserDataLiveData.value = ResourceState.Success(studies)
+                    }else{
+                        _licenseUserDataLiveData.value = ResourceState.SuccessFaild(studies)
+                    }
+                }
+            } catch (e: Exception) {
+                withContext(Dispatchers.Main) {
+                    _licenseUserDataLiveData.value = ResourceState.Error(e.localizedMessage.orEmpty())
+                }
+            }
+        }
+    }
 
     fun fetchProfessionalProyectsUser(idUser: Int , token: String) {
         _professionalProyectsUserDataLiveData.value = ResourceState.Loading()

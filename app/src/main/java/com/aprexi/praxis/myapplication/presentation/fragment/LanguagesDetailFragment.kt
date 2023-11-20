@@ -73,17 +73,23 @@ class LanguagesDetailFragment: Fragment() {
         getTokenLoginPreference()
         initViewModel()
         handleAuthentication()
+        if (idFragment == myUtils.CREATE_FRAGMENT){
+            initUI()
+        }
     }
 
     private fun handleAuthentication() {
         try {
             if (succesToken) {
                 tokenViewModel.fetchCheckToken(loginToken)
-                languagesViewModel.getLanguagesUser(
-                    idUser = idUser,
-                    idLanguages = idLanguages,
-                    token = loginToken
-                )
+
+                if (idFragment == myUtils.MODIFICATE_FRAGMENT) {
+                    languagesViewModel.getLanguagesUser(
+                        idUser = idUser,
+                        idLanguages = idLanguages,
+                        token = loginToken
+                    )
+                }
 
                 languagesViewModel.getListExperience(
                     token = loginToken
@@ -202,7 +208,7 @@ class LanguagesDetailFragment: Fragment() {
         idLanguages = language.idLanguages.toInt()
         idExperience = language.idExperience.toInt()
 
-        initUI(language)
+        initUI()
     }
 
     class ExperienceAdapter(
@@ -297,13 +303,13 @@ class LanguagesDetailFragment: Fragment() {
 
         val idLanguage: Int = idLanguages
 
-        val adapter = LanguagesDetailFragment.LanguageAdapter(
+        val adapter = LanguageAdapter(
             requireContext(),
             R.layout.simple_spinner_dropdown_item,
             language.basicLanguages
         )
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        adapter.setDropDownViewResource(R.layout.simple_spinner_dropdown_item)
 
         val spinner = binding.acsLanguageLanguagesDetailFragment
         spinner.adapter = adapter
@@ -329,7 +335,7 @@ class LanguagesDetailFragment: Fragment() {
         }
     }
 
-    private fun initUI(language: LanguagesUser) {
+    private fun initUI() {
 
 
         binding.vBackBottomLanguages.setOnClickListener {
