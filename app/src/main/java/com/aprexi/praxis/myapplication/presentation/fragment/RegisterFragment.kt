@@ -170,7 +170,7 @@ class RegisterFragment : Fragment() {
             ownVehicle = if (binding.cbOwnVehicleRegisterFragment.isChecked) { 1 } else { 0 }
 
             var password: String = myUtils.capitalizeFirstLetter(binding.tiePasswordRegisterFragment.text.toString())
-            val email: String = myUtils.capitalizeFirstLetter(binding.tieEmailRegisterFragment.text.toString())
+            val email: String = binding.tieEmailRegisterFragment.text.toString().trim()
             val mobile: Int = myUtils.capitalizeFirstLetter(binding.tieMobileRegisterFragment.text.toString()).toInt()
             val dni: String = myUtils.capitalizeFirstLetter(binding.tieDniRegisterFragment.text.toString()) ?: ""
             val nie: String = myUtils.capitalizeFirstLetter(binding.tieNieRegisterFragment.text.toString()) ?: ""
