@@ -282,7 +282,7 @@ class CurriculumFragment: Fragment() {
                 append(" ")
                 append(userData.surname1)
             }
-            if (userData.surname2.isNotEmpty()) {
+            if (userData.surname2.isNotEmpty() && userData.surname2 != null) {
                 append(" ")
                 append(userData.surname2)
             }
@@ -297,6 +297,10 @@ class CurriculumFragment: Fragment() {
         binding.tvCountryUserCurriculumFragment.text = userData.nameCountry
         binding.tvDateBirthdayUserCurriculumFragment.text = myUtils.changeDateFormatEUR(userData.birthDate)
 
+
+        binding.vBottonMenuCurriculumFragment.setOnClickListener{
+            cleanTokenAndRedirectToLogin()
+        }
 
         studiesListAdapter.onClickListener = { studies ->
 

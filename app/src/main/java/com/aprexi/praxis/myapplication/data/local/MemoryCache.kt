@@ -39,6 +39,7 @@ class MemoryCache {
     var listMunicipality: ListBasicMunicipality? = null
     var userData: User? = null
 
+    //Datos completos de la aplicación
     fun clearAll() {
         offerList = null
         requestOfferList = null
@@ -58,6 +59,18 @@ class MemoryCache {
         listBasicLicense = null
         listMunicipality = null
         userData = null
+    }
+
+    //Datos de Usuario
+    fun cleanUser(){
+        userData = null
+        offerList = null
+        requestOfferList = null
+        followOfferList= null
+        studiesUserList = null
+        languagesUserList = null
+        experienceJobUserList = null
+        professionalProyectsList = null
     }
 
 }
