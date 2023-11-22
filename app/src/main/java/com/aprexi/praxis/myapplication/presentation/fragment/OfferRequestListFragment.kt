@@ -131,4 +131,9 @@ class OfferRequestListFragment: Fragment() {
         tokenViewModel.cleanTokenPreferences()
         myUtils.redirectToLogin(context = requireContext())
     }
+
+    override fun onResume() {
+        super.onResume()
+        handleAuthentication()
+    }
 }

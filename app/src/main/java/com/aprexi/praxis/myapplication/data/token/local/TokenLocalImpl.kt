@@ -54,6 +54,6 @@ class TokenLocalImpl(
             .putString(PreferencesKeys.TOKEN_KEY, "false")
             .apply()
 
-        memoryCache.clearAll()
+        memoryCache.clearUser()
     }
 }

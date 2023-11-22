@@ -2,8 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AprexiPraxis" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+         <item name="colorPrimary">@color/primary</item>
+        <item name="colorOnPrimary">@color/on_primary</item>
+        <item name="colorContainer">@color/primary_container</item>
+        <item name="colorPrimaryContainer">@color/on_primary_container</item>
     </style>
-
     <style name="Theme.AprexiPraxis" parent="Base.Theme.AprexiPraxis" />
 </resources>

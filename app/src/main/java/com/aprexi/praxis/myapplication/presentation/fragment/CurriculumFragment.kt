@@ -282,7 +282,7 @@ class CurriculumFragment: Fragment() {
                 append(" ")
                 append(userData.surname1)
             }
-            if (userData.surname2.isNotEmpty() && userData.surname2 != null) {
+            if (userData.surname2?.isNullOrEmpty() == false) {
                 append(" ")
                 append(userData.surname2)
             }

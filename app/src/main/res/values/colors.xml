@@ -40,4 +40,17 @@
     <color name="color_letra_oscuro">#828282</color>
     <color name="color_separacion_1">#E2E8F0</color>
 
+
+    <!--COLORES THEMES - MATERIAL DESIGN-->
+    <color name="primary">#4CAF50</color>
+    <color name="on_primary">#C8E6C9</color>
+    <color name="primary_container">#4CAF50</color>
+    <color name="on_primary_container">#388E3C</color>
+
+    <color name="secundary">#69F0AE</color>
+    <color name="on_secundary">#FFFFFF</color>
+    <color name="secundary_container">#B9F6CA</color>
+    <color name="on_secundary_container">#00C676</color>
+
+
 </resources>

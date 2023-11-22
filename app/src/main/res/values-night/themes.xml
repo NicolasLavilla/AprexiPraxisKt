@@ -2,6 +2,9 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AprexiPraxis" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-        <!-- <item name="colorPrimary">@color/my_dark_primary</item> -->
+         <item name="colorSecondary">@color/secundary</item>
+        <item name="colorOnSecondary">@color/on_secundary</item>
+        <item name="colorSecondaryContainer">@color/secundary_container</item>
+        <item name="colorOnSecondaryContainer">@color/on_secundary_container</item>
     </style>
 </resources>

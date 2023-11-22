@@ -62,8 +62,7 @@ class MemoryCache {
     }
 
     //Datos de Usuario
-    fun cleanUser(){
-        userData = null
+    fun clearUser(){
         offerList = null
         requestOfferList = null
         followOfferList= null
@@ -71,6 +70,8 @@ class MemoryCache {
         languagesUserList = null
         experienceJobUserList = null
         professionalProyectsList = null
+        school = null
+        listCompany = null
+        userData = null
     }
-
 }

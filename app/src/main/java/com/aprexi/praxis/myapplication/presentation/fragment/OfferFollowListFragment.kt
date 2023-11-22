@@ -126,4 +126,9 @@ class OfferFollowListFragment: Fragment() {
         tokenViewModel.cleanTokenPreferences()
         myUtils.redirectToLogin(requireContext())
     }
+
+    override fun onResume() {
+        super.onResume()
+        handleAuthentication()
+    }
 }
