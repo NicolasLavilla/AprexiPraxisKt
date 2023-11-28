@@ -4,50 +4,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
     tools:context=".presentation.fragment.MyOffersFragment">
 
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:orientation="horizontal"
-            android:background="@color/white"
             android:id="@+id/ll_title_my_offers_fragment"
+            style="@style/toolbar_activities"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                style="@style/bar_top_information"
                 android:text="@string/title_my_offerts_fragment"
-                android:textColor="@color/black"
-                android:fontFamily="@font/roboto_bold"
-                android:textSize="22sp"
-                android:layout_marginTop="17dp"
                 android:layout_marginStart="23dp"/>
 
             <Switch
                 android:id="@+id/switch_cambio_modalidad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="17dp"
                 android:layout_marginLeft="90dp"
                 android:text="Ofertas" />
         </LinearLayout>
 
     <com.google.android.material.tabs.TabLayout
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:id="@+id/tl_my_offers_tabs"
-        android:background="@color/white"
-        app:tabMode="scrollable"
-        app:tabTextColor="@color/black"
-        app:tabIndicatorColor="@color/black"
+        style="@style/MyTabLayoutStyle"
+
+        app:tabTextColor="@color/iconsColorAccent"
+        app:tabIndicatorColor="@color/iconsColorAccent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_title_my_offers_fragment"/>
+<!--    app:tabMode="scrollable"-->
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/vp2_my_offer_viewpager"

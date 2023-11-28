@@ -2,52 +2,41 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/ContainerStyleFragmentDetailRequestOffer">
 
-    <LinearLayout
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/ll_bar_detail_request"
         style="@style/toolbar_activities"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp">
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/v_back_bottom"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:background="@drawable/baseline_keyboard_backspace_24"
-                android:backgroundTint="@color/black" />
-        </LinearLayout>
+                android:src="@drawable/baseline_keyboard_backspace_24"
+                app:tint="@color/iconsColorAccent" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <LinearLayout
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal">
+            android:layout_height="wrap_content">
 
             <TextView
                 style="@style/bar_top_information"
-                android:text="@string/detail_request_offer_title"/>
-
-            <View
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginStart="10dp" />
-        </LinearLayout>
-    </LinearLayout>
+                android:text="@string/detail_request_offer_title" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_detail_offer_request"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="10dp"
-        app:cardElevation="3dp"
+        style="@style/MyCardStyleCurriculum"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/ll_bar_detail_request">
@@ -65,8 +54,9 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginStart="15dp"
                 android:layout_marginEnd="15dp"
+                android:clipToOutline="true"
                 android:background="@drawable/ic_image_offer_list_item"
-                android:src="@drawable/baseline_person_24" />
+                android:src="@drawable/baseline_home_work_24" />
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
@@ -77,27 +67,22 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_title_offer_detail_request_item"
-                    android:layout_width="match_parent"
+                    style="@style/title_ML"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:maxLines="2"
-                    android:textColor="@color/tv_title_offer_item"
-                    android:textSize="@dimen/tv_title_offer_item"
-                    tools:text="@string/tv_title_offer_item" />
+                    android:text="@string/tv_title_offer_item"
+                    android:textStyle="bold" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_name_company_detail_request_offer_item"
+                    style="@style/title_SM"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ellipsize="end"
-                    android:fontFamily="@font/roboto_bold"
-                    android:maxLines="1"
-                    android:textColor="@color/tv_name_company_offer_item"
-                    android:textSize="@dimen/tv_name_enterprise_offer_item"
-                    tools:text="@string/tv_name_enterprise_offer_item" />
+                    android:text="@string/tv_name_enterprise_offer_item"
+                    android:textColor="@color/secondLetterColor"
+                    android:textStyle="bold" />
 
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
@@ -107,27 +92,17 @@
 
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/iv_inscriptions_item"
-                        android:layout_width="@dimen/icon_dimens_offer_item"
-                        android:layout_height="@dimen/icon_dimens_offer_item"
-                        android:layout_marginStart="10dp"
-                        android:layout_marginEnd="10dp"
-                        android:background="@drawable/baseline_group_24" />
+                        style="@style/view_row_list"
+                        android:src="@drawable/baseline_group_24"
+                        app:tint="@color/iconsColorRow" />
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/tv_num_inscriptions_detail_request_item"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:ellipsize="end"
-                        android:fontFamily="@font/roboto_regular"
-                        android:maxWidth="150dp"
-                        android:maxLines="1"
-                        android:textColor="@color/black"
-                        android:textSize="@dimen/tv_information_offer_list_item"
+                        style="@style/row_styles_list_names"
                         tools:text="@string/tv_num_inscriptions_item" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
 
-                </LinearLayout>
-
-                <LinearLayout
+                <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginTop="5dp"
@@ -142,28 +117,25 @@
         android:layout_height="20dp"
         android:background="@color/gris_clarisimo"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintHorizontal_bias="0.088"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cv_detail_offer_request" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_detail_request_offer_list_fragment"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        tools:itemCount="3"
-        tools:listitem="@layout/row_offer_detail_request_list_item"
+        style="@style/RecyclerViewStyle_Generic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/v_line_detail_request_offer">
+        app:layout_constraintTop_toBottomOf="@+id/v_line_detail_request_offer"
+        tools:itemCount="3"
+        tools:listitem="@layout/row_offer_detail_request_list_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 
-    <ProgressBar
+    <androidx.core.widget.ContentLoadingProgressBar
         android:id="@+id/pb_detail_request_offer_fragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        style="@style/ProgressBarStyle_Generic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

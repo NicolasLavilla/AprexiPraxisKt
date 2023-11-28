@@ -2,9 +2,132 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.AprexiPraxis" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your dark theme here. -->
-         <item name="colorSecondary">@color/secundary</item>
-        <item name="colorOnSecondary">@color/on_secundary</item>
-        <item name="colorSecondaryContainer">@color/secundary_container</item>
-        <item name="colorOnSecondaryContainer">@color/on_secundary_container</item>
+        <!--Color de la barra de estado.-->
+        <item name="android:statusBarColor">@color/color_on_primary_night</item>
+        <!-- Indicador de si la barra de estado tiene texto claro u oscuro.-->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!--Color invertido del texto principal-->
+        <item name="android:textColorPrimary">@color/color_letter_primary_night</item>
+
+        <!--Color invertido del texto secundario-->
+        <item name="android:textColorSecondary">@color/color_letter_secundary_night</item>
+        <item name="android:textColor">@color/color_letter_primary_night</item>
+
+        <item name="colorPrimary">@color/iconsColorAccent</item>
+
     </style>
+
+    <style name="Theme.AprexiPraxis" parent="Base.Theme.AprexiPraxis" />
+
+    <color name="iconsColorBlue">@color/azul_candidatura</color>
+    <color name="iconsColorRed">@color/rojo_candidatura</color>
+    <color name="iconsColorGreen">@color/color_letras_inscripcion</color>
+    <color name="iconsColorAccent">@color/icon_tint</color>
+    <color name="iconsColorRow">@color/gris_tenue</color>
+    <color name="secondLetterColor">@color/gris_tenue</color>
+    <color name="primaryBackgroundFound">@color/color_primary_night</color>
+    <color name="secondaryBackgroundFound">@color/color_on_primary_night</color>
+    <color name="borderBackgroundFound">@color/color_letter_secundary</color>
+
+    <style name="ContainerStyleFragmentDetailRequestOffer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primaryBackgroundFound</item>
+    </style>
+
+    <style name="MyTabLayoutStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@color/color_toolbars_night</item>
+    </style>
+
+    <style name="MyNestedScrollViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:fillViewport">true</item>
+        <item name="android:background">@color/primaryBackgroundFound</item>
+    </style>
+
+    <style name="toolbar_activities">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:background">@color/color_toolbars_night</item>
+        <item name="android:elevation">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="MinimMyCards" parent="Widget.MaterialComponents.CardView">
+        <item name="android:backgroundTint">@color/color_on_primary_night</item>
+        <item name="cardCornerRadius">@dimen/radius</item>
+        <item name="cardElevation">@dimen/cardElevation</item>
+    </style>
+
+    <style name="MyCardStyleCurriculum" parent="MinimMyCards">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">5dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+    </style>
+
+    <style name="MySearchContainerStyle_FragmentOfferList" parent="MinimMyCards" >
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginBottom">10dp</item>
+        <item name="android:layout_marginStart">15dp</item>
+        <item name="android:layout_marginEnd">15dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">50dp</item>
+    </style>
+
+    <style name="NestedScrollView_fragmentOfferDetail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@drawable/layout_bg_offer_detail</item>
+        <item name="android:elevation">@dimen/cardElevation</item>
+        <item name="android:layout_marginStart">2dp</item>
+        <item name="android:layout_marginEnd">2dp</item>
+    </style>
+
+    <style name="SearchLinearLayoutStyle_fragmentOfferList">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:background">@color/primaryBackgroundFound</item>
+    </style>
+
+    <style name="ProgressBarStyle_Generic">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="RecyclerViewStyle_Generic">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:clipToPadding">false</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:background">@color/primaryBackgroundFound</item>
+    </style>
+
+    <style name="CoordinatorLayoutViewStyle_fragmentOfferDetail">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/primaryBackgroundFound</item>
+    </style>
+
+    <style name="DividerStyle_Generic">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1dp</item>
+    </style>
+
+    <style name="BottomNav_Generic">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">70dp</item>
+        <item name="android:elevation">8dp</item>
+        <item name="android:background">@color/color_bottom_nav_night</item>
+    </style>
+
 </resources>

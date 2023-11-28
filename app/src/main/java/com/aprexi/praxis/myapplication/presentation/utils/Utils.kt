@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.presentation.SplashActivity
@@ -300,5 +301,22 @@ class Utils {
             }
             .setCancelable(false)
             .show()
+    }
+
+    fun colorState(state: Int,context: Context): Int{
+        val colorMap = mapOf(
+            0 to R.color.iconsColorBlue, //Inscrito
+            1 to R.color.iconsColorBlue, //CV Leido
+            2 to R.color.iconsColorRed, //CV No Preseleccionado
+            3 to R.color.iconsColorRed, //Descartado
+            4 to R.color.iconsColorRed, //Proceso Cerrado
+            5 to R.color.iconsColorGreen, //Sigues en el Proceso
+            6 to R.color.iconsColorGreen, //Entrevista
+            7 to R.color.iconsColorGreen, //Seleccionado
+            8 to R.color.iconsColorRed, //Rechazar Entrevista
+            9 to R.color.iconsColorRed, //Rechazar Oferta
+            10 to R.color.iconsColorGreen, //Aceptar Oferta
+        )
+        return ContextCompat.getColor(context, colorMap[state] ?: R.color.iconsColorBlue)
     }
 }

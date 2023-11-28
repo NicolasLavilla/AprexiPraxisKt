@@ -1,14 +1,20 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
 import android.content.Intent
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.WindowInsetsController
 import android.widget.ProgressBar
+import androidx.annotation.RequiresApi
+import androidx.core.content.ContextCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.aprexi.praxis.myapplication.R
 import com.aprexi.praxis.myapplication.databinding.FragmentCurriculumBinding
 import com.aprexi.praxis.myapplication.model.ListExperienceJobUser
 import com.aprexi.praxis.myapplication.model.ListLanguagesUser
@@ -67,6 +73,7 @@ class CurriculumFragment: Fragment() {
     private lateinit var professionalProyects: ListProfessionalProyectsUser
     private lateinit var userData: User
 
+    @RequiresApi(Build.VERSION_CODES.R)
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -78,6 +85,8 @@ class CurriculumFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         progressBar = binding.pbCurriculumFragment
         getTokenLoginPreference()
         initViewModel()
@@ -427,4 +436,5 @@ class CurriculumFragment: Fragment() {
         super.onResume()
         handleAuthentication()
     }
+
 }

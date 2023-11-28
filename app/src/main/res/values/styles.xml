@@ -2,10 +2,76 @@
 <resources>
 
     <!-- Buttons - Prueba -->
+
+    <style name="title_display" parent="type_titles">
+        <item name="android:textSize">@dimen/title_display</item>
+    </style>
+
+    <style name="title_headline" parent="type_titles">
+        <item name="android:textSize">@dimen/title_headline</item>
+    </style>
+
+    <style name="title_XXL" parent="type_titles">
+        <item name="android:textSize">@dimen/title_XXL</item>
+    </style>
+
+    <style name="title_XL" parent="type_titles">
+        <item name="android:textSize">@dimen/title_XL</item>
+    </style>
+
+    <style name="title_L" parent="type_titles">
+        <item name="android:textSize">@dimen/title_L</item>
+    </style>
+
+    <style name="title_ML" parent="type_titles">
+        <item name="android:textSize">@dimen/title_ML</item>
+    </style>
+
+    <style name="title_M" parent="type_titles">
+        <item name="android:textSize">@dimen/title_M</item>
+    </style>
+
+    <style name="title_SM" parent="type_titles">
+        <item name="android:textSize">@dimen/title_SM</item>
+    </style>
+
+    <style name="title_S" parent="type_titles">
+        <item name="android:textSize">@dimen/title_S</item>
+    </style>
+
+    <style name="type_titles">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:letterSpacing">0.04</item>
+    </style>
+
+
+
+
+
+    <style name="subtitle_clases_information_cv" parent="title_L">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="style_subtitle_bottom_add_clases_bottom_cv" parent="title_S">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginEnd">10dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textColor">@color/iconsColorAccent</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+
+
+    <!-- Buttons - Prueba -->
     <style name="titulo_splash_activity">
-        <item name="android:textColor">@color/black</item>
         <item name="android:text">@string/titulo_splash_activity</item>
-        <item name="android:textSize">@dimen/titulo_splash_activity</item>
+        <item name="android:textSize">@dimen/title_display</item>
         <item name="android:textStyle">bold</item>
     </style>
 
@@ -15,47 +81,45 @@
         <item name="android:textColor">@color/gris_tenue</item>
         <item name="android:maxLines">1</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:background">@null</item>
+
     </style>
 
-    <style name="et_search_fragment_offer_detail">
+    <style name="et_search_fragment_offer_detail" parent="title_S">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">3dp</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:textSize">@dimen/tv_information_offer_detail_item</item>
-        <item name="android:maxLines">1</item>
-        <item name="android:ellipsize">end</item>
     </style>
 
-    <style name="tv_title_requirements_offer_detail_fragment">
+    <style name="tv_title_requirements_offer_detail_fragment" parent="title_M">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">12dp</item>
-        <item name="android:layout_marginTop">15dp</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
-        <item name="android:textColor">@color/tv_title_offer_item</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:layout_marginTop">10dp</item>
     </style>
 
-    <style name="tv_subtitle_requirements_offer_detail_fragment">
+    <style name="tv_text_school_offer_detail_fragment" parent="title_SM">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="tv_subtitle_requirements_offer_detail_fragment" parent="title_SM">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">37dp</item>
         <item name="android:layout_marginTop">10dp</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="android:textStyle">bold</item>
-        <item name="android:textSize">14sp</item>
-        <item name="android:textColor">@color/requisitos_oferta</item>
     </style>
 
     <style name="tv_text_requirements_offer_detail_fragment">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">37dp</item>
+        <item name="android:layout_marginStart">42dp</item>
         <item name="android:layout_marginTop">5dp</item>
         <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/title_SM</item>
     </style>
 
     <style name="ll_requirements_offer_detail_fragment">
@@ -71,20 +135,16 @@
     <style name="v_circle_offer_detail_request">
         <item name="android:layout_width">7dp</item>
         <item name="android:layout_height">7dp</item>
-        <item name="android:background">@drawable/baseline_circle_24</item>
-        <item name="android:backgroundTint">@color/azul_candidatura</item>
+        <item name="android:src">@drawable/baseline_circle_24</item>
+
     </style>
 
-    <style name="bar_top_information">
+    <style name="bar_top_information" parent="title_XL">
         <item name="android:layout_marginStart">23dp</item>
-        <item name="android:textSize">22sp</item>
-        <item name="android:textColor">@color/black</item>
         <item name="android:gravity">center</item>
-        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
     </style>
 
     <style name="bar_top_bottom_style">
@@ -92,24 +152,20 @@
         <item name="android:gravity">center</item>
         <item name="android:layout_width">24dp</item>
         <item name="android:layout_height">24dp</item>
-
     </style>
 
-    <style name="row_styles_list_names">
+    <style name="row_styles_list_names" parent="title_S">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/tv_information_offer_list_item</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
-        <item name="android:textColor">@color/black</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
+        <item name="android:padding">5dp</item>
     </style>
 
     <style name="view_row_list">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">@dimen/icon_dimens_offer_item</item>
+        <item name="android:layout_height">@dimen/icon_dimens_offer_item</item>
         <item name="android:layout_marginEnd">10dp</item>
         <item name="android:layout_marginStart">10dp</item>
+        <item name="android:backgroundTint">@color/iconsColorRow</item>
     </style>
 
     <style name="ll_row_list">
@@ -125,15 +181,6 @@
         <item name="cornerSize">50%</item>
     </style>
 
-    <style name="toolbar_activities">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:background">@color/white</item>
-        <item name="android:elevation">10dp</item>
-        <item name="android:gravity">center_vertical</item>
-        <item name="android:orientation">horizontal</item>
-    </style>
-
     <style name="SpinnerStyle" parent="Widget.AppCompat.Spinner">
         <item name="android:background">@drawable/spinner_background</item>
         <item name="android:maxLines">1</item>
@@ -144,7 +191,6 @@
         <item name="android:layout_height">50dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:layout_margin">8dp</item>
-
     </style>
 
 </resources>

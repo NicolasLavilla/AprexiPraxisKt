@@ -33,7 +33,7 @@ class DetailRequestOfferFragment: Fragment() {
     private lateinit var binding: FragmentDetailRequestOfferBinding
     private lateinit var progressBar: ProgressBar
     private val myUtils: Utils by inject()
-    private val offerListAdapter = DetailRequestOfferListAdapter(myUtils)
+    private val offerListAdapter = DetailRequestOfferListAdapter( myUtils = myUtils)
     private val args: DetailRequestOfferFragmentArgs by navArgs()
     private val tokenViewModel: TokenViewModel by activityViewModel()
     private val detailRequestOfferViewModel: DetailRequestOfferViewModel by activityViewModel()

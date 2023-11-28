@@ -1,11 +1,13 @@
 package com.aprexi.praxis.myapplication.presentation.fragment
 
+import android.graphics.PorterDuff
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
@@ -61,7 +63,7 @@ class OfferDetailFragment : Fragment() {
         handleAuthentication()
     }
 
-    private fun getTokenLoginPreference(){
+    private fun getTokenLoginPreference() {
         lifecycleScope.launch {
             val uni = tokenViewModel.fetchLoginTokenPreferences()
             loginToken = uni.token
@@ -82,15 +84,19 @@ class OfferDetailFragment : Fragment() {
                 cleanTokenAndRedirectToLogin()
             }
         } catch (e: Exception) {
-            myUtils.showError(requireContext(),e.toString())
+            myUtils.showError(requireContext(), e.toString())
         }
     }
 
     private fun initViewModel() {
-        offersViewModel.getOfferDetailLiveData().observe(viewLifecycleOwner, this::handleOfferDetailState)
-        offersViewModel.setRequestOfferLiveData().observe(viewLifecycleOwner, this::handleRequestOfferDetailState)
-        offersViewModel.followOfferLiveData().observe(viewLifecycleOwner, this::handleFollowOfferDetailState)
-        offersViewModel.deleteFollowOfferLiveData().observe(viewLifecycleOwner, this::handleDeleteFollowOfferDetailState)
+        offersViewModel.getOfferDetailLiveData()
+            .observe(viewLifecycleOwner, this::handleOfferDetailState)
+        offersViewModel.setRequestOfferLiveData()
+            .observe(viewLifecycleOwner, this::handleRequestOfferDetailState)
+        offersViewModel.followOfferLiveData()
+            .observe(viewLifecycleOwner, this::handleFollowOfferDetailState)
+        offersViewModel.deleteFollowOfferLiveData()
+            .observe(viewLifecycleOwner, this::handleDeleteFollowOfferDetailState)
         tokenViewModel.getTokenLiveData().observe(viewLifecycleOwner, this::handleTokenState)
     }
 
@@ -98,8 +104,12 @@ class OfferDetailFragment : Fragment() {
         when (state) {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> myUtils.showProgressBar(false, progressBar)
-            is ResourceState.Error -> myUtils.showError(requireContext(),state.error) { cleanTokenAndRedirectToLogin() }
-            else -> { }
+            is ResourceState.Error -> myUtils.showError(
+                requireContext(),
+                state.error
+            ) { cleanTokenAndRedirectToLogin() }
+
+            else -> {}
         }
     }
 
@@ -108,8 +118,8 @@ class OfferDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessDeleteFollowOffer(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showError(requireContext(),state.error)
-            else -> { }
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
+            else -> {}
         }
     }
 
@@ -118,8 +128,8 @@ class OfferDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessFollowOffer(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showError(requireContext(),state.error)
-            else -> { }
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
+            else -> {}
         }
     }
 
@@ -128,8 +138,8 @@ class OfferDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessRequestOffer(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showError(requireContext(),state.error)
-            else -> { }
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
+            else -> {}
         }
     }
 
@@ -138,18 +148,18 @@ class OfferDetailFragment : Fragment() {
             is ResourceState.Loading -> myUtils.showProgressBar(true, progressBar)
             is ResourceState.Success -> handleSuccessOfferDetail(state.result)
             is ResourceState.SuccessFaild -> handleSuccessFailed()
-            is ResourceState.Error -> myUtils.showError(requireContext(),state.error)
-            else -> { }
+            is ResourceState.Error -> myUtils.showError(requireContext(), state.error)
+            else -> {}
         }
     }
 
     private fun handleSuccessFollowOffer(result: FollowOfferUser) {
         myUtils.showProgressBar(false, progressBar)
 
-        if(result.success){
+        if (result.success) {
             followOfferXml()
 
-        }else{
+        } else {
             Toast.makeText(this.context, "No se ha podido guardar!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -157,10 +167,10 @@ class OfferDetailFragment : Fragment() {
     private fun handleSuccessDeleteFollowOffer(result: DeleteFollowOfferUser) {
         myUtils.showProgressBar(false, progressBar)
 
-        if(result.success){
+        if (result.success) {
             noFollowOfferXml()
 
-        }else{
+        } else {
             Toast.makeText(this.context, "No se ha podido desguardar!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -168,11 +178,12 @@ class OfferDetailFragment : Fragment() {
     private fun handleSuccessRequestOffer(result: RequestOfferUser) {
         myUtils.showProgressBar(false, progressBar)
 
-        if(result.success){
+        if (result.success) {
             binding.btnRequestOfferDetailFragment.isEnabled = false
-            binding.btnRequestOfferDetailFragment.text = getString(R.string.is_request_offer_detail_fragment)
+            binding.btnRequestOfferDetailFragment.text =
+                getString(R.string.is_request_offer_detail_fragment)
 
-        }else{
+        } else {
             Toast.makeText(this.context, "No te has podido inscribir!", Toast.LENGTH_SHORT).show()
         }
     }
@@ -197,7 +208,8 @@ class OfferDetailFragment : Fragment() {
         binding.tvSalaryOfferDetailFragment.text = offer.salary.toString()
         binding.tvTimeOfferDetailFragment.text = myUtils.calculateElapsedTime(offer.datePublication)
         binding.tvVacantOfferDetailFragment.text = offer.numVacancies.toString() + " inscritos"
-        binding.tvInscriptionsOfferDetailFragment.text = offer.numRegistered.toString() + " vacantes"
+        binding.tvInscriptionsOfferDetailFragment.text =
+            offer.numRegistered.toString() + " vacantes"
         binding.tvModalityOfferDetailFragment.text = offer.nameModality
         binding.tvStudiesMiniumOfferDetailFragment.text = offer.nameTypeStudies
         binding.tvExperienceMiniumOfferDetailFragment.text = offer.minExperience.toString()
@@ -206,10 +218,6 @@ class OfferDetailFragment : Fragment() {
         binding.tvOfferNameCompanyDetailFragment.text = offer.nameCompany
         binding.tvText1LicenseOfferDetailFragment.text = offer.combinedLicenses
         binding.tvText1RequiredLanguagesOfferDetailFragment.text = offer.combinedLanguages
-
-        Glide.with(requireContext())
-            .load(offer.logoCompany)
-            .into(binding.ivLogoTbOfferDetail)
 
         Glide.with(requireContext())
             .load(offer.logoCompany)
@@ -224,20 +232,23 @@ class OfferDetailFragment : Fragment() {
             if (isCollapsed) {
                 // La CollapsingToolbarLayout está completamente colapsada.
                 linearLayoutCompact.visibility = View.VISIBLE
-                toolbarDetailFragment.setBackgroundResource(R.drawable.ctr_bg)
-                binding.ivLogoCollapsingTbOfferDetail.visibility = View.GONE
+                toolbarDetailFragment.background =
+                    ContextCompat.getColor(requireContext(), R.color.primaryBackgroundFound)
+                        .toDrawable()
             } else {
                 // La CollapsingToolbarLayout no está completamente colapsada.
                 linearLayoutCompact.visibility = View.GONE
                 toolbarDetailFragment.background = android.R.color.transparent.toDrawable()
-                binding.ivLogoCollapsingTbOfferDetail.visibility = View.VISIBLE
             }
         })
 
-        toolbarDetailFragment.setOnClickListener{
+        toolbarDetailFragment.setOnClickListener {
 
             findNavController().navigate(
-                OfferDetailFragmentDirections.actionOfferDetailFragmentToOfferCompanyFragment(idUser = args.idUser, idCompany = offer.idCompany.toInt())
+                OfferDetailFragmentDirections.actionOfferDetailFragmentToOfferCompanyFragment(
+                    idUser = args.idUser,
+                    idCompany = offer.idCompany.toInt()
+                )
             )
         }
 
@@ -251,7 +262,7 @@ class OfferDetailFragment : Fragment() {
         binding.fabOfferDetailFragment.setOnClickListener {
             if (followOffer) {
                 offersViewModel.followOffer(args.idUser, args.idOffer, loginToken)
-            }else{
+            } else {
                 offersViewModel.deleteFollowOffer(args.idUser, args.idOffer, loginToken)
             }
         }
@@ -259,10 +270,12 @@ class OfferDetailFragment : Fragment() {
         //Boton Inscribirse
         if (offer.requestOffer.toInt() == 1) {
             binding.btnRequestOfferDetailFragment.isEnabled = false
-            binding.btnRequestOfferDetailFragment.text = getString(R.string.is_request_offer_detail_fragment)
-        }else{
+            binding.btnRequestOfferDetailFragment.text =
+                getString(R.string.is_request_offer_detail_fragment)
+        } else {
             binding.btnRequestOfferDetailFragment.isEnabled = true
-            binding.btnRequestOfferDetailFragment.text = getString(R.string.btn_register_offer_detail_fragment)
+            binding.btnRequestOfferDetailFragment.text =
+                getString(R.string.btn_register_offer_detail_fragment)
         }
 
         binding.btnRequestOfferDetailFragment.setOnClickListener {
@@ -270,16 +283,25 @@ class OfferDetailFragment : Fragment() {
                 offersViewModel.setRequestOffer(args.idUser, args.idOffer, loginToken)
             }
         }
+
+        binding.vBackTbOfferDetail.setOnClickListener {
+            requireActivity().onBackPressedDispatcher.onBackPressed()
+        }
     }
 
-    private fun followOfferXml(){
+    private fun followOfferXml() {
         followOffer = false
         binding.fabOfferDetailFragment.setImageResource(R.drawable.baseline_favorite_24)
+        val colorWhite = ContextCompat.getColor(requireContext(), R.color.white)
+        binding.fabOfferDetailFragment.setColorFilter(colorWhite, PorterDuff.Mode.SRC_ATOP)
     }
 
-    private fun noFollowOfferXml(){
+
+    private fun noFollowOfferXml() {
         followOffer = true
         binding.fabOfferDetailFragment.setImageResource(R.drawable.baseline_favorite_border_24)
+        val colorWhite = ContextCompat.getColor(requireContext(), R.color.white)
+        binding.fabOfferDetailFragment.setColorFilter(colorWhite, PorterDuff.Mode.SRC_ATOP)
     }
 
     private fun cleanTokenAndRedirectToLogin() {

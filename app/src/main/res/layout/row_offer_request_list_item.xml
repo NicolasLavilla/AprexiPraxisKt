@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="3dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="3dp">
+    style="@style/MyCardStyleCurriculum">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -20,8 +16,9 @@
             android:layout_gravity="center_vertical"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
+            android:clipToOutline="true"
             android:background="@drawable/ic_image_offer_list_item"
-            android:src="@drawable/baseline_person_24"/>
+            android:src="@drawable/baseline_home_work_24"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -32,20 +29,19 @@
             android:layout_marginStart="10dp">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_title_offer_request_item"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_title_offer_request_item"
-                android:textSize="@dimen/tv_title_offer_item"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/tv_title_offer_item"
+                style="@style/title_ML"
+                android:textStyle="bold"
                 android:text="@string/tv_title_offer_item"/>
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_name_company_offer_request_item"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_name_company_offer_request_item"
-                android:textSize="@dimen/tv_name_enterprise_offer_item"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/tv_name_company_offer_item"
+                style="@style/title_SM"
+                android:textStyle="bold"
+                android:textColor="@color/secondLetterColor"
                 android:text="@string/tv_name_enterprise_offer_item"/>
 
             <androidx.appcompat.widget.LinearLayoutCompat
@@ -56,7 +52,7 @@
                 android:orientation="horizontal"
                 android:gravity="center">
 
-                <View
+                <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/v_circle_state_offer_request_item"
                     style="@style/v_circle_offer_detail_request"
                     android:layout_marginStart="20dp"
@@ -84,11 +80,9 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_location_item_offer_request_list_item"
-                    android:layout_width="@dimen/icon_dimens_offer_item"
-                    android:layout_height="@dimen/icon_dimens_offer_item"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="6dp"
-                    android:background="@drawable/baseline_location_on_24"/>
+                    style="@style/view_row_list"
+                    app:tint="@color/iconsColorRow"
+                    android:src="@drawable/baseline_location_on_24"/>
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_time_offer_request_item"

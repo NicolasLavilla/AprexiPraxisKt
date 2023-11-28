@@ -30,7 +30,7 @@ class StudiesListAdapter(
         }
 
         holder.nameStudies.text = item.nameStudies
-        holder.schoolStudies.text = item.nameStudies
+        holder.schoolStudies.text = item.nameSchool
 
         val fullDate = buildString {
             if (item.startYear.isNotEmpty()) {

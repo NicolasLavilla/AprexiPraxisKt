@@ -11,13 +11,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <View
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/v_back_bottom_license"
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:layout_marginStart="10dp"
-            android:background="@drawable/baseline_keyboard_backspace_24"
-            android:backgroundTint="@color/black" />
+            android:src="@drawable/baseline_keyboard_backspace_24"
+            app:tint="@color/iconsColorAccent" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title_license_fragment"
@@ -29,17 +29,17 @@
             android:layout_height="wrap_content"
             android:gravity="end">
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/tv_botton_trush_license_fragment"
                 style="@style/bar_top_bottom_style"
-                android:background="@drawable/baseline_delete_24"
-                android:backgroundTint="@color/rojo_candidatura"
+                android:src="@drawable/baseline_delete_24"
+                app:tint="@color/iconsColorRed"
                 android:visibility="gone"/>
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/tv_botton_save_license_fragment"
                 style="@style/bar_top_bottom_style"
-                android:background="@drawable/baseline_save_24"
-                android:backgroundTint="@color/azul_candidatura"
+                android:src="@drawable/baseline_save_24"
+                app:tint="@color/iconsColorBlue"
                 android:visibility="gone"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
@@ -48,10 +48,8 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:id="@+id/cl_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="@style/RecyclerViewStyle_Generic"
         android:orientation="vertical"
-        android:padding="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -78,9 +76,7 @@
 
     <ProgressBar
         android:id="@+id/pb_license_detail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        style="@style/ProgressBarStyle_Generic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

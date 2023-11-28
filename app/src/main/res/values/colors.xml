@@ -2,7 +2,6 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
@@ -25,7 +24,6 @@
     <color name="azul_candidatura">#2D7AC0</color>
     <color name="rojo_candidatura">#D82664</color>
 
-
     <!--COLORES PROYECTO VUE.JS-->
     <color name="color_principal_azul">#0EA4E9</color>
     <color name="color_principal_gris_fondo_blanquecino">#F9FAFB</color>
@@ -41,16 +39,61 @@
     <color name="color_separacion_1">#E2E8F0</color>
 
 
-    <!--COLORES THEMES - MATERIAL DESIGN-->
-    <color name="primary">#4CAF50</color>
-    <color name="on_primary">#C8E6C9</color>
-    <color name="primary_container">#4CAF50</color>
-    <color name="on_primary_container">#388E3C</color>
 
-    <color name="secundary">#69F0AE</color>
-    <color name="on_secundary">#FFFFFF</color>
-    <color name="secundary_container">#B9F6CA</color>
-    <color name="on_secundary_container">#00C676</color>
+
+    <!--COLORES THEMES - MATERIAL DESIGN-->
+        <!--LIGHT-->
+        <color name="color_primary">#FBFBFB</color>
+        <color name="color_on_primary">#111111</color>
+        <color name="color_primary_container">#FFFFFF</color>
+        <color name="color_primary_dark">#FBFBFB</color>
+
+        <!--LIGHT-->
+        <color name="color_secundary">#E7FAFA</color>
+        <color name="color_on_secundary">#13593C</color>
+        <color name="color_secundary_container">#FFFFFF</color>
+        <color name="color_accent">#2BB47C</color>
+
+        <color name="status_bar_color">#FBFBFB</color>
+        <color name="window_background">#FBFBFB</color>
+        <color name="color_background">#FFFFFF</color>
+        <color name="text_color_primary">#111111</color>
+        <color name="text_color_secondary">#2A2C2B</color>
+
+        <color name="text_color_primary_inverse">#2A2C2B</color>
+        <color name="text_color_secondary_inverse">#2A2C2B</color>
+        <color name="navigation_bar_color">#FFFFFF</color>
+        <color name="background">#FBFBFB</color>
+        <color name="icon_tint">#2BB47C</color>
+
+        <color name="border">#2BB47C</color>
+
+
+    <!--NIGHT-->
+    <color name="color_primary_night">#0E0E0E</color> <!--FONDO-->
+    <color name="color_on_primary_night">#1C1D1F</color> <!--SEGUNDO FONDO-->
+    <color name="color_primary_container_night">#2A2C2B</color> <!--BORDE-->
+    <color name="color_letter_night">#FFFFFF</color> <!--LETRAS-->
+
+    <!--NIGHT-->
+    <color name="color_secundary_night">#E7FAFA</color> <!--CONTENEDOR ACCENT FONDO-->
+    <color name="color_on_secundary_night">#B9DFCD</color> <!--BORDE CONTENEDOR ACCENT-->
+    <color name="color_secundary_container_night">#13593C</color> <!--LETRA ACCENT-->
+    <color name="color_secundary_accent_night">#757575</color> <!--ICONO ACCENT-->
+
+
+
+
+    <color name="color_letter_primary">#111111</color>
+    <color name="color_letter_secundary">#2A2C2B</color>
+    <color name="color_letter_primary_night">#FFFFFF</color>
+    <color name="color_letter_secundary_night">#B9DFCD</color>
+
+    <color name="color_toolbars">#FFFFFF</color>
+    <color name="color_toolbars_night">#1C1D1F</color>
+    <color name="color_border">#E2E2E2</color>
+    <color name="color_bottom_nav">#FFFFFF</color>
+    <color name="color_bottom_nav_night">#1C1D1F</color>
 
 
 </resources>

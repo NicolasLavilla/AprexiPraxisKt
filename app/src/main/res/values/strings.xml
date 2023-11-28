@@ -48,8 +48,8 @@
     <string name="work_permit_register_fragment">Permiso de Trabajo</string>
     <string name="autonomous_discharger_register_fragment">¿Eres autónomo?</string>
     <string name="own_vehicle_register_fragment">¿Dispones de vehículo?</string>
-    <string name="studies_minium_offer_detail_fragment">Estudios Minimos</string>
-    <string name="experience_minium_offer_detail_fragment">Experiencia Minima</string>
+    <string name="studies_minium_offer_detail_fragment">Estudios Mínimos</string>
+    <string name="experience_minium_offer_detail_fragment">Experiencia Mínima</string>
     <string name="required_languages_offer_detail_fragment">Idiomas Requeridos</string>
     <string name="license_offer_detail_fragment">Carnets</string>
     <string name="minimum_requirements_offer_detail_fragment">Requisitos Mínimos</string>
@@ -98,6 +98,11 @@
     <string name="address">Dirección</string>
     <string name="title_register_fragment">Registro</string>
     <string name="title_license_detail_fragment">Carnets</string>
+    <string name="title_studies">Estudios:</string>
+    <string name="title_experience">Experiencia:</string>
+    <string name="title_languages">Idiomas:</string>
+    <string name="title_professional_proyects">Proyectos Profesionales:</string>
+    <string name="titile_license">Carnets:</string>
 
 
 </resources>

@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MyCardStyleCurriculum"
     android:layout_width="80dp"
-    android:layout_height="wrap_content"
-    android:layout_marginVertical="5dp"
-    android:orientation="vertical"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="3dp">
+    android:orientation="vertical">
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
@@ -15,17 +11,11 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tv_name_license_row_list_license"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:elevation="2dp"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:text="B"
-                android:textColor="@color/black" />
-
+                style="@style/tv_text_school_offer_detail_fragment"
+                android:textStyle="bold"
+                android:text="B" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.cardview.widget.CardView>

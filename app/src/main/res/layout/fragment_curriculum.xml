@@ -16,7 +16,7 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tv_title_curriculum_fragment"
             style="@style/bar_top_information"
-            android:text="@string/curriculum" />
+            android:text="@string/curriculum"/>
 
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
@@ -24,23 +24,23 @@
             android:gravity="end">
 
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/v_botton_download_cv_curriculum_fragment"
                 style="@style/bar_top_bottom_style"
-                android:background="@drawable/baseline_cloud_download_24"
-                android:backgroundTint="@color/azul_candidatura" />
+                app:tint="@color/iconsColorAccent"
+                android:src="@drawable/baseline_cloud_download_24"/>
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/v_botton_qr_curriculum_fragment"
                 style="@style/bar_top_bottom_style"
-                android:background="@drawable/baseline_qr_code_24"
-                android:backgroundTint="@color/azul_candidatura" />
+                app:tint="@color/iconsColorAccent"
+                android:src="@drawable/baseline_qr_code_24"/>
 
-            <View
+            <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/v_botton_menu_curriculum_fragment"
                 style="@style/bar_top_bottom_style"
-                android:background="@drawable/baseline_more_vert_24"
-                android:backgroundTint="@color/azul_candidatura" />
+                app:tint="@color/iconsColorAccent"
+                android:src="@drawable/baseline_more_vert_24"/>
 
         </androidx.appcompat.widget.LinearLayoutCompat>
 
@@ -48,11 +48,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:id="@+id/principal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/fondo_gris_azulado_super_claro"
-        android:fillViewport="true"
-        android:orientation="vertical"
+        style="@style/MyNestedScrollViewStyle"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -61,18 +57,14 @@
         <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:orientation="vertical">
 
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/cv_curriculum_user_fragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:layout_marginTop="10dp"
-                android:orientation="horizontal"
-                app:cardCornerRadius="10dp"
-                app:cardElevation="3dp">
+                style="@style/MyCardStyleCurriculum">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:id="@+id/item_listado_Candidatos_1"
@@ -108,10 +100,9 @@
                                 android:id="@+id/tv_name_user_curriculum_fragment"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_black"
-                                android:text="Roberto Martinez Pozo"
-                                android:textColor="@color/black"
-                                android:textSize="18sp" />
+                                android:textStyle="bold"
+                                style="@style/title_ML"
+                                android:text="Roberto Martinez Pozo" />
                         </androidx.appcompat.widget.LinearLayoutCompat>
 
                         <androidx.appcompat.widget.LinearLayoutCompat style="@style/ll_row_list">
@@ -119,6 +110,7 @@
                             <androidx.appcompat.widget.AppCompatImageView
                                 android:id="@+id/icono_email_item_Candidatos_1"
                                 style="@style/view_row_list"
+
                                 android:background="@drawable/baseline_email_24" />
 
                             <androidx.appcompat.widget.AppCompatTextView
@@ -193,53 +185,44 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="15dp"
                     android:layout_marginBottom="10dp"
-                    android:text="Soy Paula, trabajo como consultora de RRHH en una ETT, he estudiado veterinaria  en la Universidad Autonoma de Barcelona (UAB). Actualmente he terminado un curso sobre dirección de equipos y estoy buscando una empresa donde formarme y trabajar."
-                    android:textColor="@color/black" />
+                    android:text="Soy Paula, trabajo como consultora de RRHH en una ETT, he estudiado veterinaria  en la Universidad Autonoma de Barcelona (UAB). Actualmente he terminado un curso sobre dirección de equipos y estoy buscando una empresa donde formarme y trabajar." />
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
                     android:gravity="start"
+                    android:padding="10dp"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/baseline_menu_book_24"
-                        android:backgroundTint="@color/black" />
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:text="@string/title_studies"
+                        style="@style/subtitle_clases_information_cv"/>
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:orientation="horizontal">
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Estudios:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
-
-                    <View
                         android:id="@+id/v_insert_studies_curriculum_fragment"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="40dp"
-                        android:background="@drawable/baseline_add_24"
-                        android:backgroundTint="@color/black" />
+                        style="@style/style_subtitle_bottom_add_clases_bottom_cv"
+                        android:text="+ Añadir"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="5dp">
+                    android:layout_height="wrap_content">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rv_list_studies_user_curriculum_fragment"
@@ -248,53 +231,46 @@
                         android:nestedScrollingEnabled="true"
                         android:orientation="vertical"
                         tools:itemCount="3"
-                        tools:listitem="@layout/row_list_studies"></androidx.recyclerview.widget.RecyclerView>
+                        tools:listitem="@layout/row_list_studies"/>
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
                     android:gravity="left"
+                    android:padding="10dp"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/baseline_work_24"
-                        android:backgroundTint="@color/black" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Experiencia:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        style="@style/subtitle_clases_information_cv"
+                        android:text="@string/title_experience"/>
 
-                    <View
-                        android:id="@+id/v_insert_experience_curriculum_fragment"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="5dp"
-                        android:layout_marginEnd="40dp"
-                        android:background="@drawable/baseline_add_24"
-                        android:backgroundTint="@color/black" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/v_insert_experience_curriculum_fragment"
+                            style="@style/style_subtitle_bottom_add_clases_bottom_cv"
+                            android:text="+ Añadir"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:gravity="center">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -304,52 +280,46 @@
                         android:gravity="center"
                         android:orientation="vertical"
                         tools:itemCount="3"
-                        tools:listitem="@layout/row_list_experience"></androidx.recyclerview.widget.RecyclerView>
+                        tools:listitem="@layout/row_list_experience"/>
                 </RelativeLayout>
             </androidx.appcompat.widget.LinearLayoutCompat>
 
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
                     android:gravity="start"
+                    android:padding="10dp"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/baseline_headset_24"
-                        android:backgroundTint="@color/black" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Idiomas:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        style="@style/subtitle_clases_information_cv"
+                        android:text="@string/title_languages" />
 
-                    <View
-                        android:id="@+id/v_insert_languages_curriculum_fragment"
-                        android:layout_width="24dp"
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginStart="5dp"
-                        android:background="@drawable/baseline_add_24"
-                        android:backgroundTint="@color/black" />
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/v_insert_languages_curriculum_fragment"
+                            style="@style/style_subtitle_bottom_add_clases_bottom_cv"
+                            android:text="+ Añadir"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
                     android:gravity="center">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -368,46 +338,38 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:padding="10dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
                     android:gravity="start"
+                    android:padding="10dp"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/baseline_assignment_24"
-                        android:backgroundTint="@color/black" />
-
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Proyectos Profesionales:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        style="@style/subtitle_clases_information_cv"
+                        android:text="@string/title_professional_proyects" />
 
-                    <View
-                        android:id="@+id/v_insert_professional_proyects_curriculum_fragment"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="5dp"
-                        android:background="@drawable/baseline_add_24"
-                        android:backgroundTint="@color/black" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/v_insert_professional_proyects_curriculum_fragment"
+                            style="@style/style_subtitle_bottom_add_clases_bottom_cv"
+                            android:text="+ Añadir"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_marginBottom="35dp"
                     android:gravity="center">
 
                     <androidx.recyclerview.widget.RecyclerView
@@ -426,46 +388,40 @@
             <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:padding="10dp"
+                android:layout_marginBottom="35dp"
                 android:orientation="vertical">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="23dp"
                     android:gravity="start"
+                    android:padding="10dp"
                     android:orientation="horizontal">
 
-                    <View
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:background="@drawable/baseline_assignment_24"
-                        android:backgroundTint="@color/black" />
 
                     <androidx.appcompat.widget.AppCompatTextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="5dp"
-                        android:fontFamily="@font/roboto_bold"
-                        android:text="Carnets:"
-                        android:textColor="@color/black"
-                        android:textSize="18sp" />
+                        style="@style/subtitle_clases_information_cv"
+                        android:text="@string/titile_license" />
 
-                    <View
-                        android:id="@+id/v_insert_licenses_curriculum_fragment"
-                        android:layout_width="24dp"
-                        android:layout_height="24dp"
-                        android:layout_marginStart="5dp"
-                        android:background="@drawable/baseline_add_24"
-                        android:backgroundTint="@color/black" />
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="end"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/v_insert_licenses_curriculum_fragment"
+                            style="@style/style_subtitle_bottom_add_clases_bottom_cv"
+                            android:text="+ Añadir"/>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
 
                 </androidx.appcompat.widget.LinearLayoutCompat>
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="5dp"
-                    android:layout_marginBottom="35dp"
                     android:gravity="center">
 
                     <androidx.recyclerview.widget.RecyclerView

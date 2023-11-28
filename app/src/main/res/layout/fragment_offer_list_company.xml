@@ -8,11 +8,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_offer_list_company"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@color/white"
+        style="@style/RecyclerViewStyle_Generic"
         android:clipToPadding="false"
-        android:padding="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,9 +19,7 @@
 
     <ProgressBar
         android:id="@+id/pb_offer_list_company"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
+        style="@style/ProgressBarStyle_Generic"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
