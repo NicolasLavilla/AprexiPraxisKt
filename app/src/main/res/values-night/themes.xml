@@ -29,6 +29,7 @@
     <color name="primaryBackgroundFound">@color/color_primary_night</color>
     <color name="secondaryBackgroundFound">@color/color_on_primary_night</color>
     <color name="borderBackgroundFound">@color/color_letter_secundary</color>
+    <color name="backgroundSplashLogo">#111111</color>
 
     <style name="ContainerStyleFragmentDetailRequestOffer">
         <item name="android:layout_width">match_parent</item>
@@ -128,6 +129,10 @@
         <item name="android:layout_height">70dp</item>
         <item name="android:elevation">8dp</item>
         <item name="android:background">@color/color_bottom_nav_night</item>
+    </style>
+
+    <style name="image_logo">
+        <item name="srcCompat">@drawable/logo_oscuro</item>
     </style>
 
 </resources>
